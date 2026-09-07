@@ -1,67 +1,77 @@
-<svg width="800" height="300" viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg">
+<svg width="800" height="300" viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="heroTitle heroDesc">
+  <title id="heroTitle">P-Bit Optimization</title>
+  <desc id="heroDesc">Three cards showing probabilistic binary direction, annealing schedule, and low-precision robustness</desc>
+
   <defs>
     <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0a1628"/>
-      <stop offset="100%" stop-color="#1a2f4a"/>
+      <stop offset="0%" stop-color="#0a0a0c"/>
+      <stop offset="100%" stop-color="#111114"/>
     </linearGradient>
-    <linearGradient id="line" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#00d4ff"/>
-      <stop offset="100%" stop-color="#00ff9d"/>
+    <linearGradient id="surface" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#141416"/>
+      <stop offset="100%" stop-color="#18181b"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5e6ad2"/>
+      <stop offset="100%" stop-color="#8b5cf6"/>
+    </linearGradient>
+    <linearGradient id="accent2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="100%" stop-color="#22d3ee"/>
     </linearGradient>
   </defs>
 
   <rect width="800" height="300" fill="url(#bg)" rx="12"/>
 
-  <text x="400" y="45" text-anchor="middle" fill="#e0f7fa" font-size="24" font-weight="bold" letter-spacing="2">
-    P-BIT OPTIMIZATION
+  <text x="400" y="36" text-anchor="middle" fill="#fafafa" font-size="18" font-weight="600" letter-spacing="0.5">
+    P-Bit Optimization
   </text>
-
-  <text x="400" y="72" text-anchor="middle" fill="#80deea" font-size="13" letter-spacing="1">
+  <text x="400" y="58" text-anchor="middle" fill="#71717a" font-size="12" font-weight="400">
     Boltzmann annealing meets gradient descent
   </text>
 
-  <line x1="80" y1="95" x2="720" y2="95" stroke="url(#line)" stroke-width="2"/>
+  <line x1="80" y1="76" x2="720" y2="76" stroke="#27272a" stroke-width="1"/>
 
-  <g transform="translate(60, 110)">
-    <rect x="0" y="0" width="200" height="160" fill="#0d2137" stroke="#00d4ff" stroke-width="1" rx="8" opacity="0.9"/>
-    <text x="100" y="28" text-anchor="middle" fill="#00d4ff" font-size="13" font-weight="bold">PROBABILISTIC</text>
-    <text x="100" y="52" text-anchor="middle" fill="#e0f7fa" font-size="11">Binary direction</text>
-    <text x="100" y="70" text-anchor="middle" fill="#e0f7fa" font-size="11">sigma in {-1, +1}</text>
-    <text x="100" y="98" text-anchor="middle" fill="#00ff9d" font-size="11" font-weight="bold">
+  <g transform="translate(48, 96)">
+    <rect x="0" y="0" width="224" height="180" fill="url(#surface)" stroke="#27272a" stroke-width="1" rx="8"/>
+    <text x="112" y="28" text-anchor="middle" fill="#fafafa" font-size="12" font-weight="500">Probabilistic</text>
+    <text x="112" y="48" text-anchor="middle" fill="#a1a1aa" font-size="11">Binary direction</text>
+    <text x="112" y="66" text-anchor="middle" fill="#a1a1aa" font-size="11">sigma in {-1, +1}</text>
+    <text x="112" y="96" text-anchor="middle" fill="#22d3ee" font-size="11" font-weight="500">
       P(+1) = sigmoid(-beta * g / g_scale)
     </text>
-    <circle cx="100" cy="135" r="5" fill="#00d4ff"/>
+    <circle cx="112" cy="140" r="4" fill="#5e6ad2"/>
   </g>
 
-  <g transform="translate(290, 110)">
-    <rect x="0" y="0" width="200" height="160" fill="#0d2137" stroke="#00ff9d" stroke-width="1" rx="8" opacity="0.9"/>
-    <text x="100" y="28" text-anchor="middle" fill="#00ff9d" font-size="13" font-weight="bold">ANNEALING</text>
-    <text x="100" y="52" text-anchor="middle" fill="#e0f7fa" font-size="11">Inverse temperature</text>
-    <text x="100" y="70" text-anchor="middle" fill="#e0f7fa" font-size="11">rises over time</text>
-    <text x="100" y="98" text-anchor="middle" fill="#00d4ff" font-size="11" font-weight="bold">
+  <g transform="translate(288, 96)">
+    <rect x="0" y="0" width="224" height="180" fill="url(#surface)" stroke="#27272a" stroke-width="1" rx="8"/>
+    <text x="112" y="28" text-anchor="middle" fill="#fafafa" font-size="12" font-weight="500">Annealing</text>
+    <text x="112" y="48" text-anchor="middle" fill="#a1a1aa" font-size="11">Inverse temperature</text>
+    <text x="112" y="66" text-anchor="middle" fill="#a1a1aa" font-size="11">rises over time</text>
+    <text x="112" y="96" text-anchor="middle" fill="#5e6ad2" font-size="11" font-weight="500">
       beta(t) = min(beta0 * (1 + t/tau), beta_cap)
     </text>
-    <rect x="50" y="118" width="100" height="6" fill="#1a3a5c" rx="3"/>
-    <rect x="50" y="118" width="100" height="6" fill="url(#line)" rx="3"/>
+    <rect x="72" y="120" width="80" height="4" fill="#27272a" rx="2"/>
+    <rect x="72" y="120" width="80" height="4" fill="url(#accent)" rx="2"/>
   </g>
 
-  <g transform="translate(520, 110)">
-    <rect x="0" y="0" width="200" height="160" fill="#0d2137" stroke="#ff9800" stroke-width="1" rx="8" opacity="0.9"/>
-    <text x="100" y="28" text-anchor="middle" fill="#ff9800" font-size="13" font-weight="bold">ROBUST</text>
-    <text x="100" y="52" text-anchor="middle" fill="#e0f7fa" font-size="11">1-4 bit gradients</text>
-    <text x="100" y="70" text-anchor="middle" fill="#e0f7fa" font-size="11">quantization noise</text>
-    <text x="100" y="98" text-anchor="middle" fill="#00d4ff" font-size="11" font-weight="bold">
+  <g transform="translate(528, 96)">
+    <rect x="0" y="0" width="224" height="180" fill="url(#surface)" stroke="#27272a" stroke-width="1" rx="8"/>
+    <text x="112" y="28" text-anchor="middle" fill="#fafafa" font-size="12" font-weight="500">Robust</text>
+    <text x="112" y="48" text-anchor="middle" fill="#a1a1aa" font-size="11">1-4 bit gradients</text>
+    <text x="112" y="66" text-anchor="middle" fill="#a1a1aa" font-size="11">quantization noise</text>
+    <text x="112" y="96" text-anchor="middle" fill="#22d3ee" font-size="11" font-weight="500">
       Natural low-precision
     </text>
     <g>
-      <rect x="55" y="118" width="12" height="20" fill="#00d4ff" opacity="0.8"/>
-      <rect x="75" y="118" width="12" height="14" fill="#00ff9d" opacity="0.8"/>
-      <rect x="95" y="118" width="12" height="8" fill="#ff9800" opacity="0.8"/>
-      <rect x="115" y="118" width="12" height="18" fill="#00d4ff" opacity="0.8"/>
+      <rect x="72" y="118" width="10" height="18" fill="#5e6ad2" opacity="0.8" rx="2"/>
+      <rect x="90" y="118" width="10" height="12" fill="#8b5cf6" opacity="0.8" rx="2"/>
+      <rect x="108" y="118" width="10" height="6" fill="#22d3ee" opacity="0.8" rx="2"/>
+      <rect x="126" y="118" width="10" height="15" fill="#5e6ad2" opacity="0.8" rx="2"/>
     </g>
   </g>
 
-  <text x="400" y="285" text-anchor="middle" fill="#546e7a" font-size="11">
+  <text x="400" y="286" text-anchor="middle" fill="#52525b" font-size="11">
     Honest benchmarking  •  Best-so-far reporting  •  Reproducible by design
   </text>
 </svg>

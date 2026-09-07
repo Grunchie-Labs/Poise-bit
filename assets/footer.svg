@@ -1,12 +1,15 @@
-<svg width="600" height="55" viewBox="0 0 600 55" xmlns="http://www.w3.org/2000/svg">
+<svg width="600" height="55" viewBox="0 0 600 55" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="footerTitle footerDesc">
+  <title id="footerTitle">Grunchie Labs Footer</title>
+  <desc id="footerDesc">Footer showing Built by Grunchie Labs and Apache-2.0 Licensed</desc>
+
   <defs>
     <linearGradient id="footer" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#0a1628"/>
-      <stop offset="100%" stop-color="#1a2f4a"/>
+      <stop offset="0%" stop-color="#0a0a0c"/>
+      <stop offset="100%" stop-color="#111114"/>
     </linearGradient>
   </defs>
   <rect width="600" height="55" fill="url(#footer)" rx="8"/>
-  <text x="300" y="32" text-anchor="middle" fill="#546e7a" font-size="12">
+  <text x="300" y="32" text-anchor="middle" fill="#52525b" font-size="12">
     Built by Grunchie Labs  •  Apache-2.0 Licensed
   </text>
 </svg>
