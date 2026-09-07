@@ -1,107 +1,107 @@
-<svg width="100%" height="320" viewBox="0 0 800 320" xmlns="http://www.w3.org/2000/svg" style="max-width: 800px; font-family: 'Segoe UI', system-ui, sans-serif;">
-    <defs>
-      <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#0a1628"/>
-        <stop offset="100%" stop-color="#1a2f4a"/>
-      </linearGradient>
-      <linearGradient id="line" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" stop-color="#00d4ff">
-          <animate attributeName="stop-color" values="#00d4ff;#00ff9d;#00d4ff" dur="4s" repeatCount="indefinite"/>
-        </stop>
-        <stop offset="100%" stop-color="#00ff9d">
-          <animate attributeName="stop-color" values="#00ff9d;#00d4ff;#00ff9d" dur="4s" repeatCount="indefinite"/>
-        </stop>
-      </linearGradient>
-      <filter id="glow">
-        <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-        <feMerge>
-          <feMergeNode in="coloredBlur"/>
-          <feMergeNode in="SourceGraphic"/>
-        </feMerge>
-      </filter>
-    </defs>
+<svg width="800" height="300" viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a1628"/>
+      <stop offset="100%" stop-color="#1a2f4a"/>
+    </linearGradient>
+    <linearGradient id="line" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00d4ff">
+        <animate attributeName="stop-color" values="#00d4ff;#00ff9d;#00d4ff" dur="4s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="100%" stop-color="#00ff9d">
+        <animate attributeName="stop-color" values="#00ff9d;#00d4ff;#00ff9d" dur="4s" repeatCount="indefinite"/>
+      </stop>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
 
-    <rect width="800" height="320" fill="url(#bg)" rx="12"/>
+  <rect width="800" height="300" fill="url(#bg)" rx="12"/>
 
-    <text x="400" y="45" text-anchor="middle" fill="#e0f7fa" font-size="24" font-weight="bold" letter-spacing="2">
-      P-BIT OPTIMIZATION
+  <text x="400" y="40" text-anchor="middle" fill="#e0f7fa" font-size="22" font-weight="bold" letter-spacing="2">
+    P-BIT OPTIMIZATION
+  </text>
+
+  <text x="400" y="65" text-anchor="middle" fill="#80deea" font-size="12" letter-spacing="1">
+    Boltzmann annealing meets gradient descent
+  </text>
+
+  <line x1="80" y1="85" x2="720" y2="85" stroke="url(#line)" stroke-width="2" filter="url(#glow)">
+    <animate attributeName="x1" values="80;60;80" dur="6s" repeatCount="indefinite"/>
+    <animate attributeName="x2" values="720;740;720" dur="6s" repeatCount="indefinite"/>
+  </line>
+
+  <g transform="translate(60, 100)">
+    <rect x="0" y="0" width="200" height="170" fill="#0d2137" stroke="#00d4ff" stroke-width="1" rx="8" opacity="0.9">
+      <animate attributeName="stroke-opacity" values="0.9;1;0.9" dur="3s" repeatCount="indefinite"/>
+    </rect>
+    <text x="100" y="28" text-anchor="middle" fill="#00d4ff" font-size="13" font-weight="bold">PROBABILISTIC</text>
+    <text x="100" y="52" text-anchor="middle" fill="#e0f7fa" font-size="11">Binary direction</text>
+    <text x="100" y="70" text-anchor="middle" fill="#e0f7fa" font-size="11">sigma in {-1, +1}</text>
+    <text x="100" y="98" text-anchor="middle" fill="#00ff9d" font-size="11" font-weight="bold">
+      P(+1) = sigmoid(-beta * g / g_scale)
+      <animate attributeName="fill" values="#00ff9d;#00d4ff;#00ff9d" dur="2s" repeatCount="indefinite"/>
     </text>
+    <circle cx="100" cy="140" r="6" fill="#00d4ff">
+      <animate attributeName="cy" values="140;135;140" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="1;0.6;1" dur="2s" repeatCount="indefinite"/>
+    </circle>
+  </g>
 
-    <text x="400" y="72" text-anchor="middle" fill="#80deea" font-size="13" letter-spacing="1">
-      Boltzmann annealing meets gradient descent
+  <g transform="translate(290, 100)">
+    <rect x="0" y="0" width="200" height="170" fill="#0d2137" stroke="#00ff9d" stroke-width="1" rx="8" opacity="0.9">
+      <animate attributeName="stroke-opacity" values="0.9;1;0.9" dur="3s" repeatCount="indefinite" begin="1s"/>
+    </rect>
+    <text x="100" y="28" text-anchor="middle" fill="#00ff9d" font-size="13" font-weight="bold">ANNEALING</text>
+    <text x="100" y="52" text-anchor="middle" fill="#e0f7fa" font-size="11">Inverse temperature</text>
+    <text x="100" y="70" text-anchor="middle" fill="#e0f7fa" font-size="11">rises over time</text>
+    <text x="100" y="98" text-anchor="middle" fill="#00d4ff" font-size="11" font-weight="bold">
+      beta(t) = min(beta0 * (1 + t/tau), beta_cap)
+      <animate attributeName="fill" values="#00d4ff;#00ff9d;#00d4ff" dur="2s" repeatCount="indefinite" begin="0.5s"/>
     </text>
+    <rect x="50" y="120" width="100" height="6" fill="#1a3a5c" rx="3"/>
+    <rect x="50" y="120" width="100" height="6" fill="url(#line)" rx="3">
+      <animate attributeName="width" values="20;100;20" dur="4s" repeatCount="indefinite"/>
+    </rect>
+  </g>
 
-    <line x1="80" y1="95" x2="720" y2="95" stroke="url(#line)" stroke-width="2" filter="url(#glow)">
-      <animate attributeName="x1" values="80;60;80" dur="6s" repeatCount="indefinite"/>
-      <animate attributeName="x2" values="720;740;720" dur="6s" repeatCount="indefinite"/>
-    </line>
-
-    <g transform="translate(100, 120)">
-      <rect x="0" y="0" width="180" height="160" fill="#0d2137" stroke="#00d4ff" stroke-width="1" rx="8" opacity="0.9">
-        <animate attributeName="stroke-opacity" values="0.9;1;0.9" dur="3s" repeatCount="indefinite"/>
-      </rect>
-      <text x="90" y="30" text-anchor="middle" fill="#00d4ff" font-size="12" font-weight="bold">PROBABILISTIC</text>
-      <text x="90" y="55" text-anchor="middle" fill="#e0f7fa" font-size="11">Binary direction</text>
-      <text x="90" y="72" text-anchor="middle" fill="#e0f7fa" font-size="11">σ ∈ {−1, +1}</text>
-      <text x="90" y="95" text-anchor="middle" fill="#00ff9d" font-size="10" font-weight="bold">
-        P(+1) = σ(−β · g / ḡ)
-        <animate attributeName="fill" values="#00ff9d;#00d4ff;#00ff9d" dur="2s" repeatCount="indefinite"/>
-      </text>
-      <circle cx="90" cy="130" r="6" fill="#00d4ff">
-        <animate attributeName="cy" values="130;125;130" dur="2s" repeatCount="indefinite"/>
-        <animate attributeName="opacity" values="1;0.6;1" dur="2s" repeatCount="indefinite"/>
-      </circle>
-    </g>
-
-    <g transform="translate(310, 120)">
-      <rect x="0" y="0" width="180" height="160" fill="#0d2137" stroke="#00ff9d" stroke-width="1" rx="8" opacity="0.9">
-        <animate attributeName="stroke-opacity" values="0.9;1;0.9" dur="3s" repeatCount="indefinite" begin="1s"/>
-      </rect>
-      <text x="90" y="30" text-anchor="middle" fill="#00ff9d" font-size="12" font-weight="bold">ANNEALING</text>
-      <text x="90" y="55" text-anchor="middle" fill="#e0f7fa" font-size="11">Inverse temperature</text>
-      <text x="90" y="72" text-anchor="middle" fill="#e0f7fa" font-size="11">rises over time</text>
-      <text x="90" y="95" text-anchor="middle" fill="#00d4ff" font-size="10" font-weight="bold">
-        β(t) = min(β₀(1+t/τ), βcap)
-        <animate attributeName="fill" values="#00d4ff;#00ff9d;#00d4ff" dur="2s" repeatCount="indefinite" begin="0.5s"/>
-      </text>
-      <rect x="40" y="115" width="100" height="6" fill="#1a3a5c" rx="3"/>
-      <rect x="40" y="115" width="100" height="6" fill="url(#line)" rx="3">
-        <animate attributeName="width" values="20;100;20" dur="4s" repeatCount="indefinite"/>
-      </rect>
-    </g>
-
-    <g transform="translate(520, 120)">
-      <rect x="0" y="0" width="180" height="160" fill="#0d2137" stroke="#ff9800" stroke-width="1" rx="8" opacity="0.9">
-        <animate attributeName="stroke-opacity" values="0.9;1;0.9" dur="3s" repeatCount="indefinite" begin="2s"/>
-      </rect>
-      <text x="90" y="30" text-anchor="middle" fill="#ff9800" font-size="12" font-weight="bold">ROBUST</text>
-      <text x="90" y="55" text-anchor="middle" fill="#e0f7fa" font-size="11">1–4 bit gradients</text>
-      <text x="90" y="72" text-anchor="middle" fill="#e0f7fa" font-size="11">quantization noise</text>
-      <text x="90" y="95" text-anchor="middle" fill="#00d4ff" font-size="10" font-weight="bold">
-        Natural low-precision
-        <animate attributeName="fill" values="#00d4ff;#ff9800;#00d4ff" dur="2s" repeatCount="indefinite" begin="1s"/>
-      </text>
-      <g>
-        <rect x="50" y="115" width="12" height="20" fill="#00d4ff" opacity="0.8">
-          <animate attributeName="height" values="20;30;20" dur="1.5s" repeatCount="indefinite"/>
-          <animate attributeName="y" values="115;110;115" dur="1.5s" repeatCount="indefinite"/>
-        </rect>
-        <rect x="70" y="115" width="12" height="14" fill="#00ff9d" opacity="0.8">
-          <animate attributeName="height" values="14;22;14" dur="1.5s" repeatCount="indefinite" begin="0.2s"/>
-          <animate attributeName="y" values="115;110;115" dur="1.5s" repeatCount="indefinite" begin="0.2s"/>
-        </rect>
-        <rect x="90" y="115" width="12" height="8" fill="#ff9800" opacity="0.8">
-          <animate attributeName="height" values="8;16;8" dur="1.5s" repeatCount="indefinite" begin="0.4s"/>
-          <animate attributeName="y" values="115;110;115" dur="1.5s" repeatCount="indefinite" begin="0.4s"/>
-        </rect>
-        <rect x="110" y="115" width="12" height="18" fill="#00d4ff" opacity="0.8">
-          <animate attributeName="height" values="18;26;18" dur="1.5s" repeatCount="indefinite" begin="0.6s"/>
-          <animate attributeName="y" values="115;110;115" dur="1.5s" repeatCount="indefinite" begin="0.6s"/>
-        </rect>
-      </g>
-    </g>
-
-    <text x="400" y="300" text-anchor="middle" fill="#546e7a" font-size="11">
-      Honest benchmarking &nbsp;•&nbsp; Best-so-far reporting &nbsp;•&nbsp; Reproducible by design
+  <g transform="translate(520, 100)">
+    <rect x="0" y="0" width="200" height="170" fill="#0d2137" stroke="#ff9800" stroke-width="1" rx="8" opacity="0.9">
+      <animate attributeName="stroke-opacity" values="0.9;1;0.9" dur="3s" repeatCount="indefinite" begin="2s"/>
+    </rect>
+    <text x="100" y="28" text-anchor="middle" fill="#ff9800" font-size="13" font-weight="bold">ROBUST</text>
+    <text x="100" y="52" text-anchor="middle" fill="#e0f7fa" font-size="11">1-4 bit gradients</text>
+    <text x="100" y="70" text-anchor="middle" fill="#e0f7fa" font-size="11">quantization noise</text>
+    <text x="100" y="98" text-anchor="middle" fill="#00d4ff" font-size="11" font-weight="bold">
+      Natural low-precision
+      <animate attributeName="fill" values="#00d4ff;#ff9800;#00d4ff" dur="2s" repeatCount="indefinite" begin="1s"/>
     </text>
-  </svg>
+    <g>
+      <rect x="55" y="120" width="12" height="20" fill="#00d4ff" opacity="0.8">
+        <animate attributeName="height" values="20;30;20" dur="1.5s" repeatCount="indefinite"/>
+        <animate attributeName="y" values="120;115;120" dur="1.5s" repeatCount="indefinite"/>
+      </rect>
+      <rect x="75" y="120" width="12" height="14" fill="#00ff9d" opacity="0.8">
+        <animate attributeName="height" values="14;22;14" dur="1.5s" repeatCount="indefinite" begin="0.2s"/>
+        <animate attributeName="y" values="120;115;120" dur="1.5s" repeatCount="indefinite" begin="0.2s"/>
+      </rect>
+      <rect x="95" y="120" width="12" height="8" fill="#ff9800" opacity="0.8">
+        <animate attributeName="height" values="8;16;8" dur="1.5s" repeatCount="indefinite" begin="0.4s"/>
+        <animate attributeName="y" values="120;115;120" dur="1.5s" repeatCount="indefinite" begin="0.4s"/>
+      </rect>
+      <rect x="115" y="120" width="12" height="18" fill="#00d4ff" opacity="0.8">
+        <animate attributeName="height" values="18;26;18" dur="1.5s" repeatCount="indefinite" begin="0.6s"/>
+        <animate attributeName="y" values="120;115;120" dur="1.5s" repeatCount="indefinite" begin="0.6s"/>
+      </rect>
+    </g>
+  </g>
+
+  <text x="400" y="285" text-anchor="middle" fill="#546e7a" font-size="11">
+    Honest benchmarking  •  Best-so-far reporting  •  Reproducible by design
+  </text>
+</svg>

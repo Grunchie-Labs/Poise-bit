@@ -1,12 +1,12 @@
-<svg width="100%" height="60" viewBox="0 0 600 60" xmlns="http://www.w3.org/2000/svg" style="max-width: 600px; font-family: 'Segoe UI', system-ui, sans-serif;">
-    <defs>
-      <linearGradient id="footer" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" stop-color="#0a1628"/>
-        <stop offset="100%" stop-color="#1a2f4a"/>
-      </linearGradient>
-    </defs>
-    <rect width="600" height="60" fill="url(#footer)" rx="8"/>
-    <text x="300" y="35" text-anchor="middle" fill="#546e7a" font-size="12">
-      Built by Grunchie Labs &nbsp;•&nbsp; Apache-2.0 Licensed
-    </text>
-  </svg>
+<svg width="600" height="55" viewBox="0 0 600 55" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="footer" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0a1628"/>
+      <stop offset="100%" stop-color="#1a2f4a"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="55" fill="url(#footer)" rx="8"/>
+  <text x="300" y="32" text-anchor="middle" fill="#546e7a" font-size="12">
+    Built by Grunchie Labs  •  Apache-2.0 Licensed
+  </text>
+</svg>
