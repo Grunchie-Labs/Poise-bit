@@ -20,6 +20,8 @@ import numpy as np
 def iter_to_threshold(best_history: np.ndarray, threshold: float) -> int:
     """First index where best-so-far loss < threshold, else ``len`` (never hit)."""
     best_history = np.asarray(best_history)
+    if best_history.size == 0:
+        raise ValueError("best_history must not be empty")
     idxs = np.where(best_history < threshold)[0]
     return int(idxs[0]) if len(idxs) > 0 else int(len(best_history))
 

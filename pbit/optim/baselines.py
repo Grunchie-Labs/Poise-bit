@@ -45,6 +45,12 @@ class SGD(_Base):
         pass
 
     def step(self, x: np.ndarray, grad: np.ndarray, t: int) -> np.ndarray:
+        grad = np.asarray(grad, dtype=np.float64)
+        if not np.all(np.isfinite(grad)):
+            raise ValueError(
+                "gradient must be finite; got nan/inf. "
+                "Consider clipping or checking your loss function."
+            )
         return x - self.lr * grad
 
     def params(self) -> dict:

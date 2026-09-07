@@ -23,6 +23,8 @@ from pbit.bench.specs import NoiseSpec
 
 def _quantize(g: np.ndarray, bits: int, stochastic: bool, rng: np.random.Generator) -> np.ndarray:
     g = np.asarray(g, dtype=np.float64)
+    if bits < 1:
+        raise ValueError(f"bits must be >= 1, got {bits!r}")
     levels = float(2**bits - 1)
     gmin, gmax = g.min(), g.max()
     if gmax == gmin:
@@ -56,6 +58,8 @@ def NoNoise() -> NoiseSpec:
 
 
 def GaussianNoise(sigma: float = 0.5) -> NoiseSpec:
+    if sigma < 0:
+        raise ValueError(f"sigma must be non-negative, got {sigma!r}")
     def apply(g, rng):
         return np.asarray(g, dtype=np.float64) + rng.normal(0.0, sigma, np.asarray(g).shape)
 
@@ -63,6 +67,10 @@ def GaussianNoise(sigma: float = 0.5) -> NoiseSpec:
 
 
 def CorruptionNoise(p: float = 0.2, amplify: float = 3.0) -> NoiseSpec:
+    if not 0 <= p <= 1:
+        raise ValueError(f"p must be in [0, 1], got {p!r}")
+    if amplify < 0:
+        raise ValueError(f"amplify must be non-negative, got {amplify!r}")
     def apply(g, rng):
         g = np.asarray(g, dtype=np.float64)
         mask = rng.random(g.shape) < p
@@ -70,10 +78,12 @@ def CorruptionNoise(p: float = 0.2, amplify: float = 3.0) -> NoiseSpec:
         gc[mask] = -gc[mask] * amplify
         return gc
 
-    return NoiseSpec(name=f"CorruptionNoise_p={p}", apply=apply, params={"p": p})
+    return NoiseSpec(name=f"CorruptionNoise_p={p}", apply=apply, params={"p": p, "amplify": amplify})
 
 
 def QuantizeNoise(bits: int = 4, stochastic: bool = False) -> NoiseSpec:
+    if bits < 1:
+        raise ValueError(f"bits must be >= 1, got {bits!r}")
     def apply(g, rng):
         return _quantize(g, bits, stochastic, rng)
 
@@ -92,6 +102,8 @@ def SignNoise() -> NoiseSpec:
 
 
 def ClipNoise(max_norm: float = 5.0) -> NoiseSpec:
+    if max_norm <= 0:
+        raise ValueError(f"max_norm must be positive, got {max_norm!r}")
     def apply(g, rng):
         return _clip_norm(g, max_norm)
 

@@ -77,6 +77,11 @@ class Report:
         self._rows = rows
         self._cells = None
 
+    @property
+    def rows(self) -> list[_RunRow]:
+        """Public read-only access to raw run rows (for plotting / inspection)."""
+        return list(self._rows)
+
     # ------------------------------------------------------------------ cells
     def cells(self) -> list[_Cell]:
         if self._cells is None:

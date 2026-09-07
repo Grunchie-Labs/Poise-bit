@@ -4,21 +4,23 @@ build-backend = "hatchling.build"
 
 [project]
 name = "pbit"
-version = "0.3.0"
+version = "0.4.0"
 description = "Probabilistic p-bit optimization, low-precision gradient robustness, and reproducible optimizer benchmarking."
 readme = "README.md"
-requires-python = ">=3.11"
 license = { text = "Apache-2.0" }
+requires-python = ">=3.11"
 authors = [
-    { name = "Grunchie Labs" },
+    { name = "Grunchie Labs", email = "contact@grunchielabs.example.invalid" },
 ]
 keywords = [
     "pbit", "probabilistic computing", "stochastic optimization",
     "low-precision", "quantization", "benchmarking", "optimizer",
+    "annealing", "boltzmann", "binary-direction",
 ]
 classifiers = [
-    "Development Status :: 3 - Alpha",
+    "Development Status :: 4 - Beta",
     "Intended Audience :: Science/Research",
+    "Intended Audience :: Developers",
     "License :: OSI Approved :: Apache Software License",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.11",
@@ -26,15 +28,18 @@ classifiers = [
     "Programming Language :: Python :: 3.13",
     "Topic :: Scientific/Engineering",
     "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 
 [project.urls]
 Homepage = "https://grunchielabs.example.invalid/pbit"
 Documentation = "https://grunchielabs.example.invalid/pbit/docs"
-Source = "https://grunchielabs.example.invalid/pbit"
+Source = "https://github.com/grunchielabs/pbit"
+"Repository" = "https://github.com/grunchielabs/pbit"
+"Bug Tracker" = "https://github.com/grunchielabs/pbit/issues"
 
 [project.optional-dependencies]
-bench = ["matplotlib>=3.6", "pandas>=2.0"]
+bench = ["matplotlib>=3.6", "pandas>=2.0", "tqdm>=4.66"]
 torch = ["torch>=2.0"]
 plots = ["matplotlib>=3.6"]
 tables = ["pandas>=2.0"]

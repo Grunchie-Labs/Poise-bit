@@ -44,11 +44,9 @@ def plot_convergence(report: Report, function: str, noise: str = "clean", ax=Non
 
 
 def _mean_best_curve(report: Report, function: str, noise: str, optimizer: str) -> np.ndarray:
-    from pbit.bench.report import _RunRow
-
     rows: list[_RunRow] = [
         r
-        for r in report._rows  # noqa: SLF001
+        for r in report.rows
         if r.function == function and r.noise == noise and r.optimizer == optimizer
     ]
     if not rows:

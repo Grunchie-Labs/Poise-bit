@@ -31,6 +31,12 @@ from pbit.optim.base import AskTellOptimizer, GradientOptimizer
 
 DEFAULT_CLIP = 5.0
 
+try:
+    from tqdm import tqdm as _tqdm
+except ImportError:  # pragma: no cover - tqdm is optional
+    def _tqdm(iterable, **kwargs):
+        return iterable
+
 
 @dataclass
 class Experiment:
@@ -61,6 +67,15 @@ class Experiment:
         self.seed: int = int(c.get("seed", 42))
         self.clip: float = float(c.get("clip", DEFAULT_CLIP))
 
+        if not self.functions:
+            raise ValueError("Experiment requires at least one function")
+        if not self.optimizers:
+            raise ValueError("Experiment requires at least one optimizer")
+        if self.max_iter <= 0:
+            raise ValueError(f"max_iter must be positive, got {self.max_iter!r}")
+        if self.n_runs <= 0:
+            raise ValueError(f"n_runs must be positive, got {self.n_runs!r}")
+
     @property
     def hash(self) -> str:
         return config_hash(
@@ -76,6 +91,9 @@ class Experiment:
     def run(self) -> Report:
         report = Report(experiment=self)
         rows: list[_RunRow] = []
+
+        total = len(self.functions) * len(self.noises) * len(self.optimizers) * self.n_runs
+        pbar = _tqdm(total=total, desc="Benchmarking", unit="run")
 
         for fnspec in self.functions:
             for nspec in self.noises:
@@ -94,7 +112,9 @@ class Experiment:
                             fnspec, nspec, ospec, run, rng_init, rng_noise, rng_opt
                         )
                         rows.append(row)
+                        pbar.update(1)
 
+        pbar.close()
         report.set_rows(rows)
         return report
 
@@ -183,10 +203,12 @@ def _clip_grad(g: np.ndarray, clip: float) -> np.ndarray:
 def _fd_grad(fnspec: FunctionSpec, x: np.ndarray, eps: float = 1e-5) -> np.ndarray:
     """Vectorized central finite-difference gradient fallback."""
     x = np.asarray(x, dtype=np.float64)
-    g = np.zeros_like(x)
-    for i in range(len(x)):
-        xp, xm = x.copy(), x.copy()
-        xp[i] += eps
-        xm[i] -= eps
-        g[i] = (fnspec.evaluate(xp) - fnspec.evaluate(xm)) / (2 * eps)
-    return g
+    dim = len(x)
+    xp = np.tile(x, (dim, 1))
+    xm = np.tile(x, (dim, 1))
+    for i in range(dim):
+        xp[i, i] += eps
+        xm[i, i] -= eps
+    fp = np.apply_along_axis(fnspec.evaluate, 1, xp)
+    fm = np.apply_along_axis(fnspec.evaluate, 1, xm)
+    return (fp - fm) / (2 * eps)

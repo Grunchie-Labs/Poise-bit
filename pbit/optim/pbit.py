@@ -86,11 +86,26 @@ class PBitOptimizer:
         floor: float = 0.0,
         convention: str = "legacy",
         seed: int | None = None,
+        lr_schedule: Callable[[int], float] | None = None,
     ) -> None:
         if step_size not in ("proportional", "constant", "floor"):
             raise ValueError(f"unknown step_size {step_size!r}")
         if convention != "legacy":
             raise ValueError(f"unknown convention {convention!r}")
+        if lr <= 0:
+            raise ValueError(f"lr must be positive, got {lr!r}")
+        if tau <= 0:
+            raise ValueError(f"tau must be positive, got {tau!r}")
+        if beta0 < 0:
+            raise ValueError(f"beta0 must be non-negative, got {beta0!r}")
+        if beta_cap < 0:
+            raise ValueError(f"beta_cap must be non-negative, got {beta_cap!r}")
+        if beta_cap < beta0:
+            raise ValueError(
+                f"beta_cap ({beta_cap}) must be >= beta0 ({beta0})"
+            )
+        if step_size == "floor" and floor < 0:
+            raise ValueError(f"floor must be non-negative for step_size='floor', got {floor!r}")
         self.lr = float(lr)
         self.beta0 = float(beta0)
         self.tau = float(tau)
@@ -101,6 +116,7 @@ class PBitOptimizer:
         self._seed = seed
         self._rng = constructor_rng(seed)
         self._schedule: Schedule = linear_cooling(beta0, tau, beta_cap)
+        self._lr_schedule = lr_schedule
         self.state = PBitState()
 
     # ------------------------------------------------------------------ RNG
@@ -128,30 +144,52 @@ class PBitOptimizer:
             "step_size": self.step_size,
             "floor": self.floor,
             "convention": self.convention,
+            "lr_schedule": self._lr_schedule is not None,
         }
 
     def configure_schedule(self, schedule: Callable[[int], float]) -> None:
         """Override the temperature schedule with a custom callable."""
         self._schedule = schedule
 
+    def configure_lr_schedule(self, schedule: Callable[[int], float] | None) -> None:
+        """Override the learning-rate schedule with a custom callable.
+
+        The callable receives the current step ``t`` and returns the effective
+        learning rate for that step. Pass ``None`` to disable scheduling.
+        """
+        self._lr_schedule = schedule
+
     # ------------------------------------------------------------- core
     def step(self, x: np.ndarray, grad: np.ndarray, t: int) -> np.ndarray:
         x = np.asarray(x, dtype=np.float64)
         grad = np.asarray(grad, dtype=np.float64)
 
+        if not np.all(np.isfinite(grad)):
+            raise ValueError(
+                "gradient must be finite; got nan/inf. "
+                "Consider clipping or checking your loss function."
+            )
+
         beta = self.beta(t)
         g_scale = float(np.mean(np.abs(grad))) + EPS
+        if g_scale <= EPS:
+            g_scale = EPS
 
         prob = sigmoid(-beta * grad / g_scale)
         sigma = bernoulli_bit(self._rng, prob)
 
         abs_g = np.abs(grad)
+        effective_lr = self._lr_schedule(t) if self._lr_schedule is not None else self.lr
+        if effective_lr <= 0:
+            raise ValueError(
+                f"effective learning rate must be positive, got {effective_lr!r} at t={t}"
+            )
         if self.step_size == "constant":
-            mag = np.full_like(abs_g, self.lr)
+            mag = np.full_like(abs_g, effective_lr)
         elif self.step_size == "floor":
-            mag = self.lr * (abs_g + self.floor + EPS)
+            mag = effective_lr * (abs_g + self.floor + EPS)
         else:  # proportional (default)
-            mag = self.lr * (abs_g + EPS)
+            mag = effective_lr * (abs_g + EPS)
 
         step = mag * sigma
 
