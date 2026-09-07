@@ -1,4 +1,4 @@
-# pbit
+# Pbit
 
 > Probabilistic p-bit optimization, low-precision gradient robustness, and
 > reproducible optimizer benchmarking.
