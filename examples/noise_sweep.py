@@ -1,4 +1,4 @@
-"""noise_sweep.py — low-precision gradient stress test.
+"""noise_sweep.py - low-precision gradient stress test.
 
 The most AI/hardware-relevant example: sweep gradient quantization bit-width
 (stochastic rounding) from 1 to 32 bits and compare how optimizers degrade.

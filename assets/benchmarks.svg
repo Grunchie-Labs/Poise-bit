@@ -24,7 +24,7 @@
   <rect width="760" height="340" fill="url(#bg2)" rx="12"/>
 
   <text x="380" y="28" text-anchor="middle" fill="#fafafa" font-size="15" font-weight="600">
-    PBit vs Baselines — 4-bit Quantized Rastrigin
+    PBit vs Baselines - 4-bit Quantized Rastrigin
   </text>
   <text x="380" y="46" text-anchor="middle" fill="#71717a" font-size="10">
     Lower final best loss is better
@@ -62,7 +62,7 @@
     Rosenbrock Convergence Speed
   </text>
   <text x="380" y="248" text-anchor="middle" fill="#71717a" font-size="10">
-    Median iterations to reach threshold — lower is better
+    Median iterations to reach threshold - lower is better
   </text>
 
   <g transform="translate(80, 266)">

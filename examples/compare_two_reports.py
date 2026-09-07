@@ -1,4 +1,4 @@
-"""compare_two_reports.py — diff two experiment reports.
+"""compare_two_reports.py - diff two experiment reports.
 
 Runs the same small experiment twice and compares the resulting JSON reports,
 demonstrating the reproducibility/diff helper. Loss histories should agree

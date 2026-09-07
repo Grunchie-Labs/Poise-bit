@@ -1,4 +1,4 @@
-"""run_benchmark.py — full reproducible optimizer benchmark.
+"""run_benchmark.py - full reproducible optimizer benchmark.
 
 Compares PBit against AI-relevant baselines across multiple functions and
 noise modes, exports CSV/JSON, and prints a summary table.

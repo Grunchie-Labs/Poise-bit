@@ -109,7 +109,7 @@ optimizer = PBitTorchOptimizer(model.parameters(), lr=1e-3, tau=1000)
 
 | Noise | Optimizer | Rastrigin final loss | Degradation |
 |-------|-----------|----------------------|-------------|
-| Clean | PBit | 23.94 | — |
+| Clean | PBit | 23.94 | - |
 | 4-bit Quant | **PBit** | **11.69** | **0.49x** (improved!) |
 | 4-bit Quant | Adam | 20.30 | 0.99x |
 | Sign (1-bit) | **PBit** | 21.01 | 0.88x |
@@ -187,7 +187,7 @@ All implement `GradientOptimizer` protocol (`reset(rng)`, `step(x, grad, t)`):
 
 #### Ask/Tell
 
-- `SimulatedAnnealing`, `EvolutionStrategy` — implement `AskTellOptimizer` protocol
+- `SimulatedAnnealing`, `EvolutionStrategy` - implement `AskTellOptimizer` protocol
 
 ### Benchmarking
 
@@ -224,21 +224,21 @@ for row in report.rows:
 
 #### Noise Suite
 
-- `NoNoise` — clean gradients
-- `GaussianNoise(sigma)` — additive Gaussian
-- `CorruptionNoise(p, amplify)` — random sign flips + amplification
-- `QuantizeNoise(bits, stochastic)` — uniform quantization with optional randomized rounding
-- `SignNoise` — 1-bit sign-only gradients
-- `ClipNoise(max_norm)` — gradient norm clipping
+- `NoNoise` - clean gradients
+- `GaussianNoise(sigma)` - additive Gaussian
+- `CorruptionNoise(p, amplify)` - random sign flips + amplification
+- `QuantizeNoise(bits, stochastic)` - uniform quantization with optional randomized rounding
+- `SignNoise` - 1-bit sign-only gradients
+- `ClipNoise(max_norm)` - gradient norm clipping
 
 #### Metrics
 
-- `success_rate(best_histories, threshold)` — fraction of runs reaching threshold
-- `median_hit_time_successes(best_histories, threshold)` — median iteration to reach threshold (successful runs only)
-- `iter_to_threshold(best_history, threshold)` — first iteration crossing threshold
-- `auc_loss(history)` — area under loss curve
-- `robustness_ratio(noisy, clean)` — noisy_final / clean_final
-- `escape_count_current(mean_current)` — count of plateau escapes
+- `success_rate(best_histories, threshold)` - fraction of runs reaching threshold
+- `median_hit_time_successes(best_histories, threshold)` - median iteration to reach threshold (successful runs only)
+- `iter_to_threshold(best_history, threshold)` - first iteration crossing threshold
+- `auc_loss(history)` - area under loss curve
+- `robustness_ratio(noisy, clean)` - noisy_final / clean_final
+- `escape_count_current(mean_current)` - count of plateau escapes
 
 ### PyTorch Integration
 
@@ -266,12 +266,12 @@ stochastic binary decision driven by thermodynamic annealing:
 4. **Take step**: `x ← x + lr · |grad| · σ`
 5. **Anneal**: increase `β` over time using `schedule(t)`
 
-Early in optimization (`β` small), directions are nearly random — providing
-exploration. As `β` grows, the optimizer locks onto descent directions —
+Early in optimization (`β` small), directions are nearly random - providing
+exploration. As `β` grows, the optimizer locks onto descent directions -
 providing exploitation. This makes it naturally robust to:
-- **Quantization noise** — stochastic rounding is part of the model
-- **Sign-only gradients** — binary direction is the native representation
-- **Corrupted gradients** — random flips are indistinguishable from high-temperature exploration
+- **Quantization noise** - stochastic rounding is part of the model
+- **Sign-only gradients** - binary direction is the native representation
+- **Corrupted gradients** - random flips are indistinguishable from high-temperature exploration
 
 ---
 
@@ -336,11 +336,11 @@ pbit/
 
 See the `examples/` directory:
 
-- `demo_optimizer.py` — classic optimization with PBit on Rastrigin and Rosenbrock
-- `run_benchmark.py` — full reproducible optimizer benchmark across functions and noise modes
-- `noise_sweep.py` — quantization bit-width sweep
-- `compare_two_reports.py` — explain why two benchmark runs differ
-- `pytorch_mlp.py` — PyTorch integration example
+- `demo_optimizer.py` - classic optimization with PBit on Rastrigin and Rosenbrock
+- `run_benchmark.py` - full reproducible optimizer benchmark across functions and noise modes
+- `noise_sweep.py` - quantization bit-width sweep
+- `compare_two_reports.py` - explain why two benchmark runs differ
+- `pytorch_mlp.py` - PyTorch integration example
 
 Run a demo:
 ```bash
@@ -373,7 +373,7 @@ ruff check pbit tests
 
 ## License
 
-Apache-2.0 — the explicit patent grant is intentional for hardware-adjacent work.
+Apache-2.0 - the explicit patent grant is intentional for hardware-adjacent work.
 
 See [LICENSE](LICENSE) for details.
 

@@ -1,4 +1,4 @@
-"""demo_optimizer.py — classic optimization with PBitOptimizer.
+"""demo_optimizer.py - classic optimization with PBitOptimizer.
 
 Shows PBit on Rastrigin and Rosenbrock with best-so-far tracking and the three
 step-size modes.

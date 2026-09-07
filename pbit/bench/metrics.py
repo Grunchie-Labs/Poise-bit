@@ -148,7 +148,7 @@ def quantize_sweep(
     """Run a quantization bit-width sweep, returning ``{optimizer: {bits: final_best}}``.
 
     ``run_fn`` must accept (function, noise, optimizer, max_iter, n_runs, seed) and
-    return something exposing ``final_best_loss()`` — used by examples to keep the
+    return something exposing ``final_best_loss()`` - used by examples to keep the
     sweep generic without importing the full runner here.
     """
     from pbit.bench.noise import QuantizeNoise

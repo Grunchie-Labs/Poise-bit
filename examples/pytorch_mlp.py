@@ -1,4 +1,4 @@
-"""pytorch_mlp.py — train a tiny MLP with the optional PBit torch optimizer.
+"""pytorch_mlp.py - train a tiny MLP with the optional PBit torch optimizer.
 
 Requires torch: ``pip install "pbit[torch]"``.
 

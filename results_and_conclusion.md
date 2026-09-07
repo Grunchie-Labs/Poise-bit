@@ -48,7 +48,7 @@ tests/test_torch.py             3 passed
 | Momentum | 500 | 3.445 | 2.823 | 0.174 | 11.53 |
 | SimAnneal | 500 | 4.271 | 0.838 | 0.187 | 10.71 |
 
-#### Rosenbrock (Banana valley — easy to find, hard to optimize)
+#### Rosenbrock (Banana valley - easy to find, hard to optimize)
 
 | Optimizer | Iter→thresh | AUC-Loss | Final Variance | Time (s) | Efficiency |
 |-----------|-------------|----------|----------------|----------|-----------|
@@ -68,7 +68,7 @@ tests/test_torch.py             3 passed
 ### 2. Noise Robustness
 **Configuration:** dim=2, max_iter=300, n_runs=5
 
-#### Rastrigin — Final Best Loss (lower is better)
+#### Rastrigin - Final Best Loss (lower is better)
 
 | Optimizer | Clean | Gaussian σ=0.5 | 4-bit Quant |
 |-----------|-------|----------------|-------------|
@@ -77,9 +77,9 @@ tests/test_torch.py             3 passed
 | SGD | 20.75 | 19.36 | 18.78 |
 | RMSProp | 18.00 | 24.84 | 18.77 |
 
-**Key Finding:** PBit shows **remarkable robustness to quantization** — performance **improves** under 4-bit quantization (11.69 vs 23.94 clean). This is because stochastic rounding in quantization adds exploration that helps escape local minima.
+**Key Finding:** PBit shows **remarkable robustness to quantization** - performance **improves** under 4-bit quantization (11.69 vs 23.94 clean). This is because stochastic rounding in quantization adds exploration that helps escape local minima.
 
-#### Ackley — Final Best Loss (lower is better)
+#### Ackley - Final Best Loss (lower is better)
 
 | Optimizer | Clean | Gaussian σ=0.5 | 4-bit Quant |
 |-----------|-------|----------------|-------------|
@@ -117,7 +117,7 @@ tests/test_torch.py             3 passed
 | Adam | 100% | 66.0 | **0.0000** |
 | SGD | 20% | 2.0 | 4.8965 |
 
-**Key Finding:** PBit achieves **100% success rate with median 4 iterations** — fastest convergence. Adam eventually reaches lower final loss (0.0) but takes 66 iterations median.
+**Key Finding:** PBit achieves **100% success rate with median 4 iterations** - fastest convergence. Adam eventually reaches lower final loss (0.0) but takes 66 iterations median.
 
 ---
 
@@ -135,17 +135,17 @@ tests/test_torch.py             3 passed
 
 ## Use Cases Where PBit Excels
 
-1. **Low-Precision Hardware** — 1-4 bit gradient representations
-2. **Multi-modal Landscapes** — Rastrigin, basin-hopping problems
-3. **Fast Initial Convergence** — When quick "good enough" solutions matter
-4. **Energy-Constrained** — Binary decisions are computationally cheap
-5. **Noisy Gradients** — Gaussian noise, quantization noise
+1. **Low-Precision Hardware** - 1-4 bit gradient representations
+2. **Multi-modal Landscapes** - Rastrigin, basin-hopping problems
+3. **Fast Initial Convergence** - When quick "good enough" solutions matter
+4. **Energy-Constrained** - Binary decisions are computationally cheap
+5. **Noisy Gradients** - Gaussian noise, quantization noise
 
 ## When to Use Alternatives
 
-- **Adam** — When final convergence precision matters (lower final loss on Rosenbrock)
-- **RMSProp** — On unimodal or less noisy landscapes
-- **EvoStrat** — On highly deceptive landscapes (Ackley)
+- **Adam** - When final convergence precision matters (lower final loss on Rosenbrock)
+- **RMSProp** - On unimodal or less noisy landscapes
+- **EvoStrat** - On highly deceptive landscapes (Ackley)
 
 ---
 
@@ -173,14 +173,14 @@ tests/test_torch.py             3 passed
 | Adam | 0.00 | 0.59 | **234.38x** (catastrophic!) |
 
 **Key Finding:**
-- **Adam is extremely fragile to corruption** — 234x worse on Rosenbrock
-- **SGD is robust** — actually improves with corruption (noise helps exploration)
-- **PBit is moderately robust** — 1.79x degradation
+- **Adam is extremely fragile to corruption** - 234x worse on Rosenbrock
+- **SGD is robust** - actually improves with corruption (noise helps exploration)
+- **PBit is moderately robust** - 1.79x degradation
 - **RMSProp is stable** on Rosenbrock (1.00x)
 
 ---
 
-### 6. Sign Noise Test (1-bit gradient — extreme quantization)
+### 6. Sign Noise Test (1-bit gradient - extreme quantization)
 
 | Optimizer | Clean | Sign Only | Degradation |
 |-----------|-------|-----------|-------------|
@@ -204,7 +204,7 @@ tests/test_torch.py             3 passed
 | PBit | 6.25 |
 
 **Key Finding:**
-- **Adam dominates in high dimensions** — adaptive learning rates help
+- **Adam dominates in high dimensions** - adaptive learning rates help
 - PBit struggles in high-dim (exploration becomes unfocused)
 - This is expected: PBit's stochastic binary decisions need more iterations to explore effectively
 
@@ -226,12 +226,12 @@ tests/test_torch.py             3 passed
 ## PBit Strengths & Weaknesses
 
 ### Strengths
-- **Low-precision hardware** (1-4 bit) — best performer
-- **Fast initial convergence** — finds good solutions quickly
-- **Corruption/sign noise** — robust binary mechanism
-- **Multi-modal exploration** — escapes local minima
+- **Low-precision hardware** (1-4 bit) - best performer
+- **Fast initial convergence** - finds good solutions quickly
+- **Corruption/sign noise** - robust binary mechanism
+- **Multi-modal exploration** - escapes local minima
 
 ### Weaknesses
-- **High dimensions** — Adam wins at dim=10
-- **Fine precision** — settles at local minima vs global
-- **Clean standard training** — RMSProp/Adam better at 32-bit
+- **High dimensions** - Adam wins at dim=10
+- **Fine precision** - settles at local minima vs global
+- **Clean standard training** - RMSProp/Adam better at 32-bit
