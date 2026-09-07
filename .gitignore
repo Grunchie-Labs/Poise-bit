@@ -19,6 +19,7 @@ htmlcov/
 pbit_benchmark_results/
 out/
 reports/
+examples/
 
 # OS / editor
 .DS_Store
