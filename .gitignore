@@ -20,6 +20,13 @@ pbit_benchmark_results/
 out/
 reports/
 
+# Agent tooling installed by the skills CLI
+.agents/
+.claude/
+agent/
+.omo/
+skills-lock.json
+
 # OS / editor
 .DS_Store
 Thumbs.db

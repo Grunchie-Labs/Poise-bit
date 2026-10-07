@@ -1,0 +1,181 @@
+cell,optimizer,selected_params,n_runs,final_current_mean,final_current_sd,final_best_mean,success_rate
+Rastrigin/dim=2/clean,pbit,"{""lr"": 0.005, ""tau"": 100}",50,18.327193,11.242178,18.327172,0.08
+Rastrigin/dim=2/clean,pbit_floor,"{""lr"": 0.005, ""tau"": 100}",50,18.267622,11.241496,18.267551,0.08
+Rastrigin/dim=2/clean,sgd,"{""lr"": 0.001}",50,18.327033,11.242368,18.327033,0.08
+Rastrigin/dim=2/clean,momentum,"{""lr"": 0.001}",50,18.327033,11.242368,18.327033,0.08
+Rastrigin/dim=2/clean,adam,"{""lr"": 0.5}",50,19.355814,10.881676,17.620788,0.02
+Rastrigin/dim=2/clean,adamw,"{""lr"": 0.5, ""weight_decay"": 0.0}",50,19.355814,10.881676,17.620788,0.02
+Rastrigin/dim=2/clean,rmsprop,"{""lr"": 0.01}",50,18.336908,11.242342,18.32789,0.08
+Rastrigin/dim=2/clean,signsgd,"{""lr"": 0.005}",50,18.330861,11.241567,18.328516,0.08
+Rastrigin/dim=2/clean,lion,"{""lr"": 0.01}",50,18.343414,11.243597,18.332772,0.06
+Rastrigin/dim=2/clean,langevin,"{""lr"": 0.001}",50,18.864077,11.022284,18.387681,0.08
+Rastrigin/dim=2/GaussianNoise_sigma=0.5,pbit,"{""lr"": 0.005, ""tau"": 100}",50,18.349491,11.241909,18.327209,0.08
+Rastrigin/dim=2/GaussianNoise_sigma=0.5,pbit_floor,"{""lr"": 0.005, ""tau"": 100}",50,18.289486,11.240825,18.267478,0.08
+Rastrigin/dim=2/GaussianNoise_sigma=0.5,sgd,"{""lr"": 0.001}",50,18.327204,11.242399,18.327033,0.08
+Rastrigin/dim=2/GaussianNoise_sigma=0.5,momentum,"{""lr"": 0.001}",50,18.328405,11.242336,18.327039,0.08
+Rastrigin/dim=2/GaussianNoise_sigma=0.5,adam,"{""lr"": 0.5}",50,19.431575,11.057321,17.560843,0.02
+Rastrigin/dim=2/GaussianNoise_sigma=0.5,adamw,"{""lr"": 0.5, ""weight_decay"": 0.0}",50,19.431575,11.057321,17.560843,0.02
+Rastrigin/dim=2/GaussianNoise_sigma=0.5,rmsprop,"{""lr"": 0.01}",50,18.336586,11.24136,18.32707,0.08
+Rastrigin/dim=2/GaussianNoise_sigma=0.5,signsgd,"{""lr"": 0.005}",50,18.33171,11.241334,18.328516,0.08
+Rastrigin/dim=2/GaussianNoise_sigma=0.5,lion,"{""lr"": 0.01}",50,18.343301,11.243459,18.332772,0.06
+Rastrigin/dim=2/GaussianNoise_sigma=0.5,langevin,"{""lr"": 0.001}",50,18.862754,11.021795,18.387713,0.08
+Rastrigin/dim=2/CorruptionNoise_p=0.2,pbit,"{""lr"": 0.005, ""tau"": 100}",50,18.400352,11.056449,18.191005,0.06
+Rastrigin/dim=2/CorruptionNoise_p=0.2,pbit_floor,"{""lr"": 0.005, ""tau"": 100}",50,18.472726,11.173457,18.250812,0.08
+Rastrigin/dim=2/CorruptionNoise_p=0.2,sgd,"{""lr"": 0.001}",50,18.307133,11.22962,18.307133,0.08
+Rastrigin/dim=2/CorruptionNoise_p=0.2,momentum,"{""lr"": 0.001}",50,18.767465,11.184556,18.307658,0.08
+Rastrigin/dim=2/CorruptionNoise_p=0.2,adam,"{""lr"": 0.5}",50,40.914688,24.517658,9.119176,0.04
+Rastrigin/dim=2/CorruptionNoise_p=0.2,adamw,"{""lr"": 0.5, ""weight_decay"": 0.0}",50,40.914688,24.517658,9.119176,0.04
+Rastrigin/dim=2/CorruptionNoise_p=0.2,rmsprop,"{""lr"": 0.01}",50,18.523038,11.328204,18.446427,0.08
+Rastrigin/dim=2/CorruptionNoise_p=0.2,signsgd,"{""lr"": 0.005}",50,18.321274,11.226269,18.308644,0.08
+Rastrigin/dim=2/CorruptionNoise_p=0.2,lion,"{""lr"": 0.01}",50,18.386552,11.234558,18.332772,0.06
+Rastrigin/dim=2/CorruptionNoise_p=0.2,langevin,"{""lr"": 0.001}",50,19.381793,11.014837,18.371925,0.08
+Rastrigin/dim=2/QuantizeNoise_bits=4_stochastic=True,pbit,"{""lr"": 0.005, ""tau"": 100}",50,18.327193,11.242178,18.327172,0.08
+Rastrigin/dim=2/QuantizeNoise_bits=4_stochastic=True,pbit_floor,"{""lr"": 0.005, ""tau"": 100}",50,18.267622,11.241496,18.267551,0.08
+Rastrigin/dim=2/QuantizeNoise_bits=4_stochastic=True,sgd,"{""lr"": 0.001}",50,18.327033,11.242368,18.327033,0.08
+Rastrigin/dim=2/QuantizeNoise_bits=4_stochastic=True,momentum,"{""lr"": 0.001}",50,18.327033,11.242368,18.327033,0.08
+Rastrigin/dim=2/QuantizeNoise_bits=4_stochastic=True,adam,"{""lr"": 0.5}",50,19.364246,10.8264,17.620428,0.02
+Rastrigin/dim=2/QuantizeNoise_bits=4_stochastic=True,adamw,"{""lr"": 0.5, ""weight_decay"": 0.0}",50,19.364246,10.8264,17.620428,0.02
+Rastrigin/dim=2/QuantizeNoise_bits=4_stochastic=True,rmsprop,"{""lr"": 0.01}",50,18.336908,11.242342,18.32789,0.08
+Rastrigin/dim=2/QuantizeNoise_bits=4_stochastic=True,signsgd,"{""lr"": 0.005}",50,18.330861,11.241567,18.328516,0.08
+Rastrigin/dim=2/QuantizeNoise_bits=4_stochastic=True,lion,"{""lr"": 0.01}",50,18.343414,11.243597,18.332772,0.06
+Rastrigin/dim=2/QuantizeNoise_bits=4_stochastic=True,langevin,"{""lr"": 0.001}",50,18.864077,11.022284,18.387681,0.08
+Rastrigin/dim=2/SignNoise,pbit,"{""lr"": 0.005, ""tau"": 100}",50,18.330861,11.241567,18.328516,0.08
+Rastrigin/dim=2/SignNoise,pbit_floor,"{""lr"": 0.005, ""tau"": 100}",50,18.330785,11.241522,18.328514,0.08
+Rastrigin/dim=2/SignNoise,sgd,"{""lr"": 0.001}",50,19.774261,11.480035,19.774221,0.04
+Rastrigin/dim=2/SignNoise,momentum,"{""lr"": 0.001}",50,18.327856,11.242284,18.32707,0.08
+Rastrigin/dim=2/SignNoise,adam,"{""lr"": 0.5}",50,20.679768,10.678517,17.505113,0.04
+Rastrigin/dim=2/SignNoise,adamw,"{""lr"": 0.5, ""weight_decay"": 0.0}",50,20.679768,10.678517,17.505113,0.04
+Rastrigin/dim=2/SignNoise,rmsprop,"{""lr"": 0.01}",50,18.341199,11.242638,18.33477,0.06
+Rastrigin/dim=2/SignNoise,signsgd,"{""lr"": 0.005}",50,18.330861,11.241567,18.328516,0.08
+Rastrigin/dim=2/SignNoise,lion,"{""lr"": 0.01}",50,18.340022,11.242896,18.332772,0.06
+Rastrigin/dim=2/SignNoise,langevin,"{""lr"": 0.001}",50,25.280694,12.753132,20.49648,0.04
+Rastrigin/dim=10/clean,pbit,"{""lr"": 0.005, ""tau"": 100}",50,84.115068,23.250296,84.11503,0.0
+Rastrigin/dim=10/clean,pbit_floor,"{""lr"": 0.005, ""tau"": 100}",50,84.673321,23.7409,84.673236,0.0
+Rastrigin/dim=10/clean,sgd,"{""lr"": 0.001}",50,84.769987,23.599658,84.769987,0.0
+Rastrigin/dim=10/clean,momentum,"{""lr"": 0.001}",50,84.769987,23.599658,84.769987,0.0
+Rastrigin/dim=10/clean,adam,"{""lr"": 0.5}",50,90.173748,23.646649,83.283802,0.0
+Rastrigin/dim=10/clean,adamw,"{""lr"": 0.5, ""weight_decay"": 0.0}",50,90.173748,23.646649,83.283802,0.0
+Rastrigin/dim=10/clean,rmsprop,"{""lr"": 0.01}",50,84.819371,23.599599,84.782116,0.0
+Rastrigin/dim=10/clean,signsgd,"{""lr"": 0.005}",50,84.787149,23.597975,84.78234,0.0
+Rastrigin/dim=10/clean,lion,"{""lr"": 0.01}",50,84.84656,23.5969,84.821822,0.0
+Rastrigin/dim=10/clean,langevin,"{""lr"": 0.001}",50,86.89995,23.624351,85.189515,0.0
+Ackley/dim=2/clean,pbit,"{""lr"": 0.1, ""tau"": 1000}",50,19.74324,2.914257,18.462995,0.02
+Ackley/dim=2/clean,pbit_floor,"{""lr"": 0.1, ""tau"": 300}",50,19.715591,2.749734,18.513009,0.02
+Ackley/dim=2/clean,sgd,"{""lr"": 0.5}",50,16.074117,7.153275,12.325634,0.24
+Ackley/dim=2/clean,momentum,"{""lr"": 0.05}",50,19.044756,1.525718,18.92539,0.0
+Ackley/dim=2/clean,adam,"{""lr"": 0.5}",50,18.888863,1.810785,18.888253,0.0
+Ackley/dim=2/clean,adamw,"{""lr"": 0.5, ""weight_decay"": 0.0}",50,18.888863,1.810785,18.888253,0.0
+Ackley/dim=2/clean,rmsprop,"{""lr"": 0.5}",50,14.879967,8.835528,12.726731,0.32
+Ackley/dim=2/clean,signsgd,"{""lr"": 0.005}",50,19.015382,1.284718,19.015081,0.0
+Ackley/dim=2/clean,lion,"{""lr"": 0.01}",50,19.016919,1.285075,19.015763,0.0
+Ackley/dim=2/clean,langevin,"{""lr"": 0.5}",50,14.14545,7.536492,9.807988,0.24
+Ackley/dim=2/GaussianNoise_sigma=0.5,pbit,"{""lr"": 0.1, ""tau"": 1000}",50,19.709853,3.756946,18.113529,0.02
+Ackley/dim=2/GaussianNoise_sigma=0.5,pbit_floor,"{""lr"": 0.1, ""tau"": 300}",50,19.581594,3.443643,18.406719,0.02
+Ackley/dim=2/GaussianNoise_sigma=0.5,sgd,"{""lr"": 0.5}",50,14.344461,7.90733,10.784888,0.32
+Ackley/dim=2/GaussianNoise_sigma=0.5,momentum,"{""lr"": 0.05}",50,18.28914,4.645744,17.6991,0.08
+Ackley/dim=2/GaussianNoise_sigma=0.5,adam,"{""lr"": 0.5}",50,19.045647,1.3405,18.989225,0.0
+Ackley/dim=2/GaussianNoise_sigma=0.5,adamw,"{""lr"": 0.5, ""weight_decay"": 0.0}",50,19.045647,1.3405,18.989225,0.0
+Ackley/dim=2/GaussianNoise_sigma=0.5,rmsprop,"{""lr"": 0.5}",50,14.806973,8.562058,12.572697,0.32
+Ackley/dim=2/GaussianNoise_sigma=0.5,signsgd,"{""lr"": 0.005}",50,19.016707,1.284449,19.015081,0.0
+Ackley/dim=2/GaussianNoise_sigma=0.5,lion,"{""lr"": 0.01}",50,19.019506,1.285874,19.015763,0.0
+Ackley/dim=2/GaussianNoise_sigma=0.5,langevin,"{""lr"": 0.5}",50,13.934656,7.427842,9.524753,0.28
+Ackley/dim=2/CorruptionNoise_p=0.2,pbit,"{""lr"": 0.1, ""tau"": 1000}",50,19.7705,3.924481,17.825535,0.02
+Ackley/dim=2/CorruptionNoise_p=0.2,pbit_floor,"{""lr"": 0.1, ""tau"": 300}",50,19.595543,3.388935,17.889889,0.02
+Ackley/dim=2/CorruptionNoise_p=0.2,sgd,"{""lr"": 0.5}",50,19.863635,3.884364,13.967172,0.04
+Ackley/dim=2/CorruptionNoise_p=0.2,momentum,"{""lr"": 0.05}",50,17.794965,5.704333,12.243267,0.08
+Ackley/dim=2/CorruptionNoise_p=0.2,adam,"{""lr"": 0.5}",50,18.876137,5.118751,17.043544,0.08
+Ackley/dim=2/CorruptionNoise_p=0.2,adamw,"{""lr"": 0.5, ""weight_decay"": 0.0}",50,18.876137,5.118751,17.043544,0.08
+Ackley/dim=2/CorruptionNoise_p=0.2,rmsprop,"{""lr"": 0.5}",50,17.266737,6.544181,15.217103,0.1
+Ackley/dim=2/CorruptionNoise_p=0.2,signsgd,"{""lr"": 0.005}",50,19.016408,1.284959,19.015081,0.0
+Ackley/dim=2/CorruptionNoise_p=0.2,lion,"{""lr"": 0.01}",50,19.02154,1.285215,19.015106,0.0
+Ackley/dim=2/CorruptionNoise_p=0.2,langevin,"{""lr"": 0.5}",50,19.173808,4.351944,12.292332,0.06
+Ackley/dim=2/QuantizeNoise_bits=4_stochastic=True,pbit,"{""lr"": 0.1, ""tau"": 1000}",50,19.714612,2.875556,18.496916,0.02
+Ackley/dim=2/QuantizeNoise_bits=4_stochastic=True,pbit_floor,"{""lr"": 0.1, ""tau"": 300}",50,19.728954,2.833479,18.53177,0.02
+Ackley/dim=2/QuantizeNoise_bits=4_stochastic=True,sgd,"{""lr"": 0.5}",50,14.423505,7.84608,10.788659,0.28
+Ackley/dim=2/QuantizeNoise_bits=4_stochastic=True,momentum,"{""lr"": 0.05}",50,19.038668,1.526501,18.924636,0.0
+Ackley/dim=2/QuantizeNoise_bits=4_stochastic=True,adam,"{""lr"": 0.5}",50,18.888863,1.810785,18.888253,0.0
+Ackley/dim=2/QuantizeNoise_bits=4_stochastic=True,adamw,"{""lr"": 0.5, ""weight_decay"": 0.0}",50,18.888863,1.810785,18.888253,0.0
+Ackley/dim=2/QuantizeNoise_bits=4_stochastic=True,rmsprop,"{""lr"": 0.5}",50,14.427173,8.70944,12.484478,0.34
+Ackley/dim=2/QuantizeNoise_bits=4_stochastic=True,signsgd,"{""lr"": 0.005}",50,19.015382,1.284718,19.015081,0.0
+Ackley/dim=2/QuantizeNoise_bits=4_stochastic=True,lion,"{""lr"": 0.01}",50,19.016919,1.285075,19.015763,0.0
+Ackley/dim=2/QuantizeNoise_bits=4_stochastic=True,langevin,"{""lr"": 0.5}",50,14.843505,7.671128,10.454493,0.18
+Ackley/dim=2/SignNoise,pbit,"{""lr"": 0.1, ""tau"": 1000}",50,19.260509,1.406838,19.091784,0.0
+Ackley/dim=2/SignNoise,pbit_floor,"{""lr"": 0.1, ""tau"": 300}",50,19.190293,1.291212,19.111775,0.0
+Ackley/dim=2/SignNoise,sgd,"{""lr"": 0.5}",50,20.245338,3.036263,19.802329,0.02
+Ackley/dim=2/SignNoise,momentum,"{""lr"": 0.05}",50,19.213165,1.274981,19.020593,0.0
+Ackley/dim=2/SignNoise,adam,"{""lr"": 0.5}",50,19.159317,1.956473,18.829402,0.0
+Ackley/dim=2/SignNoise,adamw,"{""lr"": 0.5, ""weight_decay"": 0.0}",50,19.159317,1.956473,18.829402,0.0
+Ackley/dim=2/SignNoise,rmsprop,"{""lr"": 0.5}",50,20.297779,2.294387,19.801844,0.0
+Ackley/dim=2/SignNoise,signsgd,"{""lr"": 0.005}",50,19.015382,1.284718,19.015081,0.0
+Ackley/dim=2/SignNoise,lion,"{""lr"": 0.01}",50,19.0166,1.284958,19.015763,0.0
+Ackley/dim=2/SignNoise,langevin,"{""lr"": 0.5}",50,15.506325,7.806246,13.016394,0.28
+Ackley/dim=10/clean,pbit,"{""lr"": 0.01, ""tau"": 100}",50,19.478564,0.284383,19.478564,0.0
+Ackley/dim=10/clean,pbit_floor,"{""lr"": 0.005, ""tau"": 100}",50,19.488404,0.302662,19.488404,0.0
+Ackley/dim=10/clean,sgd,"{""lr"": 0.01}",50,19.4785,0.284317,19.4785,0.0
+Ackley/dim=10/clean,momentum,"{""lr"": 0.1}",50,19.4785,0.284317,19.4785,0.0
+Ackley/dim=10/clean,adam,"{""lr"": 0.5}",50,19.473528,0.294312,19.471139,0.0
+Ackley/dim=10/clean,adamw,"{""lr"": 0.5, ""weight_decay"": 0.0}",50,19.473528,0.294312,19.471139,0.0
+Ackley/dim=10/clean,rmsprop,"{""lr"": 0.5}",50,19.172022,4.934447,18.172705,0.06
+Ackley/dim=10/clean,signsgd,"{""lr"": 0.005}",50,19.478945,0.284332,19.478854,0.0
+Ackley/dim=10/clean,lion,"{""lr"": 0.003}",50,19.47948,0.28449,19.479269,0.0
+Ackley/dim=10/clean,langevin,"{""lr"": 0.01}",50,20.249319,0.471086,19.644904,0.0
+Rosenbrock/dim=2/clean,pbit,"{""lr"": 0.005, ""tau"": 1000}",50,1.362569,2.047943,1.157714,0.74
+Rosenbrock/dim=2/clean,pbit_floor,"{""lr"": 0.005, ""tau"": 1000}",50,1.371133,2.093932,1.177758,0.76
+Rosenbrock/dim=2/clean,sgd,"{""lr"": 0.01}",50,2.061609,2.285829,1.769518,0.68
+Rosenbrock/dim=2/clean,momentum,"{""lr"": 0.001}",50,0.029871,0.04265,0.029537,1.0
+Rosenbrock/dim=2/clean,adam,"{""lr"": 0.05}",50,0.007907,0.03797,0.007312,1.0
+Rosenbrock/dim=2/clean,adamw,"{""lr"": 0.05, ""weight_decay"": 0.0}",50,0.007907,0.03797,0.007312,1.0
+Rosenbrock/dim=2/clean,rmsprop,"{""lr"": 0.01}",50,0.874038,1.819753,0.871043,0.86
+Rosenbrock/dim=2/clean,signsgd,"{""lr"": 0.01}",50,1.614986,2.006275,1.601149,0.68
+Rosenbrock/dim=2/clean,lion,"{""lr"": 0.01}",50,1.320033,2.785545,0.847636,0.8
+Rosenbrock/dim=2/clean,langevin,"{""lr"": 0.01}",50,2.403181,3.408694,0.859842,0.8
+Rosenbrock/dim=2/GaussianNoise_sigma=0.5,pbit,"{""lr"": 0.005, ""tau"": 1000}",50,1.263924,1.972914,1.096267,0.78
+Rosenbrock/dim=2/GaussianNoise_sigma=0.5,pbit_floor,"{""lr"": 0.005, ""tau"": 1000}",50,1.368458,2.105914,1.155787,0.76
+Rosenbrock/dim=2/GaussianNoise_sigma=0.5,sgd,"{""lr"": 0.01}",50,2.051439,2.296474,1.747224,0.68
+Rosenbrock/dim=2/GaussianNoise_sigma=0.5,momentum,"{""lr"": 0.001}",50,0.028882,0.033732,0.0283,1.0
+Rosenbrock/dim=2/GaussianNoise_sigma=0.5,adam,"{""lr"": 0.05}",50,0.009026,0.019414,0.006862,1.0
+Rosenbrock/dim=2/GaussianNoise_sigma=0.5,adamw,"{""lr"": 0.05, ""weight_decay"": 0.0}",50,0.009026,0.019414,0.006862,1.0
+Rosenbrock/dim=2/GaussianNoise_sigma=0.5,rmsprop,"{""lr"": 0.01}",50,0.862899,1.770875,0.853401,0.86
+Rosenbrock/dim=2/GaussianNoise_sigma=0.5,signsgd,"{""lr"": 0.01}",50,1.333566,2.064462,1.319594,0.76
+Rosenbrock/dim=2/GaussianNoise_sigma=0.5,lion,"{""lr"": 0.01}",50,1.19398,2.673992,0.71669,0.8
+Rosenbrock/dim=2/GaussianNoise_sigma=0.5,langevin,"{""lr"": 0.01}",50,2.688377,3.313707,0.834991,0.82
+Rosenbrock/dim=2/CorruptionNoise_p=0.2,pbit,"{""lr"": 0.005, ""tau"": 1000}",50,1.575781,2.026303,1.304572,0.74
+Rosenbrock/dim=2/CorruptionNoise_p=0.2,pbit_floor,"{""lr"": 0.005, ""tau"": 1000}",50,1.425454,1.860154,1.218246,0.76
+Rosenbrock/dim=2/CorruptionNoise_p=0.2,sgd,"{""lr"": 0.01}",50,2.058143,2.335424,1.178783,0.74
+Rosenbrock/dim=2/CorruptionNoise_p=0.2,momentum,"{""lr"": 0.001}",50,1.035613,1.705516,0.744659,0.82
+Rosenbrock/dim=2/CorruptionNoise_p=0.2,adam,"{""lr"": 0.05}",50,0.779175,1.340089,0.57779,0.84
+Rosenbrock/dim=2/CorruptionNoise_p=0.2,adamw,"{""lr"": 0.05, ""weight_decay"": 0.0}",50,0.779175,1.340089,0.57779,0.84
+Rosenbrock/dim=2/CorruptionNoise_p=0.2,rmsprop,"{""lr"": 0.01}",50,1.72051,2.112942,1.694615,0.6
+Rosenbrock/dim=2/CorruptionNoise_p=0.2,signsgd,"{""lr"": 0.01}",50,1.75083,2.282258,1.709502,0.68
+Rosenbrock/dim=2/CorruptionNoise_p=0.2,lion,"{""lr"": 0.01}",50,0.955967,1.429659,0.734903,0.8
+Rosenbrock/dim=2/CorruptionNoise_p=0.2,langevin,"{""lr"": 0.01}",50,4.669517,5.692986,1.094945,0.72
+Rosenbrock/dim=2/QuantizeNoise_bits=4_stochastic=True,pbit,"{""lr"": 0.005, ""tau"": 1000}",50,1.362569,2.047943,1.157714,0.74
+Rosenbrock/dim=2/QuantizeNoise_bits=4_stochastic=True,pbit_floor,"{""lr"": 0.005, ""tau"": 1000}",50,1.371133,2.093932,1.177758,0.76
+Rosenbrock/dim=2/QuantizeNoise_bits=4_stochastic=True,sgd,"{""lr"": 0.01}",50,2.061609,2.285829,1.769518,0.68
+Rosenbrock/dim=2/QuantizeNoise_bits=4_stochastic=True,momentum,"{""lr"": 0.001}",50,0.029871,0.04265,0.029537,1.0
+Rosenbrock/dim=2/QuantizeNoise_bits=4_stochastic=True,adam,"{""lr"": 0.05}",50,0.007907,0.03797,0.007312,1.0
+Rosenbrock/dim=2/QuantizeNoise_bits=4_stochastic=True,adamw,"{""lr"": 0.05, ""weight_decay"": 0.0}",50,0.007907,0.03797,0.007312,1.0
+Rosenbrock/dim=2/QuantizeNoise_bits=4_stochastic=True,rmsprop,"{""lr"": 0.01}",50,0.874083,1.819735,0.871088,0.86
+Rosenbrock/dim=2/QuantizeNoise_bits=4_stochastic=True,signsgd,"{""lr"": 0.01}",50,1.614986,2.006275,1.601149,0.68
+Rosenbrock/dim=2/QuantizeNoise_bits=4_stochastic=True,lion,"{""lr"": 0.01}",50,1.320033,2.785545,0.847636,0.8
+Rosenbrock/dim=2/QuantizeNoise_bits=4_stochastic=True,langevin,"{""lr"": 0.01}",50,2.762794,3.528169,0.859611,0.8
+Rosenbrock/dim=2/SignNoise,pbit,"{""lr"": 0.005, ""tau"": 1000}",50,7.660234,21.604408,7.641013,0.48
+Rosenbrock/dim=2/SignNoise,pbit_floor,"{""lr"": 0.005, ""tau"": 1000}",50,7.489787,18.446251,7.481642,0.5
+Rosenbrock/dim=2/SignNoise,sgd,"{""lr"": 0.01}",50,1.614986,2.006275,1.601149,0.68
+Rosenbrock/dim=2/SignNoise,momentum,"{""lr"": 0.001}",50,0.245872,0.588527,0.245501,0.94
+Rosenbrock/dim=2/SignNoise,adam,"{""lr"": 0.05}",50,0.525867,1.299043,0.491179,0.9
+Rosenbrock/dim=2/SignNoise,adamw,"{""lr"": 0.05, ""weight_decay"": 0.0}",50,0.525867,1.299043,0.491179,0.9
+Rosenbrock/dim=2/SignNoise,rmsprop,"{""lr"": 0.01}",50,1.580389,2.013131,1.571275,0.7
+Rosenbrock/dim=2/SignNoise,signsgd,"{""lr"": 0.01}",50,1.614986,2.006275,1.601149,0.68
+Rosenbrock/dim=2/SignNoise,lion,"{""lr"": 0.01}",50,1.993402,2.939742,1.473963,0.66
+Rosenbrock/dim=2/SignNoise,langevin,"{""lr"": 0.01}",50,8.215516,15.662903,1.348541,0.68
+Rosenbrock/dim=10/clean,pbit,"{""lr"": 0.005, ""tau"": 100}",50,7.460656,1.502096,7.36642,0.02
+Rosenbrock/dim=10/clean,pbit_floor,"{""lr"": 0.005, ""tau"": 300}",50,7.479982,1.625843,7.386765,0.02
+Rosenbrock/dim=10/clean,sgd,"{""lr"": 0.01}",50,13.01634,14.94127,12.460319,0.0
+Rosenbrock/dim=10/clean,momentum,"{""lr"": 0.001}",50,1.23478,1.871981,1.23478,0.7
+Rosenbrock/dim=10/clean,adam,"{""lr"": 0.05}",50,0.971406,1.718712,0.965477,0.76
+Rosenbrock/dim=10/clean,adamw,"{""lr"": 0.05, ""weight_decay"": 0.0}",50,0.971406,1.718712,0.965477,0.76
+Rosenbrock/dim=10/clean,rmsprop,"{""lr"": 0.01}",50,6.207031,1.619012,6.205406,0.0
+Rosenbrock/dim=10/clean,signsgd,"{""lr"": 0.01}",50,7.651938,1.587551,7.635328,0.0
+Rosenbrock/dim=10/clean,lion,"{""lr"": 0.03}",50,7.758518,15.301413,5.932961,0.06
+Rosenbrock/dim=10/clean,langevin,"{""lr"": 0.01}",50,12.215968,5.367454,6.137444,0.0

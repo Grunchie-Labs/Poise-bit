@@ -90,32 +90,26 @@ optimizer = PBitTorchOptimizer(model.parameters(), lr=1e-3, tau=1000)
 
 ## Benchmarks
 
-<div align="center">
-  <img src="assets/benchmarks.svg" alt="PBit vs baselines benchmark charts" width="100%" style="max-width: 760px;">
-</div>
+Benchmark tables previously published here were withdrawn: they reported bare
+means with no uncertainty, and ask/tell optimizers had received twice the
+objective-evaluation budget of every other method.
 
-### Convergence on Different Landscapes
+The benchmark results now live in [`research/CLAIMS.md`](research/CLAIMS.md).
+Every optimizer is tuned on a published grid on clean cells, evaluated on
+held-out seeds, replicated at three master seeds, and compared in pairs on
+shared random streams with bootstrap confidence intervals and multiplicity
+correction. Reproduce them:
 
-| Function | Optimizer | Iter to threshold | AUC Loss | Final variance |
-|----------|-----------|-------------------|----------|----------------|
-| **Rosenbrock** | **PBit** | **51** | 11.74 | 0.638 |
-| Rosenbrock | Adam | 180 | 15.31 | 0.001 |
-| Rosenbrock | RMSProp | 156 | 21.27 | 0.000 |
-| Rastrigin | RMSProp | 500 | 1.96 | 1.030 |
-| Rastrigin | **PBit** | 500 | 3.99 | **4.39** |
-| Ackley | EvoStrat | 80 | 0.67 | 0.012 |
+```bash
+python research/experiments/tune_and_evaluate.py
+python research/experiments/claims.py
+python research/experiments/robustness.py
+```
 
-### Noise Robustness
-
-| Noise | Optimizer | Rastrigin final loss | Degradation |
-|-------|-----------|----------------------|-------------|
-| Clean | PBit | 23.94 | - |
-| 4-bit Quant | **PBit** | **11.69** | **0.49x** (improved!) |
-| 4-bit Quant | Adam | 20.30 | 0.99x |
-| Sign (1-bit) | **PBit** | 21.01 | 0.88x |
-| Sign (1-bit) | Adam | 11.34 | 0.55x |
-
-Full results: [`results_and_conclusion.md`](results_and_conclusion.md)
+Currently registered: 8 claims across 17 comparisons, replicated on three
+landscapes and on MNIST. Seed-stable findings: PBit shrugs off corruption
+noise where Adam degrades heavily; Adam dominates on smooth valleys and on
+MNIST. See [`research/README.md`](research/README.md) for the full study.
 
 ---
 
@@ -293,12 +287,14 @@ pbit/
 │   │   ├── ask_tell.py         # SimulatedAnnealing, EvolutionStrategy
 │   │   └── base.py             # GradientOptimizer, AskTellOptimizer protocols
 │   ├── bench/
-│   │   ├── experiment.py       # Experiment runner with tqdm progress
-│   │   ├── report.py           # Report aggregation, CSV/JSON export
+│   │   ├── experiment.py       # Experiment runner; CRN streams, equal budget
+│   │   ├── report.py           # Report aggregation with sd + CI, CSV/JSON export
 │   │   ├── metrics.py          # success_rate, auc_loss, robustness_ratio, etc.
 │   │   ├── noise.py            # QuantizeNoise, SignNoise, GaussianNoise, etc.
 │   │   ├── functions.py        # Rastrigin, Ackley, Rosenbrock
 │   │   ├── specs.py            # FunctionSpec, NoiseSpec, OptimizerSpec
+│   │   ├── stats.py            # paired bootstrap CIs, sign-flip tests, Holm
+│   │   ├── tune.py             # equal-budget grid search, auditable selection
 │   │   ├── plot.py             # matplotlib visualization helpers
 │   │   └── compare.py          # ReportDiff, compare_reports
 │   ├── torch/
@@ -306,13 +302,19 @@ pbit/
 │   └── utils/
 │       ├── io.py               # atomic writes
 │       └── timing.py           # Timer, TimingStats
-├── tests/                      # 65+ tests, all passing
+├── research/                   # the research layer (objective, method, claims)
+│   ├── README.md
+│   ├── METHOD.md
+│   ├── CLAIMS.md
+│   └── experiments/            # tune_and_evaluate, claims, power, verify_docs
+├── results/                    # recorded artifacts the prose cites
+├── tests/                      # 100+ tests, all passing
 ├── examples/                   # demo scripts
 ├── assets/                     # SVG assets for README
 ├── pyproject.toml
 ├── README.md
 ├── LICENSE
-└── results_and_conclusion.md
+└── results_and_conclusion.md   # redirect to research/
 ```
 
 ---

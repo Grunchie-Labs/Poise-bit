@@ -1,0 +1,94 @@
+{
+  "metadata": {
+    "draws": 2000,
+    "source": "results/tuned.json",
+    "sizes": [
+      5,
+      10,
+      20,
+      30,
+      50
+    ]
+  },
+  "sign_noise_effect": {
+    "mean": -1.3202857893935986,
+    "sd": 3.4798825031623974,
+    "power_curve": [
+      {
+        "n": 5,
+        "p_negative": 0.813,
+        "p_positive": 0.187,
+        "p_significant_at_0.05": 0.0,
+        "draws": 2000
+      },
+      {
+        "n": 10,
+        "p_negative": 0.9125,
+        "p_positive": 0.0875,
+        "p_significant_at_0.05": 0.1855,
+        "draws": 2000
+      },
+      {
+        "n": 20,
+        "p_negative": 0.992,
+        "p_positive": 0.008,
+        "p_significant_at_0.05": 0.331,
+        "draws": 2000
+      },
+      {
+        "n": 30,
+        "p_negative": 1.0,
+        "p_positive": 0.0,
+        "p_significant_at_0.05": 0.554,
+        "draws": 2000
+      },
+      {
+        "n": 50,
+        "p_negative": 1.0,
+        "p_positive": 0.0,
+        "p_significant_at_0.05": 1.0,
+        "draws": 2000
+      }
+    ]
+  },
+  "quant4_null": {
+    "mean": 0.0,
+    "power_curve": [
+      {
+        "n": 5,
+        "p_negative": 0.0,
+        "p_positive": 1.0,
+        "p_significant_at_0.05": 0.0,
+        "draws": 2000
+      },
+      {
+        "n": 10,
+        "p_negative": 0.0,
+        "p_positive": 1.0,
+        "p_significant_at_0.05": 0.0,
+        "draws": 2000
+      },
+      {
+        "n": 20,
+        "p_negative": 0.0,
+        "p_positive": 1.0,
+        "p_significant_at_0.05": 0.0,
+        "draws": 2000
+      },
+      {
+        "n": 30,
+        "p_negative": 0.0,
+        "p_positive": 1.0,
+        "p_significant_at_0.05": 0.0,
+        "draws": 2000
+      },
+      {
+        "n": 50,
+        "p_negative": 0.0,
+        "p_positive": 1.0,
+        "p_significant_at_0.05": 0.0,
+        "draws": 2000
+      }
+    ]
+  }
+}

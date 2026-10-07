@@ -15,7 +15,7 @@ from __future__ import annotations
 
 import numpy as np
 
-from pbit.bench.report import Report
+from pbit.bench.report import Report, _RunRow
 
 
 def _plt():
@@ -61,10 +61,14 @@ def plot_quantization_sweep(report: Report, function: str, ax=None):
     sweep = report.quantize_sweep(function)
     bits_labels = []
     series: dict[str, list[float]] = {}
-    for noise_label in sorted(
-        {c.noise for c in report.cells() if c.function == function and c.noise != "clean"}
+    for noise_label, _bits in sorted(
+        {
+            (c.noise, _extract_bits(c.noise))
+            for c in report.cells()
+            if c.function == function and c.noise != "clean"
+        },
+        key=lambda pair: (pair[1] is None, pair[1], pair[0]),
     ):
-        _bits = _extract_bits(noise_label)
         if _bits is None:
             continue
         bits_labels.append(_bits)

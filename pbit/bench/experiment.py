@@ -99,15 +99,34 @@ class Experiment:
             for nspec in self.noises:
                 for ospec in self.optimizers:
                     for run in range(self.n_runs):
-                        tag_base = (
+                        # Stream design (common random numbers):
+                        # - init: keyed on (function, run) only, so every noise
+                        #   condition and every optimizer shares one start point.
+                        # - noise: keyed on (function, noise, run), so optimizers
+                        #   within one noise condition see the same perturbation.
+                        # - opt: keyed on (function, run, optimizer), so a
+                        #   stochastic optimizer's private coins are identical
+                        #   across noise conditions but independent across
+                        #   optimizers.
+                        # Do not add the noise or optimizer name to a stream that
+                        # is meant to be shared: that silently unpairs results.
+                        rng_init = derive_rng(
+                            self.seed, f"f={fnspec.name}", f"run={run}", "init"
+                        )
+                        rng_noise = derive_rng(
+                            self.seed,
                             f"f={fnspec.name}",
                             f"n={nspec.name if nspec else 'clean'}",
-                            f"o={ospec.name}",
                             f"run={run}",
+                            "noise",
                         )
-                        rng_init = derive_rng(self.seed, *tag_base, "init")
-                        rng_noise = derive_rng(self.seed, *tag_base, "noise")
-                        rng_opt = derive_rng(self.seed, *tag_base, "opt")
+                        rng_opt = derive_rng(
+                            self.seed,
+                            f"f={fnspec.name}",
+                            f"run={run}",
+                            f"o={ospec.name}",
+                            "opt",
+                        )
                         row = self._run_one(
                             fnspec, nspec, ospec, run, rng_init, rng_noise, rng_opt
                         )
@@ -140,6 +159,7 @@ class Experiment:
         best_history = np.empty(self.max_iter)
         step_times = np.empty(self.max_iter)
         clip_count = 0
+        n_evals = 0
         diagnostics: dict | None = None
 
         best = float("inf")
@@ -158,6 +178,7 @@ class Experiment:
                 x = opt.step(x, clipped, t)
                 step_times[t] = time.perf_counter() - t0
                 cur = float(fnspec.evaluate(x))
+                n_evals += 1
                 best = min(best, cur)
                 current_history[t] = cur
                 best_history[t] = best
@@ -166,10 +187,14 @@ class Experiment:
             opt.reset(rng_opt)
             for t in range(self.max_iter):
                 cand = np.asarray(opt.ask(), dtype=np.float64)
+                # Exactly one objective evaluation per iteration, matching the
+                # gradient path. Evaluating here and again in tell() doubled the
+                # ask/tell budget and invalidated every reported comparison.
                 cur = float(fnspec.evaluate(cand))
+                n_evals += 1
                 best = min(best, cur)
                 t0 = time.perf_counter()
-                opt.tell(float(fnspec.evaluate(cand)))
+                opt.tell(cur)
                 step_times[t] = time.perf_counter() - t0
                 current_history[t] = cur
                 best_history[t] = best
@@ -193,6 +218,7 @@ class Experiment:
             clip_count=clip_count,
             diagnostics=diagnostics or {},
             flops_per_step=flops,
+            n_evals=n_evals,
         )
 
 

@@ -1,0 +1,31 @@
+{
+  "_source": "results_and_conclusion.md as published before 2026-10-07, quoted in research/CLAIMS.md for comparison. These are NOT measurements made by this project and are not evidence for any claim. They are recorded here so the prose citing them is machine-checkable against a single source.",
+  "withdrawn": {
+    "quantization_rastrigin": {
+      "pbit_clean_final_loss": 23.94,
+      "pbit_4bit_final_loss": 11.69,
+      "claimed_ratio": 0.49,
+      "adam_4bit_final_loss": 20.30,
+      "adam_clean_final_loss": 20.50,
+      "n_runs": 5,
+      "max_iter": 300
+    },
+    "rosenbrock_iter_to_threshold": {
+      "pbit": 51,
+      "adam": 180,
+      "rmsprop": 156,
+      "n_runs": 10,
+      "max_iter": 500
+    },
+    "rosenbrock_success_rate": {
+      "pbit_claim": 1.0
+    },
+    "sign_noise_rastrigin": {
+      "pbit_clean": 23.94,
+      "pbit_sign_only": 21.01,
+      "pbit_claimed_ratio": 0.88,
+      "adam_clean": 20.50,
+      "adam_sign_only": 11.34
+    }
+  }
+}

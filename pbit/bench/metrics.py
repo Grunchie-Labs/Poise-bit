@@ -86,7 +86,8 @@ def median_hit_time_successes(best_histories: np.ndarray, threshold: float) -> f
     conflate 'failed to reach' with 'took longer').
     """
     hits = hit_times(best_histories, threshold)
-    successes = hits[hits < len(np.asarray(best_histories).T)]
+    n_iter = np.asarray(best_histories).shape[1]
+    successes = hits[hits < n_iter]
     if successes.size == 0:
         return float("nan")
     return float(np.median(successes))

@@ -33,6 +33,7 @@ class _RunRow:
     clip_count: int
     diagnostics: dict[str, Any]
     flops_per_step: int | None
+    n_evals: int = 0
 
 
 @dataclass
@@ -48,7 +49,11 @@ class _Cell:
     median_hit_time_successes: float = float("nan")
     final_best_loss_mean: float = float("nan")
     final_best_loss_median: float = float("nan")
+    final_best_loss_sd: float = float("nan")
+    final_best_loss_ci_lo: float = float("nan")
+    final_best_loss_ci_hi: float = float("nan")
     final_current_loss_mean: float = float("nan")
+    final_current_loss_sd: float = float("nan")
     auc_best_loss: float = float("nan")
     auc_current_loss: float = float("nan")
     escape_count_current: int = 0
@@ -56,6 +61,7 @@ class _Cell:
     wall_time_step_mean: float = float("nan")
     proxy_flops_per_step: float = float("nan")
     clip_count_mean: float = float("nan")
+    eval_count_mean: float = float("nan")
     threshold: float = 1.0
 
 
@@ -88,6 +94,21 @@ class Report:
             self._cells = self._aggregate()
         return self._cells
 
+    @staticmethod
+    def _spread(finals: np.ndarray) -> tuple[float, float, float]:
+        """Return ``(sd, ci_lo, ci_hi)`` of the per-run terminal values.
+
+        Every reported mean must travel with its spread: on these landscapes the
+        seed-to-seed sd is often comparable to the mean, so a bare mean cannot
+        distinguish a real effect from seed luck.
+        """
+        if finals.size < 2:
+            return float("nan"), float("nan"), float("nan")
+        sd = float(np.std(finals, ddof=1))
+        half = 1.96 * sd / np.sqrt(finals.size)
+        mean = float(np.mean(finals))
+        return sd, mean - half, mean + half
+
     def _aggregate(self) -> list[_Cell]:
         cells: dict[tuple[str, str, str], list[_RunRow]] = {}
         for r in self._rows:
@@ -101,6 +122,9 @@ class Report:
             cur_all = np.stack([r.current_history for r in runs])
             thr = self.threshold
 
+            best_sd, best_ci_lo, best_ci_hi = self._spread(best_all[:, -1])
+            cur_sd, _, _ = self._spread(cur_all[:, -1])
+
             cell = _Cell(
                 function=function,
                 dim=dim,
@@ -111,7 +135,11 @@ class Report:
                 median_hit_time_successes=M.median_hit_time_successes(best_all, thr),
                 final_best_loss_mean=M.final_best(best_all),
                 final_best_loss_median=float(np.median(best_all[:, -1])),
+                final_best_loss_sd=best_sd,
+                final_best_loss_ci_lo=best_ci_lo,
+                final_best_loss_ci_hi=best_ci_hi,
                 final_current_loss_mean=M.final_current(cur_all),
+                final_current_loss_sd=cur_sd,
                 auc_best_loss=M.auc_loss(np.mean(best_all, axis=0)),
                 auc_current_loss=M.auc_loss(np.mean(cur_all, axis=0)),
                 escape_count_current=M.escape_count_current(np.mean(cur_all, axis=0)),
@@ -123,6 +151,7 @@ class Report:
                     else float("nan")
                 ),
                 clip_count_mean=float(np.mean([r.clip_count for r in runs])),
+                eval_count_mean=float(np.mean([r.n_evals for r in runs])),
                 threshold=thr,
             )
             out.append(cell)
@@ -154,15 +183,32 @@ class Report:
             return float("nan")
         return M.robustness_ratio(noisy.final_best_loss_mean, clean.final_best_loss_mean)
 
-    def quantize_sweep(self, function: str, noisy_noise_prefix: str = "QuantizeNoise") -> dict[str, dict[str, float]]:
-        """Return ``{optimizer: {bits_label: final_best_loss}}`` for quantization cells."""
+    def noise_sweep(self, function: str) -> dict[str, dict[str, float]]:
+        """Return ``{optimizer: {noise_label: final_best_loss}}`` for one function.
+
+        Every non-clean cell for ``function`` is included, whatever the noise.
+        """
         out: dict[str, dict[str, float]] = {}
         for c in self.cells():
             if c.function != function or c.noise == "clean":
                 continue
-            if c.optimizer not in out:
-                out[c.optimizer] = {}
-            out[c.optimizer][c.noise] = c.final_best_loss_mean
+            out.setdefault(c.optimizer, {})[c.noise] = c.final_best_loss_mean
+        return out
+
+    def quantize_sweep(self, function: str) -> dict[str, dict[str, float]]:
+        """Return ``{optimizer: {bits_label: final_best_loss}}`` for quantization cells.
+
+        Only cells whose noise label reports a bit-width are returned. The label
+        is parsed rather than matched, so a non-quantization cell is skipped
+        instead of being folded into the sweep.
+        """
+        out: dict[str, dict[str, float]] = {}
+        for c in self.cells():
+            if c.function != function or c.noise == "clean":
+                continue
+            if not c.noise.startswith("QuantizeNoise"):
+                continue
+            out.setdefault(c.optimizer, {})[c.noise] = c.final_best_loss_mean
         return out
 
     # ------------------------------------------------------------------ export
@@ -225,7 +271,7 @@ class Report:
         lines = []
         header = (
             f"{'function':<10} {'noise':<18} {'opt':<10} {'succ%':>6} "
-            f"{'finBest':>9} {'aucBest':>9} {'timeTot':>8}"
+            f"{'finBest':>9} {'sd':>8} {'finCurr':>9} {'aucBest':>9}"
         )
         lines.append(header)
         lines.append("-" * len(header))
@@ -233,7 +279,8 @@ class Report:
             lines.append(
                 f"{c.function:<10} {c.noise:<18} {c.optimizer:<10} "
                 f"{c.success_rate * 100:>5.0f}% {c.final_best_loss_mean:>9.4f} "
-                f"{c.auc_best_loss:>9.4f} {c.wall_time_total_mean:>8.4f}"
+                f"{c.final_best_loss_sd:>8.4f} {c.final_current_loss_mean:>9.4f} "
+                f"{c.auc_best_loss:>9.4f}"
             )
         return "\n".join(lines)
 
@@ -264,7 +311,11 @@ class Report:
             "median_hit_time_successes": c.median_hit_time_successes,
             "final_best_loss_mean": round(c.final_best_loss_mean, 6),
             "final_best_loss_median": round(c.final_best_loss_median, 6),
+            "final_best_loss_sd": round(c.final_best_loss_sd, 6),
+            "final_best_loss_ci_lo": round(c.final_best_loss_ci_lo, 6),
+            "final_best_loss_ci_hi": round(c.final_best_loss_ci_hi, 6),
             "final_current_loss_mean": round(c.final_current_loss_mean, 6),
+            "final_current_loss_sd": round(c.final_current_loss_sd, 6),
             "auc_best_loss": round(c.auc_best_loss, 4),
             "auc_current_loss": round(c.auc_current_loss, 4),
             "escape_count_current": c.escape_count_current,
@@ -272,5 +323,6 @@ class Report:
             "wall_time_step_mean": round(c.wall_time_step_mean, 6),
             "proxy_flops_per_step": c.proxy_flops_per_step,
             "clip_count_mean": round(c.clip_count_mean, 2),
+            "eval_count_mean": round(c.eval_count_mean, 1),
             "threshold": c.threshold,
         }

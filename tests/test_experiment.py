@@ -15,7 +15,7 @@ from pbit.bench import (
     compare_reports,
 )
 from pbit.bench.specs import OptimizerSpec
-from pbit.optim import Adam, PBitOptimizer
+from pbit.optim import Adam, Langevin, PBitOptimizer
 
 
 def _specs():
@@ -62,20 +62,150 @@ def test_config_hash_stable():
     assert ex_diff.hash != _experiment().hash
 
 
-def test_init_noise_streams_shared_across_optimizers():
-    """Changing an optimizer's PRIVATE stream must not change init/noise streams.
+def test_common_random_numbers_pair_optimizers_within_a_cell():
+    """Every optimizer in a cell must start at the same point.
 
-    We verify by checking that two optimizers in the same cell see the same start
-    position (paired starts via rng_init).
+    The runner keys start position and gradient noise on the problem only, not
+    on the optimizer name, so optimizers in a cell share a start and a
+    perturbation. This is what lets per-run results be compared across
+    optimizers. Keying them on the name too would break the pairing while
+    leaving every result individually well-formed.
     """
-    ex = _experiment(max_iter=30, n_runs=1)
-    rep = ex.run()
-    rows = rep._rows  # noqa: SLF001
-    # For the same (function, noise), pbit and adam starts come from the same
-    # init stream; here we only assert the machinery runs without error and that
-    # pbit/adam cells exist.
-    assert any(r.optimizer == "pbit" for r in rows)
-    assert any(r.optimizer == "adam" for r in rows)
+    starts = {}
+
+    class _Recorder:
+        """Stands in for an optimizer and records the start it was handed."""
+
+        def __init__(self, name):
+            self.name = name
+
+        def reset(self, rng=None):
+            pass
+
+        def step(self, x, grad, t):
+            starts.setdefault(self.name, x.copy())
+            return x - 0.01 * grad
+
+    Experiment(
+        {
+            "functions": [Rastrigin(dim=2)],
+            "noises": [None],
+            "optimizers": [
+                OptimizerSpec("alpha", lambda: _Recorder("alpha")),
+                OptimizerSpec("beta", lambda: _Recorder("beta")),
+                OptimizerSpec("gamma", lambda: _Recorder("gamma")),
+            ],
+            "max_iter": 1,
+            "n_runs": 1,
+            "seed": 7,
+        }
+    ).run()
+    assert len(starts) == 3
+    first = starts["alpha"]
+    for name in ("beta", "gamma"):
+        assert np.allclose(starts[name], first), f"{name} started elsewhere"
+
+
+def test_start_position_shared_across_noise_conditions():
+    """Clean and noisy runs of one optimizer must share a start.
+
+    Cross-noise degradation comparisons pair on the start position; keying the
+    init stream on the noise name would silently break that pairing.
+    """
+    starts = {}
+
+    class _Recorder:
+        def reset(self, rng=None):
+            pass
+
+        def step(self, x, grad, t):
+            starts.setdefault(self._noise_name, x.copy())
+            return x
+
+        _noise_name = ""
+
+    rec = _Recorder()
+
+    def factory():
+        return rec
+
+    for noise in (None, QuantizeNoise(bits=2, stochastic=True)):
+        rec._noise_name = "clean" if noise is None else noise.name
+        Experiment(
+            {
+                "functions": [Rastrigin(dim=2)],
+                "noises": [noise],
+                "optimizers": [OptimizerSpec("x", factory)],
+                "max_iter": 1,
+                "n_runs": 1,
+                "seed": 9,
+            }
+        ).run()
+
+    assert np.allclose(starts["clean"], starts["QuantizeNoise_bits=2_stochastic=True"])
+
+
+def test_private_rng_stream_identical_across_noise_conditions():
+    """A stochastic optimizer must reuse the same coins across noise conditions.
+
+    Cross-noise comparisons isolate the noise as the only changing input. If the
+    opt stream were keyed on the noise name, the injected draws below would
+    differ between the clean and noisy runs.
+    """
+    from pbit.optim import Langevin as _Lang
+
+    class _TappingLangevin(_Lang):
+        """Records the injected noise of every step."""
+
+        def __init__(self, **kw):
+            super().__init__(**kw)
+            self.tapped: list[np.ndarray] = []
+
+        def step(self, x, grad, t):
+            noise = np.sqrt(2 * self.lr * self.temperature) * self._rng.standard_normal(x.shape)
+            self.tapped.append(noise.copy())
+            return x - self.lr * grad + noise
+
+    draws = {}
+    for label, noise in (("clean", None), ("gauss", GaussianNoise(sigma=0.5))):
+        opt = _TappingLangevin(lr=0.01, temperature=1.0)
+        Experiment(
+            {
+                "functions": [Rosenbrock(dim=2)],
+                "noises": [noise],
+                "optimizers": [OptimizerSpec("x", lambda: opt)],
+                "max_iter": 8,
+                "n_runs": 1,
+                "seed": 13,
+            }
+        ).run()
+        draws[label] = opt.tapped
+
+    assert len(draws["clean"]) == len(draws["gauss"]) == 8
+    for a, b in zip(draws["clean"], draws["gauss"]):
+        assert np.allclose(a, b)
+
+
+def test_private_rng_stream_still_differs_per_optimizer():
+    """Pairing must not collapse an optimizer's own randomness into another's.
+
+    Langevin injects noise from its private stream, so two differently named
+    Langevin instances in one cell must not draw identical noise.
+    """
+    rep = Experiment(
+        {
+            "functions": [Rosenbrock(dim=2)],
+            "noises": [None],
+            "optimizers": [
+                OptimizerSpec("l1", lambda: Langevin(lr=0.01, temperature=1.0)),
+                OptimizerSpec("l2", lambda: Langevin(lr=0.01, temperature=1.0)),
+            ],
+            "max_iter": 1,
+            "n_runs": 1,
+            "seed": 11,
+        }
+    ).run()
+    assert not np.allclose(rep.rows[0].current_history, rep.rows[1].current_history)
 
 
 def test_best_is_monotone_per_run():
@@ -134,6 +264,48 @@ def test_compare_reports_config_diff():
     d2 = _experiment(seed=2, max_iter=10, n_runs=1).run().to_json(Path("out") / "d2.json")
     diff = compare_reports(d1, d2)
     assert diff.config_match is False
+
+
+def test_every_optimizer_family_gets_the_same_objective_budget():
+    """One objective evaluation per iteration, regardless of optimizer family.
+
+    Ask/tell optimizers used to evaluate each candidate twice (once in the
+    runner, once inside tell()), doubling their budget and making every
+    reported comparison against gradient optimizers invalid.
+    """
+    from pbit.optim import EvolutionStrategy, SimulatedAnnealing
+
+    max_iter = 50
+    counts = {}
+    for name, factory in [
+        ("pbit", lambda: PBitOptimizer(lr=0.05, tau=300)),
+        ("adam", lambda: Adam(lr=0.05)),
+        ("simanneal", lambda: SimulatedAnnealing(x0=np.zeros(2), seed=1)),
+        ("evostrat", lambda: EvolutionStrategy(x0=np.zeros(2), lam=4, seed=1)),
+    ]:
+        rep = Experiment(
+            {
+                "functions": [Rastrigin(dim=2)],
+                "noises": [None],
+                "optimizers": [OptimizerSpec(name, factory)],
+                "max_iter": max_iter,
+                "n_runs": 2,
+                "seed": 42,
+            }
+        ).run()
+        counts[name] = rep.cells()[0].eval_count_mean
+
+    assert set(counts.values()) == {float(max_iter)}, counts
+
+
+def test_uncertainty_accompany_every_reported_mean():
+    """sd and a confidence interval must travel with the mean, not replace it."""
+    rep = _experiment(max_iter=30, n_runs=6).run()
+    for c in rep.cells():
+        assert np.isfinite(c.final_best_loss_sd)
+        assert c.final_best_loss_ci_lo <= c.final_best_loss_mean <= c.final_best_loss_ci_hi
+        assert c.final_best_loss_sd > 0
+        assert np.isfinite(c.final_current_loss_sd)
 
 
 def test_noisy_vs_clean_separated():

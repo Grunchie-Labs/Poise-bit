@@ -83,3 +83,26 @@ def test_escape_count_detects_plateau_escape():
 def test_robustness_ratio():
     assert robustness_ratio(2.0, 1.0) == pytest.approx(2.0)
     assert robustness_ratio(1.0, 2.0) == pytest.approx(0.5)
+
+
+def test_min_over_trajectory_is_variance_sensitive():
+    """A running min falls when variance rises even with the mean unchanged.
+
+    This is why a min-over-trajectory statistic can report that injected noise
+    *improves* an optimizer. The benchmark reports terminal current loss next
+    to the min so that artifact is visible instead of hidden.
+    """
+    mins, means = [], []
+    for noise_scale in (0.0, 4.0):
+        draws = []
+        for trial in range(200):
+            r = np.random.default_rng(500 + trial)
+            walk = np.cumsum(noise_scale * r.standard_normal(200) * 0.05) + 5.0
+            draws.append(walk)
+        stacked = np.stack(draws)
+        mins.append(stacked.min(axis=1).mean())
+        means.append(stacked.mean(axis=1).mean())
+
+    mean_shift = abs(means[1] - means[0])
+    min_shift = mins[0] - mins[1]
+    assert min_shift > 5 * mean_shift, f"mean moved {mean_shift:.4f}, min moved {min_shift:.4f}"

@@ -1,0 +1,316 @@
+{
+  "metadata": {
+    "seeds": [
+      0,
+      1,
+      2
+    ]
+  },
+  "rows": [
+    {
+      "claim": "C1",
+      "verdicts_by_seed": {
+        "0": "unresolved",
+        "1": "unresolved",
+        "2": "unresolved"
+      },
+      "mean_diffs_by_seed": {
+        "0": 0.0,
+        "1": 5.684341886080802e-15,
+        "2": 0.0
+      },
+      "stable": true,
+      "direction_stable": true
+    },
+    {
+      "claim": "C2",
+      "verdicts_by_seed": {
+        "0": "resolved_lower",
+        "1": "resolved_lower",
+        "2": "unresolved"
+      },
+      "mean_diffs_by_seed": {
+        "0": -1.3202857893935986,
+        "1": -0.6974744179757884,
+        "2": -0.1399179195556785
+      },
+      "stable": false,
+      "direction_stable": true
+    },
+    {
+      "claim": "C3a",
+      "verdicts_by_seed": {
+        "0": "resolved_higher",
+        "1": "resolved_higher",
+        "2": "resolved_higher"
+      },
+      "mean_diffs_by_seed": {
+        "0": 1.3546623606047314,
+        "1": 0.6950013643179076,
+        "2": 0.911458275409939
+      },
+      "stable": true,
+      "direction_stable": true
+    },
+    {
+      "claim": "C3b",
+      "verdicts_by_seed": {
+        "0": "resolved_higher",
+        "1": "resolved_higher",
+        "2": "resolved_higher"
+      },
+      "mean_diffs_by_seed": {
+        "0": 6.489250272592529,
+        "1": 8.573579569770612,
+        "2": 7.256238933263119
+      },
+      "stable": true,
+      "direction_stable": true
+    },
+    {
+      "claim": "C4",
+      "verdicts_by_seed": {
+        "0": "resolved_higher",
+        "1": "resolved_higher",
+        "2": "resolved_higher"
+      },
+      "mean_diffs_by_seed": {
+        "0": 23.513513513513512,
+        "1": 35.13953488372093,
+        "2": 27.725
+      },
+      "stable": true,
+      "direction_stable": true
+    },
+    {
+      "claim": "C5",
+      "verdicts_by_seed": {
+        "0": "not_supported",
+        "1": "not_supported",
+        "2": "not_supported"
+      },
+      "mean_diffs_by_seed": {
+        "0": null,
+        "1": null,
+        "2": null
+      },
+      "stable": true,
+      "direction_stable": true
+    },
+    {
+      "claim": "C6",
+      "verdicts_by_seed": {
+        "0": "see per-noise entries",
+        "1": "see per-noise entries",
+        "2": "see per-noise entries"
+      },
+      "mean_diffs_by_seed": {
+        "0": null,
+        "1": null,
+        "2": null
+      },
+      "stable": true,
+      "direction_stable": true
+    },
+    {
+      "claim": "C6/Ackley/corruption",
+      "verdicts_by_seed": {
+        "0": "unresolved",
+        "1": "unresolved",
+        "2": "unresolved"
+      },
+      "mean_diffs_by_seed": {
+        "0": 0.03998644928089874,
+        "1": 0.13650956452779014,
+        "2": 0.4011528113299145
+      },
+      "stable": true,
+      "direction_stable": true
+    },
+    {
+      "claim": "C6/Ackley/gaussian",
+      "verdicts_by_seed": {
+        "0": "unresolved",
+        "1": "unresolved",
+        "2": "unresolved"
+      },
+      "mean_diffs_by_seed": {
+        "0": -0.19017081127195198,
+        "1": -0.011358049027246544,
+        "2": -0.6835563799933052
+      },
+      "stable": true,
+      "direction_stable": true
+    },
+    {
+      "claim": "C6/Ackley/quant4",
+      "verdicts_by_seed": {
+        "0": "unresolved",
+        "1": "unresolved",
+        "2": "unresolved"
+      },
+      "mean_diffs_by_seed": {
+        "0": -0.02862789986465838,
+        "1": 0.13726569774911238,
+        "2": -0.0586163929289556
+      },
+      "stable": true,
+      "direction_stable": false
+    },
+    {
+      "claim": "C6/Ackley/sign",
+      "verdicts_by_seed": {
+        "0": "resolved_lower",
+        "1": "unresolved",
+        "2": "resolved_lower"
+      },
+      "mean_diffs_by_seed": {
+        "0": -0.7531853668214086,
+        "1": -0.41439115074305954,
+        "2": -0.928996093302361
+      },
+      "stable": false,
+      "direction_stable": true
+    },
+    {
+      "claim": "C6/Rastrigin/corruption",
+      "verdicts_by_seed": {
+        "0": "resolved_lower",
+        "1": "resolved_lower",
+        "2": "resolved_lower"
+      },
+      "mean_diffs_by_seed": {
+        "0": -21.48571402301711,
+        "1": -22.803420639200727,
+        "2": -21.71748291456186
+      },
+      "stable": true,
+      "direction_stable": true
+    },
+    {
+      "claim": "C6/Rastrigin/gaussian",
+      "verdicts_by_seed": {
+        "0": "unresolved",
+        "1": "unresolved",
+        "2": "unresolved"
+      },
+      "mean_diffs_by_seed": {
+        "0": -0.05346250603586064,
+        "1": -0.3693298074102313,
+        "2": 0.0632854690289136
+      },
+      "stable": true,
+      "direction_stable": false
+    },
+    {
+      "claim": "C6/Rastrigin/quant4",
+      "verdicts_by_seed": {
+        "0": "unresolved",
+        "1": "unresolved",
+        "2": "unresolved"
+      },
+      "mean_diffs_by_seed": {
+        "0": -0.008431298978455359,
+        "1": 0.04554096608699663,
+        "2": -0.01813231249913965
+      },
+      "stable": true,
+      "direction_stable": false
+    },
+    {
+      "claim": "C6/Rastrigin/sign",
+      "verdicts_by_seed": {
+        "0": "resolved_lower",
+        "1": "resolved_lower",
+        "2": "unresolved"
+      },
+      "mean_diffs_by_seed": {
+        "0": -1.3202857893935986,
+        "1": -0.6974744179757884,
+        "2": -0.1399179195556785
+      },
+      "stable": false,
+      "direction_stable": true
+    },
+    {
+      "claim": "C6/Rosenbrock/corruption",
+      "verdicts_by_seed": {
+        "0": "resolved_lower",
+        "1": "unresolved",
+        "2": "resolved_lower"
+      },
+      "mean_diffs_by_seed": {
+        "0": -0.55805685776813,
+        "1": -0.13553763412028555,
+        "2": -0.409998009586272
+      },
+      "stable": false,
+      "direction_stable": true
+    },
+    {
+      "claim": "C6/Rosenbrock/gaussian",
+      "verdicts_by_seed": {
+        "0": "inconsistent",
+        "1": "resolved_lower",
+        "2": "unresolved"
+      },
+      "mean_diffs_by_seed": {
+        "0": -0.09976391690163823,
+        "1": -0.136837198168651,
+        "2": -0.027763021340707964
+      },
+      "stable": false,
+      "direction_stable": true
+    },
+    {
+      "claim": "C6/Rosenbrock/quant4",
+      "verdicts_by_seed": {
+        "0": "unresolved",
+        "1": "unresolved",
+        "2": "inconsistent"
+      },
+      "mean_diffs_by_seed": {
+        "0": -4.9253815408807284e-14,
+        "1": 2.473801547669182e-10,
+        "2": 5.6909558446342727e-11
+      },
+      "stable": false,
+      "direction_stable": true
+    },
+    {
+      "claim": "C6/Rosenbrock/sign",
+      "verdicts_by_seed": {
+        "0": "resolved_higher",
+        "1": "resolved_higher",
+        "2": "resolved_higher"
+      },
+      "mean_diffs_by_seed": {
+        "0": 5.7797051569492695,
+        "1": 12.296086752689387,
+        "2": 9.452191733572842
+      },
+      "stable": true,
+      "direction_stable": true
+    },
+    {
+      "claim": "C7",
+      "verdicts_by_seed": {
+        "0": "resolved_higher",
+        "1": "unresolved",
+        "2": "resolved_higher"
+      },
+      "mean_diffs_by_seed": {
+        "0": 5.030058419136941,
+        "1": 1.3926189316493771,
+        "2": 2.9055932312243984
+      },
+      "stable": false,
+      "direction_stable": true
+    }
+  ],
+  "n_claims": 20,
+  "n_stable": 13,
+  "n_direction_stable": 17,
+  "all_stable": false,
+  "all_direction_stable": false
+}

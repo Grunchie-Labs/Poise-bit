@@ -1,0 +1,35 @@
+{
+  "metadata": {
+    "clip": 5.0,
+    "quantization_levels": 16,
+    "n_runs_sampled": 20,
+    "random_gradients_tested": 1000
+  },
+  "clip_events_per_run": [
+    300,
+    300,
+    300,
+    300,
+    300,
+    300,
+    300,
+    300,
+    300,
+    300,
+    300,
+    300,
+    300,
+    300,
+    300,
+    300,
+    300,
+    300,
+    300,
+    300
+  ],
+  "iters_per_run": 300,
+  "all_runs_fully_clipped": true,
+  "max_gradient_component": 71.31842543308075,
+  "clip_erases_quantization_count": 1000,
+  "clip_erases_quantization_rate": 1.0
+}

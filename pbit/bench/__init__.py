@@ -23,14 +23,32 @@ from pbit.bench.noise import (
 )
 from pbit.bench.report import Report
 from pbit.bench.specs import FunctionSpec, NoiseSpec, OptimizerSpec
+from pbit.bench.stats import (
+    Comparison,
+    bootstrap_ci,
+    describe,
+    holm_bonferroni,
+    paired_compare,
+    sign_flip_p,
+)
+from pbit.bench.tune import (
+    GridPoint,
+    TuningResult,
+    assert_seeds_disjoint,
+    cross,
+    grid_from_values,
+    tune_optimizer,
+)
 
 __all__ = [
     "Ackley",
     "ClipNoise",
+    "Comparison",
     "CorruptionNoise",
     "Experiment",
     "FunctionSpec",
     "GaussianNoise",
+    "GridPoint",
     "NoNoise",
     "NoiseSpec",
     "OptimizerSpec",
@@ -40,14 +58,24 @@ __all__ = [
     "ReportDiff",
     "Rosenbrock",
     "SignNoise",
+    "TuningResult",
+    "assert_seeds_disjoint",
     "auc_loss",
+    "bootstrap_ci",
     "compare_reports",
+    "cross",
+    "describe",
     "escape_count_current",
     "final_best",
     "get_function",
+    "grid_from_values",
+    "holm_bonferroni",
     "iter_to_threshold",
     "make_fitness",
     "median_hit_time_successes",
+    "paired_compare",
     "robustness_ratio",
+    "sign_flip_p",
     "success_rate",
+    "tune_optimizer",
 ]
