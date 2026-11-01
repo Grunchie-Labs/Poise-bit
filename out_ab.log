@@ -1,0 +1,15 @@
+[tune] Rastrigin/dim=2/clean
+  pbit            selected={'lr': 0.05, 'tau': 100} score=17.5345
+  pbit_constbeta  selected={'lr': 0.005, 'beta0': 8.0, 'tau': 300.0} score=16.5162
+  signmag         selected={'lr': 0.005} score=16.5162
+[eval] Rastrigin/dim=2/clean done
+[eval] Rastrigin/dim=2/CorruptionNoise_p=0.2 done
+[eval] Rastrigin/dim=2/SignNoise done
+  clean: constbeta vs pbit                   diff=-6.7116 CI=[-8.5718,-4.9048] p=0.0000
+  clean: signmag vs pbit                     diff=-6.7116 CI=[-8.5718,-4.9048] p=0.0000
+  corruption shift: constbeta vs pbit        diff=-30.9092 CI=[-38.8747,-23.2813] p=0.0000
+  corruption shift: signmag vs pbit          diff=-30.9150 CI=[-38.8912,-23.2820] p=0.0000
+  sign shift: constbeta vs pbit              diff=+6.2369 CI=[+4.3967,+8.1339] p=0.0000
+  sign shift: signmag vs pbit                diff=+6.2369 CI=[+4.3967,+8.1339] p=0.0000
+
+wrote results\ablation.json

@@ -30,11 +30,11 @@
         "ci_hi": 0.0,
         "p_value": 1.0,
         "significant": false,
+        "significant_after_correction": false,
         "direction": "no detectable difference",
+        "p_value_raw": 1.0,
         "p_value_holm": 1.0
       },
-      "verdict": "UNRESOLVED: no detectable difference, CI [0.000, 0.000], p=1.0000",
-      "supports_hypothesis": "INCONCLUSIVE: no detectable effect",
       "clean": {
         "label": "clean",
         "n": 50,
@@ -56,7 +56,9 @@
         "ci_hi": 21.351871630605643,
         "min": 0.0003904869544797407,
         "max": 49.74744595678046
-      }
+      },
+      "verdict": "UNRESOLVED: no detectable difference, CI [0.000, 0.000], p_holm=1.0000",
+      "supports_hypothesis": "INCONCLUSIVE: no detectable effect after family correction"
     },
     {
       "cid": "C2",
@@ -72,13 +74,13 @@
         "sd_diff": 3.4798825031623974,
         "ci_lo": -2.3202787482318072,
         "ci_hi": -0.41683016294883696,
-        "p_value": 0.007799610019499025,
+        "p_value": 0.0935953202339883,
         "significant": true,
+        "significant_after_correction": false,
         "direction": "a better",
+        "p_value_raw": 0.007799610019499025,
         "p_value_holm": 0.0935953202339883
       },
-      "verdict": "RESOLVED: lower, CI [-2.320, -0.417], p=0.0078",
-      "supports_hypothesis": "CONFIRMED",
       "pbit_shift": {
         "label": "PBit shift",
         "n": 50,
@@ -100,7 +102,9 @@
         "ci_hi": 2.323968101759437,
         "min": -5.86253737586614,
         "max": 14.399866947686206
-      }
+      },
+      "verdict": "INCONSISTENT: interval and test disagree, CI [-2.320, -0.417], p_holm=0.0936",
+      "supports_hypothesis": "INCONCLUSIVE: no detectable effect after family correction"
     },
     {
       "cid": "C3a",
@@ -116,13 +120,13 @@
         "sd_diff": 2.046921843968914,
         "ci_lo": 0.8200465669781549,
         "ci_hi": 1.9432250295944222,
-        "p_value": 4.999750012499375e-05,
+        "p_value": 0.0008999550022498875,
         "significant": true,
+        "significant_after_correction": true,
         "direction": "b better",
+        "p_value_raw": 4.999750012499375e-05,
         "p_value_holm": 0.0008999550022498875
       },
-      "verdict": "RESOLVED: higher, CI [0.820, 1.943], p=0.0000",
-      "supports_hypothesis": "REFUTED: not lower",
       "pbit": {
         "label": "PBit",
         "n": 50,
@@ -144,7 +148,9 @@
         "ci_hi": 0.019020995207953924,
         "min": 8.798072022468018e-06,
         "max": 0.27032527007009355
-      }
+      },
+      "verdict": "RESOLVED: higher, CI [0.820, 1.943], p_holm=0.0009",
+      "supports_hypothesis": "REFUTED: not lower"
     },
     {
       "cid": "C3b",
@@ -160,13 +166,13 @@
         "sd_diff": 1.6201481539602671,
         "ci_lo": 6.040090842830252,
         "ci_hi": 6.925346665232093,
-        "p_value": 4.999750012499375e-05,
+        "p_value": 0.0008999550022498875,
         "significant": true,
+        "significant_after_correction": true,
         "direction": "b better",
+        "p_value_raw": 4.999750012499375e-05,
         "p_value_holm": 0.0008999550022498875
       },
-      "verdict": "RESOLVED: higher, CI [6.040, 6.925], p=0.0000",
-      "supports_hypothesis": "REFUTED: not lower",
       "pbit": {
         "label": "PBit",
         "n": 50,
@@ -188,7 +194,9 @@
         "ci_hi": 1.45009719232253,
         "min": 0.0015941399181376107,
         "max": 4.020259286456752
-      }
+      },
+      "verdict": "RESOLVED: higher, CI [6.040, 6.925], p_holm=0.0009",
+      "supports_hypothesis": "REFUTED: not lower"
     },
     {
       "cid": "C4",
@@ -204,9 +212,11 @@
         "sd_diff": 16.02189755307408,
         "ci_lo": 18.56756756756757,
         "ci_hi": 28.676351351351293,
-        "p_value": 4.999750012499375e-05,
+        "p_value": 0.0008999550022498875,
         "significant": true,
+        "significant_after_correction": true,
         "direction": "b better",
+        "p_value_raw": 4.999750012499375e-05,
         "p_value_holm": 0.0008999550022498875
       },
       "pbit_failures": 13,
@@ -235,7 +245,7 @@
         "min": 0.0,
         "max": 178.0
       },
-      "verdict": "RESOLVED: higher, CI [18.568, 28.676], p=0.0000",
+      "verdict": "RESOLVED: higher, CI [18.568, 28.676], p_holm=0.0009",
       "supports_hypothesis": "REFUTED: not lower"
     },
     {
@@ -254,6 +264,7 @@
         "ci_hi": 0.0,
         "p_value": 1.0,
         "significant": false,
+        "significant_after_correction": false,
         "direction": "no detectable difference"
       },
       "terminal_statistic": {
@@ -267,6 +278,7 @@
         "ci_hi": 0.0,
         "p_value": 1.0,
         "significant": false,
+        "significant_after_correction": false,
         "direction": "no detectable difference"
       },
       "readings_disagree": false,
@@ -291,9 +303,11 @@
             "sd_diff": 2.4292789231675376,
             "ci_lo": -0.7219757286715981,
             "ci_hi": 0.6259958156216644,
-            "p_value": 0.8830558472076396,
+            "p_value": 1.0,
             "significant": false,
+            "significant_after_correction": false,
             "direction": "no detectable difference",
+            "p_value_raw": 0.8830558472076396,
             "p_value_holm": 1.0
           },
           "pbit_shift": {
@@ -318,8 +332,8 @@
             "min": -8.287566733395119,
             "max": 7.382703015954686
           },
-          "verdict": "UNRESOLVED: no detectable difference, CI [-0.722, 0.626], p=0.8831",
-          "supports_hypothesis": "INCONCLUSIVE: no detectable effect"
+          "verdict": "UNRESOLVED: no detectable difference, CI [-0.722, 0.626], p_holm=1.0000",
+          "supports_hypothesis": "INCONCLUSIVE: no detectable effect after family correction"
         },
         {
           "landscape": "Rastrigin",
@@ -333,9 +347,11 @@
             "sd_diff": 26.15933300307443,
             "ci_lo": -28.97626169270105,
             "ci_hi": -14.60362409891651,
-            "p_value": 4.999750012499375e-05,
+            "p_value": 0.0008999550022498875,
             "significant": true,
+            "significant_after_correction": true,
             "direction": "a better",
+            "p_value_raw": 4.999750012499375e-05,
             "p_value_holm": 0.0008999550022498875
           },
           "pbit_shift": {
@@ -360,7 +376,7 @@
             "min": -19.338691383687127,
             "max": 97.12691835429001
           },
-          "verdict": "RESOLVED: lower, CI [-28.976, -14.604], p=0.0000",
+          "verdict": "RESOLVED: lower, CI [-28.976, -14.604], p_holm=0.0009",
           "supports_hypothesis": "CONFIRMED"
         },
         {
@@ -375,9 +391,11 @@
             "sd_diff": 0.5304818719518997,
             "ci_lo": -0.15633154589305195,
             "ci_hi": 0.13788981538313755,
-            "p_value": 0.9131043447827608,
+            "p_value": 1.0,
             "significant": false,
+            "significant_after_correction": false,
             "direction": "no detectable difference",
+            "p_value_raw": 0.9131043447827608,
             "p_value_holm": 1.0
           },
           "pbit_shift": {
@@ -402,8 +420,8 @@
             "min": -1.4158712541154905,
             "max": 1.8672643392789574
           },
-          "verdict": "UNRESOLVED: no detectable difference, CI [-0.156, 0.138], p=0.9131",
-          "supports_hypothesis": "INCONCLUSIVE: no detectable effect"
+          "verdict": "UNRESOLVED: no detectable difference, CI [-0.156, 0.138], p_holm=1.0000",
+          "supports_hypothesis": "INCONCLUSIVE: no detectable effect after family correction"
         },
         {
           "landscape": "Rastrigin",
@@ -417,9 +435,11 @@
             "sd_diff": 3.4798825031623974,
             "ci_lo": -2.3202787482318072,
             "ci_hi": -0.41683016294883696,
-            "p_value": 0.007799610019499025,
+            "p_value": 0.0935953202339883,
             "significant": true,
+            "significant_after_correction": false,
             "direction": "a better",
+            "p_value_raw": 0.007799610019499025,
             "p_value_holm": 0.0935953202339883
           },
           "pbit_shift": {
@@ -444,8 +464,8 @@
             "min": -5.86253737586614,
             "max": 14.399866947686206
           },
-          "verdict": "RESOLVED: lower, CI [-2.320, -0.417], p=0.0078",
-          "supports_hypothesis": "CONFIRMED"
+          "verdict": "INCONSISTENT: interval and test disagree, CI [-2.320, -0.417], p_holm=0.0936",
+          "supports_hypothesis": "INCONCLUSIVE: no detectable effect after family correction"
         },
         {
           "landscape": "Ackley",
@@ -459,9 +479,11 @@
             "sd_diff": 2.108659512819088,
             "ci_lo": -0.8159240001956385,
             "ci_hi": 0.32394690351777305,
-            "p_value": 0.5656717164141792,
+            "p_value": 1.0,
             "significant": false,
+            "significant_after_correction": false,
             "direction": "no detectable difference",
+            "p_value_raw": 0.5656717164141792,
             "p_value_holm": 1.0
           },
           "pbit_shift": {
@@ -486,8 +508,8 @@
             "min": -0.4514548707848256,
             "max": 5.220805935467766
           },
-          "verdict": "UNRESOLVED: no detectable difference, CI [-0.816, 0.324], p=0.5657",
-          "supports_hypothesis": "INCONCLUSIVE: no detectable effect"
+          "verdict": "UNRESOLVED: no detectable difference, CI [-0.816, 0.324], p_holm=1.0000",
+          "supports_hypothesis": "INCONCLUSIVE: no detectable effect after family correction"
         },
         {
           "landscape": "Ackley",
@@ -501,9 +523,11 @@
             "sd_diff": 4.314728309876368,
             "ci_lo": -0.9808011291576673,
             "ci_hi": 1.3400650924581265,
-            "p_value": 0.9456027198640068,
+            "p_value": 1.0,
             "significant": false,
+            "significant_after_correction": false,
             "direction": "no detectable difference",
+            "p_value_raw": 0.9456027198640068,
             "p_value_holm": 1.0
           },
           "pbit_shift": {
@@ -528,8 +552,8 @@
             "min": -16.273017526519833,
             "max": 3.814573676219137
           },
-          "verdict": "UNRESOLVED: no detectable difference, CI [-0.981, 1.340], p=0.9456",
-          "supports_hypothesis": "INCONCLUSIVE: no detectable effect"
+          "verdict": "UNRESOLVED: no detectable difference, CI [-0.981, 1.340], p_holm=1.0000",
+          "supports_hypothesis": "INCONCLUSIVE: no detectable effect after family correction"
         },
         {
           "landscape": "Ackley",
@@ -543,9 +567,11 @@
             "sd_diff": 0.9864168527233489,
             "ci_lo": -0.29944017554891605,
             "ci_hi": 0.24327575214903252,
-            "p_value": 0.8392080395980202,
+            "p_value": 1.0,
             "significant": false,
+            "significant_after_correction": false,
             "direction": "no detectable difference",
+            "p_value_raw": 0.8392080395980202,
             "p_value_holm": 1.0
           },
           "pbit_shift": {
@@ -570,8 +596,8 @@
             "min": -7.073097663123917e-11,
             "max": 8.8244789253622e-10
           },
-          "verdict": "UNRESOLVED: no detectable difference, CI [-0.299, 0.243], p=0.8392",
-          "supports_hypothesis": "INCONCLUSIVE: no detectable effect"
+          "verdict": "UNRESOLVED: no detectable difference, CI [-0.299, 0.243], p_holm=1.0000",
+          "supports_hypothesis": "INCONCLUSIVE: no detectable effect after family correction"
         },
         {
           "landscape": "Ackley",
@@ -585,9 +611,11 @@
             "sd_diff": 1.7796391764849167,
             "ci_lo": -1.182148065042598,
             "ci_hi": -0.21662490924900454,
-            "p_value": 0.002449877506124694,
+            "p_value": 0.03184840757962102,
             "significant": true,
+            "significant_after_correction": true,
             "direction": "a better",
+            "p_value_raw": 0.002449877506124694,
             "p_value_holm": 0.03184840757962102
           },
           "pbit_shift": {
@@ -612,7 +640,7 @@
             "min": -6.7153405645271445,
             "max": 2.593619791808454
           },
-          "verdict": "RESOLVED: lower, CI [-1.182, -0.217], p=0.0024",
+          "verdict": "RESOLVED: lower, CI [-1.182, -0.217], p_holm=0.0318",
           "supports_hypothesis": "CONFIRMED"
         },
         {
@@ -627,9 +655,11 @@
             "sd_diff": 0.39668128110062456,
             "ci_lo": -0.22127086196488374,
             "ci_hi": -0.006505007026926009,
-            "p_value": 0.0679466026698665,
+            "p_value": 0.543572821358932,
             "significant": true,
+            "significant_after_correction": false,
             "direction": "a better",
+            "p_value_raw": 0.0679466026698665,
             "p_value_holm": 0.543572821358932
           },
           "pbit_shift": {
@@ -654,8 +684,8 @@
             "min": -0.13561572243805414,
             "max": 0.025022842325969276
           },
-          "verdict": "INCONSISTENT: interval and test disagree, CI [-0.221, -0.007], p=0.0679",
-          "supports_hypothesis": "INCONCLUSIVE: no detectable effect"
+          "verdict": "INCONSISTENT: interval and test disagree, CI [-0.221, -0.007], p_holm=0.5436",
+          "supports_hypothesis": "INCONCLUSIVE: no detectable effect after family correction"
         },
         {
           "landscape": "Rosenbrock",
@@ -669,9 +699,11 @@
             "sd_diff": 1.54402140757422,
             "ci_lo": -1.0087880039717738,
             "ci_hi": -0.16609547682749887,
-            "p_value": 0.010249487525623718,
+            "p_value": 0.10249487525623718,
             "significant": true,
+            "significant_after_correction": false,
             "direction": "a better",
+            "p_value_raw": 0.010249487525623718,
             "p_value_holm": 0.10249487525623718
           },
           "pbit_shift": {
@@ -696,8 +728,8 @@
             "min": -0.22474763636964648,
             "max": 5.2724480438472625
           },
-          "verdict": "RESOLVED: lower, CI [-1.009, -0.166], p=0.0102",
-          "supports_hypothesis": "CONFIRMED"
+          "verdict": "INCONSISTENT: interval and test disagree, CI [-1.009, -0.166], p_holm=0.1025",
+          "supports_hypothesis": "INCONCLUSIVE: no detectable effect after family correction"
         },
         {
           "landscape": "Rosenbrock",
@@ -711,9 +743,11 @@
             "sd_diff": 1.0844865080295395e-12,
             "ci_lo": -3.858139125629341e-13,
             "ci_hi": 2.4584128265422605e-13,
-            "p_value": 0.6087195640217989,
+            "p_value": 1.0,
             "significant": false,
+            "significant_after_correction": false,
             "direction": "no detectable difference",
+            "p_value_raw": 0.6087195640217989,
             "p_value_holm": 1.0
           },
           "pbit_shift": {
@@ -738,8 +772,8 @@
             "min": -4.238654288397491e-12,
             "max": 6.3225744084682844e-12
           },
-          "verdict": "UNRESOLVED: no detectable difference, CI [-0.000, 0.000], p=0.6087",
-          "supports_hypothesis": "INCONCLUSIVE: no detectable effect"
+          "verdict": "UNRESOLVED: no detectable difference, CI [-0.000, 0.000], p_holm=1.0000",
+          "supports_hypothesis": "INCONCLUSIVE: no detectable effect after family correction"
         },
         {
           "landscape": "Rosenbrock",
@@ -753,9 +787,11 @@
             "sd_diff": 22.013749268572287,
             "ci_lo": 1.0839329336942578,
             "ci_hi": 12.80123218475983,
-            "p_value": 0.01399930003499825,
+            "p_value": 0.12599370031498425,
             "significant": true,
+            "significant_after_correction": false,
             "direction": "b better",
+            "p_value_raw": 0.01399930003499825,
             "p_value_holm": 0.12599370031498425
           },
           "pbit_shift": {
@@ -780,8 +816,8 @@
             "min": 0.0009221600028504738,
             "max": 4.963835293868378
           },
-          "verdict": "RESOLVED: higher, CI [1.084, 12.801], p=0.0140",
-          "supports_hypothesis": "REFUTED: shifted at least as much"
+          "verdict": "INCONSISTENT: interval and test disagree, CI [1.084, 12.801], p_holm=0.1260",
+          "supports_hypothesis": "INCONCLUSIVE: no detectable effect after family correction"
         }
       ],
       "verdict": "see per-noise entries"
@@ -800,13 +836,13 @@
         "sd_diff": 9.192507958018275,
         "ci_lo": 2.4665812774177516,
         "ci_hi": 7.475059167447858,
-        "p_value": 0.00034998250087495624,
+        "p_value": 0.004899755012249388,
         "significant": true,
+        "significant_after_correction": true,
         "direction": "b better",
+        "p_value_raw": 0.00034998250087495624,
         "p_value_holm": 0.004899755012249388
       },
-      "verdict": "RESOLVED: higher, CI [2.467, 7.475], p=0.0003",
-      "supports_hypothesis": "REFUTED: not lower",
       "gap_d2": {
         "label": "gap dim=2",
         "n": 50,
@@ -828,7 +864,9 @@
         "ci_hi": -3.3676072739616765,
         "min": -28.581902512199164,
         "max": 20.749286372119727
-      }
+      },
+      "verdict": "RESOLVED: higher, CI [2.467, 7.475], p_holm=0.0049",
+      "supports_hypothesis": "REFUTED: not lower"
     }
   ]
 }

@@ -7,6 +7,10 @@ initialization/clip bounds (no global ``U(-2,2)``):
 - ``Ackley``   : deceptive, many local optima; min=0 at x=0. **Analytic gradient**
                  (no slow finite-difference loop).
 - ``Rosenbrock``: banana valley; min=0 at x=ones.
+- ``Sphere``     : convex quadratic; min=0 at x=0. Gradients are small
+                 (``|g| <= 4`` on the default init box), so the runner's
+                 gradient clip at 5.0 never fires and quantization
+                 experiments on this landscape are unconfounded by clipping.
 """
 
 from __future__ import annotations
@@ -105,7 +109,37 @@ def Rosenbrock(dim: int = 2, init_bounds: tuple[float, float] = (-2.0, 2.0)) -> 
     )
 
 
-_REGISTRY = {"Rastrigin": Rastrigin, "Ackley": Ackley, "Rosenbrock": Rosenbrock}
+def _sphere(x: np.ndarray) -> float:
+    x = np.asarray(x, dtype=np.float64)
+    return float(np.sum(x**2))
+
+
+def _sphere_grad(x: np.ndarray) -> np.ndarray:
+    return 2.0 * np.asarray(x, dtype=np.float64)
+
+
+def Sphere(dim: int = 2, init_bounds: tuple[float, float] = (-2.0, 2.0)) -> FunctionSpec:
+    """Convex quadratic with small gradients.
+
+    On the default init box ``|g_i| = |2 x_i| <= 4.0 < 5.0``, so the
+    benchmark runner's gradient clip never fires and quantization noise
+    applied before clipping is never erased by it. This is the landscape
+    the Rastrigin quantization cell could not be: a cell where a
+    quantization comparison actually measures quantization.
+    """
+    return FunctionSpec(
+        name="Sphere",
+        dim=dim,
+        init_bounds=init_bounds,
+        clip_bounds=(-2.0, 2.0),
+        evaluate=_sphere,
+        grad=_sphere_grad,
+        minimum=0.0,
+        argmin=np.zeros(dim),
+    )
+
+
+_REGISTRY = {"Rastrigin": Rastrigin, "Ackley": Ackley, "Rosenbrock": Rosenbrock, "Sphere": Sphere}
 
 
 def get_function(name: str, dim: int = 2) -> FunctionSpec:

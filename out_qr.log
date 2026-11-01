@@ -1,0 +1,25 @@
+[premise] clip events per run on Sphere: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+[tune] Sphere/dim=2/clean
+  pbit       selected={'lr': 0.05, 'tau': 300} score=0.000000
+  adam       selected={'lr': 0.5} score=0.000000
+  sgd        selected={'lr': 0.5} score=0.000000
+  signsgd    selected={'lr': 0.01} score=0.000048
+[eval] Sphere/dim=2/clean done
+[eval] Sphere/dim=2/QuantizeNoise_bits=1_stochastic=True done
+[eval] Sphere/dim=2/QuantizeNoise_bits=4_stochastic=True done
+[eval] Sphere/dim=2/QuantizeNoise_bits=8_stochastic=True done
+  pbit       1-bit: diff=+0.000000 CI=[-0.000000,+0.000000] p=0.5646 holm=1.0000
+  pbit       4-bit: diff=+0.000000 CI=[-0.000000,+0.000000] p=0.5646 holm=1.0000
+  pbit       8-bit: diff=+0.000000 CI=[-0.000000,+0.000000] p=0.5646 holm=1.0000
+  adam       1-bit: diff=-0.000000 CI=[-0.000000,+0.000000] p=0.7665 holm=1.0000
+  adam       4-bit: diff=-0.000000 CI=[-0.000000,+0.000000] p=0.7665 holm=1.0000
+  adam       8-bit: diff=-0.000000 CI=[-0.000000,+0.000000] p=0.7665 holm=1.0000
+  sgd        1-bit: diff=+0.000000 CI=[+0.000000,+0.000000] p=1.0000 holm=1.0000
+  sgd        4-bit: diff=+0.000000 CI=[+0.000000,+0.000000] p=1.0000 holm=1.0000
+  sgd        8-bit: diff=+0.000000 CI=[+0.000000,+0.000000] p=1.0000 holm=1.0000
+  signsgd    1-bit: diff=+0.000000 CI=[+0.000000,+0.000000] p=1.0000 holm=1.0000
+  signsgd    4-bit: diff=+0.000000 CI=[+0.000000,+0.000000] p=1.0000 holm=1.0000
+  signsgd    8-bit: diff=+0.000000 CI=[+0.000000,+0.000000] p=1.0000 holm=1.0000
+
+wrote results\quantize_retest.json

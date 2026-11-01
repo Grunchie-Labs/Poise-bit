@@ -80,10 +80,16 @@ def load_series(tuned: dict, cell_key: str, optimizer: str, metric: str) -> np.n
 
 
 def _verdict(cmp: Comparison) -> str:
-    """Assign a verdict only when the interval and the permutation test agree."""
+    """Assign a verdict only when the interval and the permutation test agree.
+
+    ``cmp.p_value`` is always the **Holm-adjusted** p-value by the time this
+    runs (see the correction block in ``main``), so a verdict can never be
+    recorded on a raw p that the family correction withdraws. The raw value is
+    preserved as ``p_value_raw`` in the serialized comparison.
+    """
     ci_excludes_zero = cmp.ci_lo > 0.0 or cmp.ci_hi < 0.0
     test_rejects = cmp.p_value < ALPHA
-    detail = f"CI [{cmp.ci_lo:.3f}, {cmp.ci_hi:.3f}], p={cmp.p_value:.4f}"
+    detail = f"CI [{cmp.ci_lo:.3f}, {cmp.ci_hi:.3f}], p_holm={cmp.p_value:.4f}"
     if ci_excludes_zero != test_rejects:
         return f"INCONSISTENT: interval and test disagree, {detail}"
     if not ci_excludes_zero:
@@ -93,9 +99,14 @@ def _verdict(cmp: Comparison) -> str:
 
 
 def _supports(cmp: Comparison, expected: str) -> str:
-    """State whether the measurement agrees with the registered hypothesis."""
+    """State whether the measurement agrees with the registered hypothesis.
+
+    Read against the Holm-adjusted p-value, so an effect whose raw p is under
+    alpha but whose family-adjusted p is not reads INCONCLUSIVE rather than
+    CONFIRMED.
+    """
     if cmp.p_value >= ALPHA or not (cmp.ci_lo > 0.0 or cmp.ci_hi < 0.0):
-        return "INCONCLUSIVE: no detectable effect"
+        return "INCONCLUSIVE: no detectable effect after family correction"
     if expected == "no_better":
         return "CONFIRMED" if cmp.mean_diff >= 0 else "REFUTED: noise improved terminal loss"
     if expected == "a_lower":
@@ -118,8 +129,11 @@ def main() -> None:
     n_runs = tuned["metadata"]["eval_runs"]
 
     claims: list[dict] = []
-    holm_targets: list[dict] = []
     comparators: list[Comparison] = []
+    #: (holder, expected) pairs whose verdict is *not yet* computed. Verdicts
+    #: must be derived from the Holm-adjusted p-value, so they are deferred
+    #: until after the family correction rather than frozen at registration.
+    pending: list[tuple[dict, str]] = []
 
     def register(cid: str, question: str, statistic: str, hypothesis: str,
                  expected: str, cmp: Comparison, extra: dict | None = None):
@@ -129,17 +143,23 @@ def main() -> None:
             "statistic": statistic,
             "hypothesis": hypothesis,
             "comparison": cmp.to_dict(),
-            "verdict": _verdict(cmp),
-            "supports_hypothesis": _supports(cmp, expected),
         }
         if extra:
             entry.update(extra)
         claims.append(entry)
-        holm_targets.append(entry["comparison"])
         comparators.append(cmp)
+        pending.append((entry, expected))
         print(f"--- {cid}: {question}")
-        print(f"    {entry['verdict']}")
-        print(f"    hypothesis: {entry['supports_hypothesis']}")
+
+    def defer(holder: dict, expected: str, cmp: Comparison) -> None:
+        """Queue a non-``register`` claim (e.g. a C6 sub-cell) for the family.
+
+        Its verdict is computed after the Holm correction, exactly like
+        ``register`` entries, so a sub-cell cannot be recorded as CONFIRMED on
+        a raw p-value that its own adjusted p-value would withdraw.
+        """
+        comparators.append(cmp)
+        pending.append((holder, expected))
 
     # C1: does 4-bit stochastic quantization change tuned PBit's terminal loss?
     clean = load_series(tuned, CELL["rast_d2_clean"], "pbit", "final_current")
@@ -193,15 +213,11 @@ def main() -> None:
     pb_fail = int(np.sum(pb_hits >= ITERS_SENTINEL))
     ad_fail = int(np.sum(ad_hits >= ITERS_SENTINEL))
     both = (pb_hits < ITERS_SENTINEL) & (ad_hits < ITERS_SENTINEL)
-    if both.sum() >= 2:
-        cmp = paired_compare(pb_hits[both], ad_hits[both], "hit time, both succeeded")
-        c4_verdict = _verdict(cmp)
-        c4_support = _supports(cmp, "a_lower")
-        c4_cmp = cmp.to_dict()
-    else:
-        c4_verdict = "INSUFFICIENT DATA: too few runs where both optimizers succeeded"
-        c4_support = "INCONCLUSIVE"
-        c4_cmp = None
+    c4_has_cmp = both.sum() >= 2
+    c4_cmp = (
+        paired_compare(pb_hits[both], ad_hits[both], "hit time, both succeeded").to_dict()
+        if c4_has_cmp else None
+    )
     c4 = {
         "cid": "C4",
         "question": "Does tuned PBit reach the success threshold sooner than tuned Adam on Rosenbrock?",
@@ -214,19 +230,14 @@ def main() -> None:
         "both_succeeded": int(both.sum()),
         "pbit_hit_times": describe(pb_hits[pb_hits < ITERS_SENTINEL], "PBit hit time"),
         "adam_hit_times": describe(ad_hits[ad_hits < ITERS_SENTINEL], "Adam hit time"),
-        "verdict": c4_verdict,
-        "supports_hypothesis": c4_support,
+        "verdict": ("pending" if c4_has_cmp else
+                    "INSUFFICIENT DATA: too few runs where both optimizers succeeded"),
+        "supports_hypothesis": "pending" if c4_has_cmp else "INCONCLUSIVE",
     }
     claims.append(c4)
-    if c4_cmp is not None:
-        holm_targets.append(c4["comparison"])
-        comparators.append(
-            Comparison(**{k: c4_cmp[k] for k in
-                          ("label", "n", "mean_a", "mean_b", "mean_diff",
-                           "ci_lo", "ci_hi", "p_value", "sd_diff")})
-        )
+    if c4_has_cmp:
+        defer(c4, "a_lower", paired_compare(pb_hits[both], ad_hits[both], "hit time, both succeeded"))
     print(f"--- C4: {c4['question']}")
-    print(f"    {c4['verdict']} (failures: pbit={pb_fail}, adam={ad_fail})")
 
     # C5: does the min statistic disagree with the terminal statistic?
     readings = {}
@@ -275,11 +286,10 @@ def main() -> None:
                 "comparison": cmp.to_dict(),
                 "pbit_shift": describe(ps, "PBit shift"),
                 "adam_shift": describe(ads, "Adam shift"),
-                "verdict": _verdict(cmp),
-                "supports_hypothesis": _supports(cmp, "a_shift_less"),
+                "verdict": "pending",  # filled in after the Holm correction
+                "supports_hypothesis": "pending",
             })
-            holm_targets.append(sub[-1]["comparison"])
-            comparators.append(cmp)
+            defer(sub[-1], "a_shift_less", cmp)
     claims.append({
         "cid": "C6",
         "question": "Across noise families and landscapes, is tuned PBit degraded less than tuned Adam?",
@@ -307,9 +317,51 @@ def main() -> None:
         {"gap_d2": describe(gap_d2, "gap dim=2"), "gap_d10": describe(gap_d10, "gap dim=10")},
     )
 
-    # One family, one correction.
-    for holder, adj in zip(holm_targets, holm_bonferroni(comparators)):
-        holder["p_value_holm"] = adj.p_value
+    # One family, one correction -- and the correction has to *drive* the
+    # verdicts, not merely annotate them. Registering a verdict from the raw
+    # p-value and then appending p_value_holm next to it lets a cell be
+    # recorded as CONFIRMED on a raw p that its own adjusted p-value would
+    # withdraw: with 14+ contrasts in one family, a raw p of 0.03 does not
+    # survive. So the adjusted p-value is written back into each holder's
+    # comparison dict, the verdict and hypothesis verdict are recomputed from
+    # that adjusted object, and only then is the claim considered recorded.
+    adjusted = holm_bonferroni(comparators)
+    for (holder, expected), adj in zip(pending, adjusted):
+        c = holder["comparison"]
+        c["p_value_raw"] = c["p_value"]
+        c["p_value_holm"] = adj.p_value
+        # Same interval and effect size, adjusted p. `Comparison.significant`
+        # still reads the CI, so an effect that is real but does not survive
+        # correction reads UNRESOLVED here and INCONCLUSIVE in `_supports`.
+        # `Comparison` is a frozen dataclass with exactly these nine fields, so
+        # the adjusted p is supplied in place of the raw one and the raw value
+        # is preserved separately in the dict below rather than smuggled in as
+        # an extra kwarg (which would raise).
+        verdict_cmp = Comparison(
+            label=c["label"], n=c["n"], mean_a=c["mean_a"], mean_b=c["mean_b"],
+            mean_diff=c["mean_diff"], ci_lo=c["ci_lo"], ci_hi=c["ci_hi"],
+            p_value=adj.p_value, sd_diff=c["sd_diff"],
+        )
+        holder["comparison"] = {
+            **verdict_cmp.to_dict(),
+            "p_value_raw": c["p_value_raw"],
+            "p_value_holm": adj.p_value,
+        }
+        holder["verdict"] = _verdict(verdict_cmp)
+        holder["supports_hypothesis"] = _supports(verdict_cmp, expected)
+
+    # Report every claim from the corrected verdicts, in one place.
+    print(f"\nfamily: {len(pending)} comparisons, one Holm correction")
+    for entry in claims:
+        for label, sub in (("", entry),) + tuple(
+            (f"  {s['landscape']}/{s['noise']}", s) for s in entry.get("per_noise", [])
+        ):
+            c = sub.get("comparison")
+            if not c or "p_value_holm" not in c:
+                print(f"  {entry['cid']}{label}: {sub['verdict']}")
+                continue
+            print(f"  {entry['cid']}{label:<24} raw={c['p_value_raw']:.4g} "
+                  f"holm={c['p_value_holm']:.4g} -> {sub['supports_hypothesis']}")
 
     # Leaderboard: tuned mean terminal loss with sd, every optimizer, every cell.
     lb_path = Path("results/leaderboard.csv")

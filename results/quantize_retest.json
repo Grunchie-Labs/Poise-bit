@@ -1,0 +1,1309 @@
+{
+  "metadata": {
+    "function": "Sphere",
+    "dim": 10,
+    "iters": 100,
+    "tune_runs": 10,
+    "eval_runs": 50,
+    "tune_seed": 1000,
+    "eval_seed": 0,
+    "criterion": "final_current_loss_mean",
+    "python": "3.14.3",
+    "numpy": "2.5.2",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "wall_seconds": 8.009913000001688
+  },
+  "clip_premise_counts": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "tuning": {
+    "pbit": {
+      "optimizer": "pbit",
+      "function": "Sphere",
+      "dim": 10,
+      "noise": "clean",
+      "metric": "final_current_loss_mean",
+      "selected": {
+        "lr": 0.1,
+        "tau": 100
+      },
+      "selected_score": 3.9150814725288095e-17,
+      "n_grid_points": 12,
+      "tune_seed": 1000,
+      "n_tune_runs": 10,
+      "n_eval_runs": 0,
+      "max_iter": 100,
+      "grid": [
+        {
+          "params": {
+            "lr": 0.005,
+            "tau": 100
+          },
+          "score": 2.496602015245634,
+          "final_current_loss_mean": 2.496602015245634,
+          "final_best_loss_mean": 2.496602015245634,
+          "auc_current_loss": 7.306620569911507,
+          "success_rate": 0.0
+        },
+        {
+          "params": {
+            "lr": 0.005,
+            "tau": 300
+          },
+          "score": 2.7728997580038612,
+          "final_current_loss_mean": 2.7728997580038612,
+          "final_best_loss_mean": 2.7728997580038612,
+          "auc_current_loss": 7.492247336939941,
+          "success_rate": 0.0
+        },
+        {
+          "params": {
+            "lr": 0.005,
+            "tau": 1000
+          },
+          "score": 2.91565788455223,
+          "final_current_loss_mean": 2.91565788455223,
+          "final_best_loss_mean": 2.91565788455223,
+          "auc_current_loss": 7.573104690624867,
+          "success_rate": 0.0
+        },
+        {
+          "params": {
+            "lr": 0.01,
+            "tau": 100
+          },
+          "score": 0.38519798476352285,
+          "final_current_loss_mean": 0.38519798476352285,
+          "final_best_loss_mean": 0.38519798476352285,
+          "auc_current_loss": 4.216175960729661,
+          "success_rate": 1.0
+        },
+        {
+          "params": {
+            "lr": 0.01,
+            "tau": 300
+          },
+          "score": 0.481528730354942,
+          "final_current_loss_mean": 0.481528730354942,
+          "final_best_loss_mean": 0.481528730354942,
+          "auc_current_loss": 4.35640421437846,
+          "success_rate": 1.0
+        },
+        {
+          "params": {
+            "lr": 0.01,
+            "tau": 1000
+          },
+          "score": 0.5493541136150972,
+          "final_current_loss_mean": 0.5493541136150972,
+          "final_best_loss_mean": 0.5493541136150972,
+          "auc_current_loss": 4.436269287087576,
+          "success_rate": 1.0
+        },
+        {
+          "params": {
+            "lr": 0.05,
+            "tau": 100
+          },
+          "score": 1.0158387566525723e-07,
+          "final_current_loss_mean": 1.0158387566525723e-07,
+          "final_best_loss_mean": 1.0158387566525723e-07,
+          "auc_current_loss": 0.7690446243632671,
+          "success_rate": 1.0
+        },
+        {
+          "params": {
+            "lr": 0.05,
+            "tau": 300
+          },
+          "score": 3.7121605510197816e-07,
+          "final_current_loss_mean": 3.7121605510197816e-07,
+          "final_best_loss_mean": 3.7121605510197816e-07,
+          "auc_current_loss": 0.7772681880435431,
+          "success_rate": 1.0
+        },
+        {
+          "params": {
+            "lr": 0.05,
+            "tau": 1000
+          },
+          "score": 9.157677066044364e-07,
+          "final_current_loss_mean": 9.157677066044364e-07,
+          "final_best_loss_mean": 9.157677066044364e-07,
+          "auc_current_loss": 0.7821137390854515,
+          "success_rate": 1.0
+        },
+        {
+          "params": {
+            "lr": 0.1,
+            "tau": 100
+          },
+          "score": 3.9150814725288095e-17,
+          "final_current_loss_mean": 3.9150814725288095e-17,
+          "final_best_loss_mean": 3.676805681968973e-17,
+          "auc_current_loss": 0.32726198343425644,
+          "success_rate": 1.0
+        },
+        {
+          "params": {
+            "lr": 0.1,
+            "tau": 300
+          },
+          "score": 2.1910115936671913e-15,
+          "final_current_loss_mean": 2.1910115936671913e-15,
+          "final_best_loss_mean": 2.1910115936671913e-15,
+          "auc_current_loss": 0.33049364818497556,
+          "success_rate": 1.0
+        },
+        {
+          "params": {
+            "lr": 0.1,
+            "tau": 1000
+          },
+          "score": 1.3617107000015843e-14,
+          "final_current_loss_mean": 1.3617107000015843e-14,
+          "final_best_loss_mean": 1.3617107000015843e-14,
+          "auc_current_loss": 0.33113490914967236,
+          "success_rate": 1.0
+        }
+      ]
+    },
+    "adam": {
+      "optimizer": "adam",
+      "function": "Sphere",
+      "dim": 10,
+      "noise": "clean",
+      "metric": "final_current_loss_mean",
+      "selected": {
+        "lr": 0.5
+      },
+      "selected_score": 0.0001625023122410614,
+      "n_grid_points": 5,
+      "tune_seed": 1000,
+      "n_tune_runs": 10,
+      "n_eval_runs": 0,
+      "max_iter": 100,
+      "grid": [
+        {
+          "params": {
+            "lr": 0.001
+          },
+          "score": 14.047858635576523,
+          "final_current_loss_mean": 14.047858635576523,
+          "final_best_loss_mean": 14.047858635576523,
+          "auc_current_loss": 14.92253383828719,
+          "success_rate": 0.0
+        },
+        {
+          "params": {
+            "lr": 0.01
+          },
+          "score": 3.2319820056380486,
+          "final_current_loss_mean": 3.2319820056380486,
+          "final_best_loss_mean": 3.2319820056380486,
+          "auc_current_loss": 8.122570736644494,
+          "success_rate": 0.1
+        },
+        {
+          "params": {
+            "lr": 0.05
+          },
+          "score": 0.0002396646293409153,
+          "final_current_loss_mean": 0.0002396646293409153,
+          "final_best_loss_mean": 0.00022950321414006147,
+          "auc_current_loss": 1.6572505559060065,
+          "success_rate": 1.0
+        },
+        {
+          "params": {
+            "lr": 0.1
+          },
+          "score": 0.0001625718207825312,
+          "final_current_loss_mean": 0.0001625718207825312,
+          "final_best_loss_mean": 0.000162570862324311,
+          "auc_current_loss": 0.8050067272632906,
+          "success_rate": 1.0
+        },
+        {
+          "params": {
+            "lr": 0.5
+          },
+          "score": 0.0001625023122410614,
+          "final_current_loss_mean": 0.0001625023122410614,
+          "final_best_loss_mean": 0.0001386876029948259,
+          "auc_current_loss": 0.36757153849585905,
+          "success_rate": 1.0
+        }
+      ]
+    },
+    "sgd": {
+      "optimizer": "sgd",
+      "function": "Sphere",
+      "dim": 10,
+      "noise": "clean",
+      "metric": "final_current_loss_mean",
+      "selected": {
+        "lr": 0.5
+      },
+      "selected_score": 0.0,
+      "n_grid_points": 5,
+      "tune_seed": 1000,
+      "n_tune_runs": 10,
+      "n_eval_runs": 0,
+      "max_iter": 100,
+      "grid": [
+        {
+          "params": {
+            "lr": 0.001
+          },
+          "score": 10.830376592377998,
+          "final_current_loss_mean": 10.830376592377998,
+          "final_best_loss_mean": 10.830376592377998,
+          "auc_current_loss": 13.158167105056611,
+          "success_rate": 0.0
+        },
+        {
+          "params": {
+            "lr": 0.01
+          },
+          "score": 0.28428270497552044,
+          "final_current_loss_mean": 0.28428270497552044,
+          "final_best_loss_mean": 0.28428270497552044,
+          "auc_current_loss": 3.7720716979045346,
+          "success_rate": 1.0
+        },
+        {
+          "params": {
+            "lr": 0.05
+          },
+          "score": 1.1403474309913831e-08,
+          "final_current_loss_mean": 1.1403474309913831e-08,
+          "final_best_loss_mean": 1.1403474309913831e-08,
+          "auc_current_loss": 0.6236131972485794,
+          "success_rate": 1.0
+        },
+        {
+          "params": {
+            "lr": 0.1
+          },
+          "score": 6.70706783858313e-19,
+          "final_current_loss_mean": 6.70706783858313e-19,
+          "final_best_loss_mean": 6.70706783858313e-19,
+          "auc_current_loss": 0.23562785310313253,
+          "success_rate": 1.0
+        },
+        {
+          "params": {
+            "lr": 0.5
+          },
+          "score": 0.0,
+          "final_current_loss_mean": 0.0,
+          "final_best_loss_mean": 0.0,
+          "auc_current_loss": 0.0,
+          "success_rate": 1.0
+        }
+      ]
+    },
+    "signsgd": {
+      "optimizer": "signsgd",
+      "function": "Sphere",
+      "dim": 10,
+      "noise": "clean",
+      "metric": "final_current_loss_mean",
+      "selected": {
+        "lr": 0.05
+      },
+      "selected_score": 0.008073136010984786,
+      "n_grid_points": 5,
+      "tune_seed": 1000,
+      "n_tune_runs": 10,
+      "n_eval_runs": 0,
+      "max_iter": 100,
+      "grid": [
+        {
+          "params": {
+            "lr": 0.001
+          },
+          "score": 14.019506254454319,
+          "final_current_loss_mean": 14.019506254454319,
+          "final_best_loss_mean": 14.019506254454319,
+          "auc_current_loss": 14.914116044587258,
+          "success_rate": 0.0
+        },
+        {
+          "params": {
+            "lr": 0.005
+          },
+          "score": 7.234356113580939,
+          "final_current_loss_mean": 7.234356113580939,
+          "final_best_loss_mean": 7.234356113580939,
+          "auc_current_loss": 11.17136741404488,
+          "success_rate": 0.0
+        },
+        {
+          "params": {
+            "lr": 0.01
+          },
+          "score": 2.278056950996816,
+          "final_current_loss_mean": 2.278056950996816,
+          "final_best_loss_mean": 2.278056950996816,
+          "auc_current_loss": 7.736232880156008,
+          "success_rate": 0.2
+        },
+        {
+          "params": {
+            "lr": 0.05
+          },
+          "score": 0.008073136010984786,
+          "final_current_loss_mean": 0.008073136010984786,
+          "final_best_loss_mean": 0.006505775941181171,
+          "auc_current_loss": 1.54834622342744,
+          "success_rate": 1.0
+        },
+        {
+          "params": {
+            "lr": 0.1
+          },
+          "score": 0.028716635200355462,
+          "final_current_loss_mean": 0.028716635200355462,
+          "final_best_loss_mean": 0.02332811403737807,
+          "auc_current_loss": 0.7286748214795904,
+          "success_rate": 1.0
+        }
+      ]
+    }
+  },
+  "claims": [
+    {
+      "optimizer": "pbit",
+      "bits": 1,
+      "comparison": {
+        "label": "pbit 1-bit vs clean (terminal)",
+        "n": 50,
+        "mean_a": 2.7540766699071245e-13,
+        "mean_b": 3.7030496430453273e-17,
+        "mean_diff": 2.75370636494282e-13,
+        "sd_diff": 6.971918478443063e-13,
+        "ci_lo": 1.3385000130741228e-13,
+        "ci_hi": 5.033010171788693e-13,
+        "p_value": 4.999750012499375e-05,
+        "significant": true,
+        "direction": "b better",
+        "p_value_holm": 0.000599970001499925
+      },
+      "clean": {
+        "label": "pbit clean",
+        "n": 50,
+        "mean": 3.7030496430453273e-17,
+        "sd": 3.174870422042654e-17,
+        "median": 2.5318223844880212e-17,
+        "ci_lo": 2.890033664557841e-17,
+        "ci_hi": 4.6170081884235574e-17,
+        "min": 8.121560609521048e-18,
+        "max": 1.2990932133276314e-16
+      },
+      "noisy": {
+        "label": "pbit 1-bit",
+        "n": 50,
+        "mean": 2.7540766699071245e-13,
+        "sd": 6.972035252642674e-13,
+        "median": 7.293141890634394e-14,
+        "ci_lo": 1.3388728291601495e-13,
+        "ci_hi": 5.033408559285568e-13,
+        "min": 1.584972812278085e-15,
+        "max": 4.776347942833296e-12
+      },
+      "comparison_auc": {
+        "label": "pbit 1-bit vs clean (AUC)",
+        "n": 50,
+        "mean_a": 0.44303808375542575,
+        "mean_b": 0.3019012098902133,
+        "mean_diff": 0.1411368738652124,
+        "sd_diff": 0.1472698568132537,
+        "ci_lo": 0.10418615719787461,
+        "ci_hi": 0.18466667965397027,
+        "p_value": 4.999750012499375e-05,
+        "significant": true,
+        "direction": "b better",
+        "p_value_holm": 0.000599970001499925
+      },
+      "clean_auc": {
+        "label": "pbit clean AUC",
+        "n": 50,
+        "mean": 0.3019012098902133,
+        "sd": 0.11669945262076283,
+        "median": 0.2829795473032561,
+        "ci_lo": 0.271114741610729,
+        "ci_hi": 0.3340751508781489,
+        "min": 0.08702593917822174,
+        "max": 0.627968526612868
+      },
+      "noisy_auc": {
+        "label": "pbit 1-bit AUC",
+        "n": 50,
+        "mean": 0.44303808375542575,
+        "sd": 0.18106183151804567,
+        "median": 0.4002316488768851,
+        "ci_lo": 0.3954944328328,
+        "ci_hi": 0.4935395902222563,
+        "min": 0.2081515655300156,
+        "max": 1.0992637298305261
+      }
+    },
+    {
+      "optimizer": "pbit",
+      "bits": 4,
+      "comparison": {
+        "label": "pbit 4-bit vs clean (terminal)",
+        "n": 50,
+        "mean_a": 3.318191030650832e-17,
+        "mean_b": 3.7030496430453273e-17,
+        "mean_diff": -3.848586123944954e-18,
+        "sd_diff": 2.4220645765648923e-17,
+        "ci_lo": -1.0701242076540535e-17,
+        "ci_hi": 2.5629119386048913e-18,
+        "p_value": 0.27408629568521575,
+        "significant": false,
+        "direction": "no detectable difference",
+        "p_value_holm": 1.0
+      },
+      "clean": {
+        "label": "pbit clean",
+        "n": 50,
+        "mean": 3.7030496430453273e-17,
+        "sd": 3.174870422042654e-17,
+        "median": 2.5318223844880212e-17,
+        "ci_lo": 2.890033664557841e-17,
+        "ci_hi": 4.6170081884235574e-17,
+        "min": 8.121560609521048e-18,
+        "max": 1.2990932133276314e-16
+      },
+      "noisy": {
+        "label": "pbit 4-bit",
+        "n": 50,
+        "mean": 3.318191030650832e-17,
+        "sd": 2.988120471301011e-17,
+        "median": 2.3283272395662152e-17,
+        "ci_lo": 2.5898595597800387e-17,
+        "ci_hi": 4.219280266025896e-17,
+        "min": 8.06098066284396e-18,
+        "max": 1.858250141084314e-16
+      },
+      "comparison_auc": {
+        "label": "pbit 4-bit vs clean (AUC)",
+        "n": 50,
+        "mean_a": 0.30353605289014873,
+        "mean_b": 0.3019012098902133,
+        "mean_diff": 0.0016348429999354227,
+        "sd_diff": 0.019171261328755893,
+        "ci_lo": -0.003501374235717535,
+        "ci_hi": 0.006980932392186498,
+        "p_value": 0.5651717414129294,
+        "significant": false,
+        "direction": "no detectable difference",
+        "p_value_holm": 1.0
+      },
+      "clean_auc": {
+        "label": "pbit clean AUC",
+        "n": 50,
+        "mean": 0.3019012098902133,
+        "sd": 0.11669945262076283,
+        "median": 0.2829795473032561,
+        "ci_lo": 0.271114741610729,
+        "ci_hi": 0.3340751508781489,
+        "min": 0.08702593917822174,
+        "max": 0.627968526612868
+      },
+      "noisy_auc": {
+        "label": "pbit 4-bit AUC",
+        "n": 50,
+        "mean": 0.30353605289014873,
+        "sd": 0.115619687714798,
+        "median": 0.2886091078470187,
+        "ci_lo": 0.27297750843494806,
+        "ci_hi": 0.3355811654036288,
+        "min": 0.08847854205971864,
+        "max": 0.6389262664201726
+      }
+    },
+    {
+      "optimizer": "pbit",
+      "bits": 8,
+      "comparison": {
+        "label": "pbit 8-bit vs clean (terminal)",
+        "n": 50,
+        "mean_a": 3.3693319446454465e-17,
+        "mean_b": 3.7030496430453273e-17,
+        "mean_diff": -3.337176983998807e-18,
+        "sd_diff": 1.5454401115432338e-17,
+        "ci_lo": -8.038533891941355e-18,
+        "ci_hi": 3.380324021941879e-19,
+        "p_value": 0.12539373031348433,
+        "significant": false,
+        "direction": "no detectable difference",
+        "p_value_holm": 0.8777561121943903
+      },
+      "clean": {
+        "label": "pbit clean",
+        "n": 50,
+        "mean": 3.7030496430453273e-17,
+        "sd": 3.174870422042654e-17,
+        "median": 2.5318223844880212e-17,
+        "ci_lo": 2.890033664557841e-17,
+        "ci_hi": 4.6170081884235574e-17,
+        "min": 8.121560609521048e-18,
+        "max": 1.2990932133276314e-16
+      },
+      "noisy": {
+        "label": "pbit 8-bit",
+        "n": 50,
+        "mean": 3.3693319446454465e-17,
+        "sd": 2.8461214571112924e-17,
+        "median": 2.573826068581487e-17,
+        "ci_lo": 2.650749177465596e-17,
+        "ci_hi": 4.193390340657732e-17,
+        "min": 4.086248478358454e-18,
+        "max": 1.3037226728240004e-16
+      },
+      "comparison_auc": {
+        "label": "pbit 8-bit vs clean (AUC)",
+        "n": 50,
+        "mean_a": 0.30180244312445886,
+        "mean_b": 0.3019012098902133,
+        "mean_diff": -9.876676575444776e-05,
+        "sd_diff": 0.0009979415906993764,
+        "ci_lo": -0.0004140556276624641,
+        "ci_hi": 0.00010196580108997755,
+        "p_value": 0.7744612769361532,
+        "significant": false,
+        "direction": "no detectable difference",
+        "p_value_holm": 1.0
+      },
+      "clean_auc": {
+        "label": "pbit clean AUC",
+        "n": 50,
+        "mean": 0.3019012098902133,
+        "sd": 0.11669945262076283,
+        "median": 0.2829795473032561,
+        "ci_lo": 0.271114741610729,
+        "ci_hi": 0.3340751508781489,
+        "min": 0.08702593917822174,
+        "max": 0.627968526612868
+      },
+      "noisy_auc": {
+        "label": "pbit 8-bit AUC",
+        "n": 50,
+        "mean": 0.30180244312445886,
+        "sd": 0.116717626423794,
+        "median": 0.2825763281096305,
+        "ci_lo": 0.2710297840081962,
+        "ci_hi": 0.3339357963037374,
+        "min": 0.08691574928396656,
+        "max": 0.6283686876106565
+      }
+    },
+    {
+      "optimizer": "adam",
+      "bits": 1,
+      "comparison": {
+        "label": "adam 1-bit vs clean (terminal)",
+        "n": 50,
+        "mean_a": 0.0691921879516843,
+        "mean_b": 0.00012749672937157702,
+        "mean_diff": 0.06906469122231272,
+        "sd_diff": 0.07359532530183331,
+        "ci_lo": 0.05090870499656547,
+        "ci_hi": 0.09105621817237312,
+        "p_value": 4.999750012499375e-05,
+        "significant": true,
+        "direction": "b better",
+        "p_value_holm": 0.000599970001499925
+      },
+      "clean": {
+        "label": "adam clean",
+        "n": 50,
+        "mean": 0.00012749672937157702,
+        "sd": 4.817840948398094e-05,
+        "median": 0.00011649630093456308,
+        "ci_lo": 0.00011455157255760791,
+        "ci_hi": 0.00014077235542551956,
+        "min": 5.879523804131727e-05,
+        "max": 0.0002641209047570042
+      },
+      "noisy": {
+        "label": "adam 1-bit",
+        "n": 50,
+        "mean": 0.0691921879516843,
+        "sd": 0.07359893446448112,
+        "median": 0.04193655700460912,
+        "ci_lo": 0.051036532599428794,
+        "ci_hi": 0.09119208533745447,
+        "min": 0.010101902966807129,
+        "max": 0.40738761065977036
+      },
+      "comparison_auc": {
+        "label": "adam 1-bit vs clean (AUC)",
+        "n": 50,
+        "mean_a": 0.9396435536312824,
+        "mean_b": 0.3327164567172882,
+        "mean_diff": 0.6069270969139944,
+        "sd_diff": 0.2919955177273029,
+        "ci_lo": 0.531241743800425,
+        "ci_hi": 0.6904303079997944,
+        "p_value": 4.999750012499375e-05,
+        "significant": true,
+        "direction": "b better",
+        "p_value_holm": 0.000599970001499925
+      },
+      "clean_auc": {
+        "label": "adam clean AUC",
+        "n": 50,
+        "mean": 0.3327164567172882,
+        "sd": 0.09411631562438617,
+        "median": 0.3301285271012979,
+        "ci_lo": 0.30749305151401873,
+        "ci_hi": 0.35834299954141957,
+        "min": 0.1272943230308317,
+        "max": 0.5698142287992193
+      },
+      "noisy_auc": {
+        "label": "adam 1-bit AUC",
+        "n": 50,
+        "mean": 0.9396435536312824,
+        "sd": 0.3030859023266573,
+        "median": 0.8789802016162045,
+        "ci_lo": 0.8606485246400191,
+        "ci_hi": 1.0264912467295388,
+        "min": 0.4724135429292656,
+        "max": 1.7737470687879964
+      }
+    },
+    {
+      "optimizer": "adam",
+      "bits": 4,
+      "comparison": {
+        "label": "adam 4-bit vs clean (terminal)",
+        "n": 50,
+        "mean_a": 0.0001331826044503422,
+        "mean_b": 0.00012749672937157702,
+        "mean_diff": 5.685875078765192e-06,
+        "sd_diff": 2.97635088619123e-05,
+        "ci_lo": -2.713935212498056e-06,
+        "ci_hi": 1.3765128422419547e-05,
+        "p_value": 0.18219089045547723,
+        "significant": false,
+        "direction": "no detectable difference",
+        "p_value_holm": 1.0
+      },
+      "clean": {
+        "label": "adam clean",
+        "n": 50,
+        "mean": 0.00012749672937157702,
+        "sd": 4.817840948398094e-05,
+        "median": 0.00011649630093456308,
+        "ci_lo": 0.00011455157255760791,
+        "ci_hi": 0.00014077235542551956,
+        "min": 5.879523804131727e-05,
+        "max": 0.0002641209047570042
+      },
+      "noisy": {
+        "label": "adam 4-bit",
+        "n": 50,
+        "mean": 0.0001331826044503422,
+        "sd": 5.694337304090809e-05,
+        "median": 0.0001332184230492971,
+        "ci_lo": 0.00011787711414736263,
+        "ci_hi": 0.00014873210761418045,
+        "min": 4.50232787326013e-05,
+        "max": 0.00030111087862543466
+      },
+      "comparison_auc": {
+        "label": "adam 4-bit vs clean (AUC)",
+        "n": 50,
+        "mean_a": 0.33604389881661406,
+        "mean_b": 0.3327164567172882,
+        "mean_diff": 0.0033274420993258842,
+        "sd_diff": 0.008494933169226497,
+        "ci_lo": 0.0009794313144059358,
+        "ci_hi": 0.0056055052018578995,
+        "p_value": 0.006599670016499175,
+        "significant": true,
+        "direction": "b better",
+        "p_value_holm": 0.0263986800659967
+      },
+      "clean_auc": {
+        "label": "adam clean AUC",
+        "n": 50,
+        "mean": 0.3327164567172882,
+        "sd": 0.09411631562438617,
+        "median": 0.3301285271012979,
+        "ci_lo": 0.30749305151401873,
+        "ci_hi": 0.35834299954141957,
+        "min": 0.1272943230308317,
+        "max": 0.5698142287992193
+      },
+      "noisy_auc": {
+        "label": "adam 4-bit AUC",
+        "n": 50,
+        "mean": 0.33604389881661406,
+        "sd": 0.09498751345023032,
+        "median": 0.33372143017379796,
+        "ci_lo": 0.310604819791104,
+        "ci_hi": 0.36201888585998127,
+        "min": 0.12513993150557343,
+        "max": 0.5828961236499421
+      }
+    },
+    {
+      "optimizer": "adam",
+      "bits": 8,
+      "comparison": {
+        "label": "adam 8-bit vs clean (terminal)",
+        "n": 50,
+        "mean_a": 0.00012799204801257886,
+        "mean_b": 0.00012749672937157702,
+        "mean_diff": 4.953186410018145e-07,
+        "sd_diff": 3.444536447771729e-06,
+        "ci_lo": -4.352572072598814e-07,
+        "ci_hi": 1.454711055634039e-06,
+        "p_value": 0.31963401829908505,
+        "significant": false,
+        "direction": "no detectable difference",
+        "p_value_holm": 1.0
+      },
+      "clean": {
+        "label": "adam clean",
+        "n": 50,
+        "mean": 0.00012749672937157702,
+        "sd": 4.817840948398094e-05,
+        "median": 0.00011649630093456308,
+        "ci_lo": 0.00011455157255760791,
+        "ci_hi": 0.00014077235542551956,
+        "min": 5.879523804131727e-05,
+        "max": 0.0002641209047570042
+      },
+      "noisy": {
+        "label": "adam 8-bit",
+        "n": 50,
+        "mean": 0.00012799204801257886,
+        "sd": 4.8031101026781546e-05,
+        "median": 0.00012016042528852399,
+        "ci_lo": 0.00011518533590543097,
+        "ci_hi": 0.00014128009461155194,
+        "min": 5.492929632185863e-05,
+        "max": 0.0002653112674766754
+      },
+      "comparison_auc": {
+        "label": "adam 8-bit vs clean (AUC)",
+        "n": 50,
+        "mean_a": 0.3327756877441599,
+        "mean_b": 0.3327164567172882,
+        "mean_diff": 5.923102687177606e-05,
+        "sd_diff": 0.00035042180130333126,
+        "ci_lo": -3.83143368182053e-05,
+        "ci_hi": 0.0001558192720414339,
+        "p_value": 0.23818809059547022,
+        "significant": false,
+        "direction": "no detectable difference",
+        "p_value_holm": 0.7145642717864107
+      },
+      "clean_auc": {
+        "label": "adam clean AUC",
+        "n": 50,
+        "mean": 0.3327164567172882,
+        "sd": 0.09411631562438617,
+        "median": 0.3301285271012979,
+        "ci_lo": 0.30749305151401873,
+        "ci_hi": 0.35834299954141957,
+        "min": 0.1272943230308317,
+        "max": 0.5698142287992193
+      },
+      "noisy_auc": {
+        "label": "adam 8-bit AUC",
+        "n": 50,
+        "mean": 0.3327756877441599,
+        "sd": 0.09414599639761696,
+        "median": 0.3300619384417231,
+        "ci_lo": 0.307554744490289,
+        "ci_hi": 0.35837800563010935,
+        "min": 0.1270724386492531,
+        "max": 0.5695003869532277
+      }
+    },
+    {
+      "optimizer": "sgd",
+      "bits": 1,
+      "comparison": {
+        "label": "sgd 1-bit vs clean (terminal)",
+        "n": 50,
+        "mean_a": 12.75617955994074,
+        "mean_b": 0.0,
+        "mean_diff": 12.75617955994074,
+        "sd_diff": 21.283322157000505,
+        "ci_lo": 7.142784266390222,
+        "ci_hi": 18.97500831826141,
+        "p_value": 4.999750012499375e-05,
+        "significant": true,
+        "direction": "b better",
+        "p_value_holm": 0.000599970001499925
+      },
+      "clean": {
+        "label": "sgd clean",
+        "n": 50,
+        "mean": 0.0,
+        "sd": 0.0,
+        "median": 0.0,
+        "ci_lo": 0.0,
+        "ci_hi": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "noisy": {
+        "label": "sgd 1-bit",
+        "n": 50,
+        "mean": 12.75617955994074,
+        "sd": 21.283322157000505,
+        "median": 0.0,
+        "ci_lo": 7.142784266390222,
+        "ci_hi": 18.97500831826141,
+        "min": 0.0,
+        "max": 95.81106230510797
+      },
+      "comparison_auc": {
+        "label": "sgd 1-bit vs clean (AUC)",
+        "n": 50,
+        "mean_a": 19.601139661316637,
+        "mean_b": 0.0,
+        "mean_diff": 19.601139661316637,
+        "sd_diff": 11.26944162479786,
+        "ci_lo": 16.48054406234714,
+        "ci_hi": 22.703719110913315,
+        "p_value": 4.999750012499375e-05,
+        "significant": true,
+        "direction": "b better",
+        "p_value_holm": 0.000599970001499925
+      },
+      "clean_auc": {
+        "label": "sgd clean AUC",
+        "n": 50,
+        "mean": 0.0,
+        "sd": 0.0,
+        "median": 0.0,
+        "ci_lo": 0.0,
+        "ci_hi": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "noisy_auc": {
+        "label": "sgd 1-bit AUC",
+        "n": 50,
+        "mean": 19.601139661316637,
+        "sd": 11.26944162479786,
+        "median": 21.274947996951553,
+        "ci_lo": 16.48054406234714,
+        "ci_hi": 22.703719110913315,
+        "min": 1.0873927098601919,
+        "max": 39.348658951931036
+      }
+    },
+    {
+      "optimizer": "sgd",
+      "bits": 4,
+      "comparison": {
+        "label": "sgd 4-bit vs clean (terminal)",
+        "n": 50,
+        "mean_a": 2.3369160699641663e-225,
+        "mean_b": 0.0,
+        "mean_diff": 2.3369160699641663e-225,
+        "sd_diff": 0.0,
+        "ci_lo": 0.0,
+        "ci_hi": 7.010748209892499e-225,
+        "p_value": 1.0,
+        "significant": false,
+        "direction": "no detectable difference",
+        "p_value_holm": 1.0
+      },
+      "clean": {
+        "label": "sgd clean",
+        "n": 50,
+        "mean": 0.0,
+        "sd": 0.0,
+        "median": 0.0,
+        "ci_lo": 0.0,
+        "ci_hi": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "noisy": {
+        "label": "sgd 4-bit",
+        "n": 50,
+        "mean": 2.3369160699641663e-225,
+        "sd": 0.0,
+        "median": 0.0,
+        "ci_lo": 0.0,
+        "ci_hi": 7.010748209892499e-225,
+        "min": 0.0,
+        "max": 1.1684580349820832e-223
+      },
+      "comparison_auc": {
+        "label": "sgd 4-bit vs clean (AUC)",
+        "n": 50,
+        "mean_a": 0.0006414040346878796,
+        "mean_b": 0.0,
+        "mean_diff": 0.0006414040346878796,
+        "sd_diff": 0.0002905643934580687,
+        "ci_lo": 0.0005635695514559812,
+        "ci_hi": 0.000724086644213528,
+        "p_value": 4.999750012499375e-05,
+        "significant": true,
+        "direction": "b better",
+        "p_value_holm": 0.000599970001499925
+      },
+      "clean_auc": {
+        "label": "sgd clean AUC",
+        "n": 50,
+        "mean": 0.0,
+        "sd": 0.0,
+        "median": 0.0,
+        "ci_lo": 0.0,
+        "ci_hi": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "noisy_auc": {
+        "label": "sgd 4-bit AUC",
+        "n": 50,
+        "mean": 0.0006414040346878796,
+        "sd": 0.0002905643934580687,
+        "median": 0.0006221618602176657,
+        "ci_lo": 0.0005635695514559812,
+        "ci_hi": 0.000724086644213528,
+        "min": 0.0001162152339533141,
+        "max": 0.0016845907487128223
+      }
+    },
+    {
+      "optimizer": "sgd",
+      "bits": 8,
+      "comparison": {
+        "label": "sgd 8-bit vs clean (terminal)",
+        "n": 50,
+        "mean_a": 0.0,
+        "mean_b": 0.0,
+        "mean_diff": 0.0,
+        "sd_diff": 0.0,
+        "ci_lo": 0.0,
+        "ci_hi": 0.0,
+        "p_value": 1.0,
+        "significant": false,
+        "direction": "no detectable difference",
+        "p_value_holm": 1.0
+      },
+      "clean": {
+        "label": "sgd clean",
+        "n": 50,
+        "mean": 0.0,
+        "sd": 0.0,
+        "median": 0.0,
+        "ci_lo": 0.0,
+        "ci_hi": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "noisy": {
+        "label": "sgd 8-bit",
+        "n": 50,
+        "mean": 0.0,
+        "sd": 0.0,
+        "median": 0.0,
+        "ci_lo": 0.0,
+        "ci_hi": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "comparison_auc": {
+        "label": "sgd 8-bit vs clean (AUC)",
+        "n": 50,
+        "mean_a": 2.339002067606618e-06,
+        "mean_b": 0.0,
+        "mean_diff": 2.339002067606618e-06,
+        "sd_diff": 1.1998945863267078e-06,
+        "ci_lo": 2.0189114572341366e-06,
+        "ci_hi": 2.670425429187661e-06,
+        "p_value": 4.999750012499375e-05,
+        "significant": true,
+        "direction": "b better",
+        "p_value_holm": 0.000599970001499925
+      },
+      "clean_auc": {
+        "label": "sgd clean AUC",
+        "n": 50,
+        "mean": 0.0,
+        "sd": 0.0,
+        "median": 0.0,
+        "ci_lo": 0.0,
+        "ci_hi": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "noisy_auc": {
+        "label": "sgd 8-bit AUC",
+        "n": 50,
+        "mean": 2.339002067606618e-06,
+        "sd": 1.1998945863267078e-06,
+        "median": 2.16806782049396e-06,
+        "ci_lo": 2.0189114572341366e-06,
+        "ci_hi": 2.670425429187661e-06,
+        "min": 4.4410917809272634e-07,
+        "max": 5.025937417515153e-06
+      }
+    },
+    {
+      "optimizer": "signsgd",
+      "bits": 1,
+      "comparison": {
+        "label": "signsgd 1-bit vs clean (terminal)",
+        "n": 50,
+        "mean_a": 0.02022679292194626,
+        "mean_b": 0.008196608665429452,
+        "mean_diff": 0.012030184256516802,
+        "sd_diff": 0.0099814936021212,
+        "ci_lo": 0.009364635004177677,
+        "ci_hi": 0.014894173716331874,
+        "p_value": 4.999750012499375e-05,
+        "significant": true,
+        "direction": "b better",
+        "p_value_holm": 0.000599970001499925
+      },
+      "clean": {
+        "label": "signsgd clean",
+        "n": 50,
+        "mean": 0.008196608665429452,
+        "sd": 0.002381827680527872,
+        "median": 0.00831183024169984,
+        "ci_lo": 0.007533554840065485,
+        "ci_hi": 0.008837577296022952,
+        "min": 0.002317360414664155,
+        "max": 0.014443911172154544
+      },
+      "noisy": {
+        "label": "signsgd 1-bit",
+        "n": 50,
+        "mean": 0.02022679292194626,
+        "sd": 0.010201203676048005,
+        "median": 0.019524523920650697,
+        "ci_lo": 0.017519252950312286,
+        "ci_hi": 0.023113690825286425,
+        "min": 0.003249359717508091,
+        "max": 0.058001158483123115
+      },
+      "comparison_auc": {
+        "label": "signsgd 1-bit vs clean (AUC)",
+        "n": 50,
+        "mean_a": 1.5721887280233813,
+        "mean_b": 1.2681207870515798,
+        "mean_diff": 0.3040679409718015,
+        "sd_diff": 0.11133449933728434,
+        "ci_lo": 0.2742171831454325,
+        "ci_hi": 0.33516722901825835,
+        "p_value": 4.999750012499375e-05,
+        "significant": true,
+        "direction": "b better",
+        "p_value_holm": 0.000599970001499925
+      },
+      "clean_auc": {
+        "label": "signsgd clean AUC",
+        "n": 50,
+        "mean": 1.2681207870515798,
+        "sd": 0.4730069540034694,
+        "median": 1.2653258889365588,
+        "ci_lo": 1.141643674018239,
+        "ci_hi": 1.3971050908875935,
+        "min": 0.24364578497509887,
+        "max": 2.5314832915473335
+      },
+      "noisy_auc": {
+        "label": "signsgd 1-bit AUC",
+        "n": 50,
+        "mean": 1.5721887280233813,
+        "sd": 0.530253401635551,
+        "median": 1.5132878946014225,
+        "ci_lo": 1.4276892154953025,
+        "ci_hi": 1.7149698068355392,
+        "min": 0.33013031228044726,
+        "max": 2.7739417601724052
+      }
+    },
+    {
+      "optimizer": "signsgd",
+      "bits": 4,
+      "comparison": {
+        "label": "signsgd 4-bit vs clean (terminal)",
+        "n": 50,
+        "mean_a": 0.008245626476775672,
+        "mean_b": 0.008196608665429452,
+        "mean_diff": 4.901781134621861e-05,
+        "sd_diff": 0.00014042655463543038,
+        "ci_lo": 1.5093159608375664e-05,
+        "ci_hi": 9.100866302414064e-05,
+        "p_value": 0.0087995600219989,
+        "significant": true,
+        "direction": "b better",
+        "p_value_holm": 0.0703964801759912
+      },
+      "clean": {
+        "label": "signsgd clean",
+        "n": 50,
+        "mean": 0.008196608665429452,
+        "sd": 0.002381827680527872,
+        "median": 0.00831183024169984,
+        "ci_lo": 0.007533554840065485,
+        "ci_hi": 0.008837577296022952,
+        "min": 0.002317360414664155,
+        "max": 0.014443911172154544
+      },
+      "noisy": {
+        "label": "signsgd 4-bit",
+        "n": 50,
+        "mean": 0.008245626476775672,
+        "sd": 0.0023997049473595622,
+        "median": 0.008386119812116727,
+        "ci_lo": 0.00757839036033985,
+        "ci_hi": 0.008890565260492636,
+        "min": 0.002317360414664155,
+        "max": 0.014443911172154544
+      },
+      "comparison_auc": {
+        "label": "signsgd 4-bit vs clean (AUC)",
+        "n": 50,
+        "mean_a": 1.2696021404478148,
+        "mean_b": 1.2681207870515798,
+        "mean_diff": 0.0014813533962349352,
+        "sd_diff": 0.0007480641919666234,
+        "ci_lo": 0.001282008048571498,
+        "ci_hi": 0.0016908021291970443,
+        "p_value": 4.999750012499375e-05,
+        "significant": true,
+        "direction": "b better",
+        "p_value_holm": 0.000599970001499925
+      },
+      "clean_auc": {
+        "label": "signsgd clean AUC",
+        "n": 50,
+        "mean": 1.2681207870515798,
+        "sd": 0.4730069540034694,
+        "median": 1.2653258889365588,
+        "ci_lo": 1.141643674018239,
+        "ci_hi": 1.3971050908875935,
+        "min": 0.24364578497509887,
+        "max": 2.5314832915473335
+      },
+      "noisy_auc": {
+        "label": "signsgd 4-bit AUC",
+        "n": 50,
+        "mean": 1.2696021404478148,
+        "sd": 0.4730151275112396,
+        "median": 1.2661310397343493,
+        "ci_lo": 1.1431607643992263,
+        "ci_hi": 1.3986296294714102,
+        "min": 0.24394045889198704,
+        "max": 2.5331111043060694
+      }
+    },
+    {
+      "optimizer": "signsgd",
+      "bits": 8,
+      "comparison": {
+        "label": "signsgd 8-bit vs clean (terminal)",
+        "n": 50,
+        "mean_a": 0.008196608665429452,
+        "mean_b": 0.008196608665429452,
+        "mean_diff": 0.0,
+        "sd_diff": 0.0,
+        "ci_lo": 0.0,
+        "ci_hi": 0.0,
+        "p_value": 1.0,
+        "significant": false,
+        "direction": "no detectable difference",
+        "p_value_holm": 1.0
+      },
+      "clean": {
+        "label": "signsgd clean",
+        "n": 50,
+        "mean": 0.008196608665429452,
+        "sd": 0.002381827680527872,
+        "median": 0.00831183024169984,
+        "ci_lo": 0.007533554840065485,
+        "ci_hi": 0.008837577296022952,
+        "min": 0.002317360414664155,
+        "max": 0.014443911172154544
+      },
+      "noisy": {
+        "label": "signsgd 8-bit",
+        "n": 50,
+        "mean": 0.008196608665429452,
+        "sd": 0.002381827680527872,
+        "median": 0.00831183024169984,
+        "ci_lo": 0.007533554840065485,
+        "ci_hi": 0.008837577296022952,
+        "min": 0.002317360414664155,
+        "max": 0.014443911172154544
+      },
+      "comparison_auc": {
+        "label": "signsgd 8-bit vs clean (AUC)",
+        "n": 50,
+        "mean_a": 1.2681260591620247,
+        "mean_b": 1.2681207870515798,
+        "mean_diff": 5.272110444846101e-06,
+        "sd_diff": 6.7130357771813265e-06,
+        "ci_lo": 3.4748680911892703e-06,
+        "ci_hi": 7.201199620708032e-06,
+        "p_value": 4.999750012499375e-05,
+        "significant": true,
+        "direction": "b better",
+        "p_value_holm": 0.000599970001499925
+      },
+      "clean_auc": {
+        "label": "signsgd clean AUC",
+        "n": 50,
+        "mean": 1.2681207870515798,
+        "sd": 0.4730069540034694,
+        "median": 1.2653258889365588,
+        "ci_lo": 1.141643674018239,
+        "ci_hi": 1.3971050908875935,
+        "min": 0.24364578497509887,
+        "max": 2.5314832915473335
+      },
+      "noisy_auc": {
+        "label": "signsgd 8-bit AUC",
+        "n": 50,
+        "mean": 1.2681260591620247,
+        "sd": 0.47300616759168573,
+        "median": 1.2653258889365588,
+        "ci_lo": 1.141648927446532,
+        "ci_hi": 1.3971090852104846,
+        "min": 0.24364578497509887,
+        "max": 2.5314832915473335
+      }
+    }
+  ]
+}

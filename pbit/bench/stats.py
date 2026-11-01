@@ -31,7 +31,15 @@ import numpy as np
 
 @dataclass(frozen=True)
 class Comparison:
-    """Result of one paired comparison between two conditions."""
+    """Result of one paired comparison between two conditions.
+
+    ``p_value`` is the value the verdict is read from, which callers set to the
+    family-adjusted p after a Holm correction. ``p_value_raw`` and
+    ``p_value_holm`` are carried alongside it so a serialized claim can show
+    both: a raw p that clears alpha and an adjusted p that does not is the
+    single most common way a multiplicity error hides in a results table, and
+    dropping either one makes it impossible to see.
+    """
 
     label: str
     n: int
@@ -42,11 +50,36 @@ class Comparison:
     ci_hi: float
     p_value: float
     sd_diff: float
+    p_value_raw: float | None = None
+    p_value_holm: float | None = None
+
+    @property
+    def p_effective(self) -> float:
+        """The p-value a verdict should be read from: adjusted when one exists.
+
+        ``holm_bonferroni`` returns copies carrying only the adjusted value, so
+        in practice the adjusted comparison reaches the verdict code with
+        ``p_value`` already corrected. This property makes that explicit and
+        keeps both numbers visible on the same object.
+        """
+        return self.p_value_holm if self.p_value_holm is not None else self.p_value
 
     @property
     def significant(self) -> bool:
         """True when the 95% CI excludes zero (two-sided, alpha=0.05)."""
         return (self.ci_lo > 0.0) or (self.ci_hi < 0.0)
+
+    @property
+    def significant_after_correction(self) -> bool:
+        """True when the p-value that drives verdicts clears alpha.
+
+        Deliberately not the same question as ``significant``: the interval
+        speaks to the effect size, this speaks to whether the family supports
+        calling the effect real. A row can have an interval excluding zero and
+        still be inconclusive after correction, and that disagreement is itself
+        a reportable finding rather than a bug.
+        """
+        return self.p_effective < 0.05
 
     @property
     def direction(self) -> str:
@@ -55,7 +88,7 @@ class Comparison:
         return "a better" if self.mean_diff < 0 else "b better"
 
     def to_dict(self) -> dict:
-        return {
+        out = {
             "label": self.label,
             "n": self.n,
             "mean_a": self.mean_a,
@@ -66,8 +99,14 @@ class Comparison:
             "ci_hi": self.ci_hi,
             "p_value": self.p_value,
             "significant": self.significant,
+            "significant_after_correction": self.significant_after_correction,
             "direction": self.direction,
         }
+        if self.p_value_raw is not None:
+            out["p_value_raw"] = self.p_value_raw
+        if self.p_value_holm is not None:
+            out["p_value_holm"] = self.p_value_holm
+        return out
 
 
 def bootstrap_ci(
@@ -137,7 +176,7 @@ def holm_bonferroni(comparisons: Sequence[Comparison], alpha: float = 0.05) -> l
 
     Returns new ``Comparison`` objects with Holm-adjusted p-values. Holm is used
     rather than Bonferroni because it is uniformly more powerful and still
-    controls the family-wise error rate.
+
     """
     items = list(comparisons)
     m = len(items)
@@ -163,6 +202,12 @@ def holm_bonferroni(comparisons: Sequence[Comparison], alpha: float = 0.05) -> l
                 ci_hi=c.ci_hi,
                 p_value=adjusted[i],
                 sd_diff=c.sd_diff,
+                # Keep the uncorrected value on the returned object. The
+                # adjusted p replaces p_value, so any verdict computed from
+                # it is automatically corrected; the raw value survives for
+                # reporting the before/after.
+                p_value_raw=c.p_value,
+                p_value_holm=adjusted[i],
             )
         )
     return out

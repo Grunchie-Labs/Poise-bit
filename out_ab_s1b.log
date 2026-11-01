@@ -1,0 +1,46 @@
+[tune] Rastrigin/dim=2/clean
+  pbit            selected={'lr': 0.005, 'tau': 100} score=19.9987
+  pbit_frozen_low selected={'lr': 0.005} score=20.7619
+  pbit_frozen_high selected={'lr': 0.005} score=19.3021
+  signmag         selected={'lr': 0.005} score=19.3021
+  [premise] beta0=0.1    wrong-way P=0.475 entropy=0.9982
+  [premise] beta0=0.25   wrong-way P=0.4378 entropy=0.9888
+  [premise] beta0=0.5    wrong-way P=0.3775 entropy=0.9563
+  [premise] beta0=1      wrong-way P=0.2689 entropy=0.8399
+  [premise] beta0=2      wrong-way P=0.1192 entropy=0.5271
+  [premise] beta0=4      wrong-way P=0.01799 entropy=0.1300
+  [premise] beta0=8      wrong-way P=0.0003354 entropy=0.0044
+  [premise] beta0=16     wrong-way P=1.125e-07 entropy=0.0000
+  [premise] pbit              measured entropy/coord=0.3315 flip P=0.5125
+  [premise] pbit_frozen_low   measured entropy/coord=0.9480 flip P=0.4947
+  [premise] pbit_frozen_high  measured entropy/coord=0.0404 flip P=0.5374
+  [premise] signmag           measured entropy/coord=0.0000 flip P=0
+[eval] Rastrigin/dim=2/clean done
+[eval] Rastrigin/dim=2/CorruptionNoise_p=0.2 done
+[eval] Rastrigin/dim=2/SignNoise done
+  [main    ] clean: frozen_low vs pbit                  diff=+0.7441 CI=[+0.2759,+1.2375] p=0.0011
+  [main    ] clean: signmag vs frozen_low               diff=-0.7442 CI=[-1.2376,-0.2760] p=0.0011
+  [main    ] clean: signmag vs pbit                     diff=-0.0001 CI=[-0.0002,-0.0001] p=0.0000
+  [main    ] corruption shift: frozen_low vs pbit       diff=+3.4264 CI=[+2.0869,+4.9315] p=0.0000
+  [main    ] corruption shift: signmag vs frozen_low    diff=-3.4162 CI=[-4.8960,-2.1126] p=0.0000
+  [main    ] sign shift: signmag vs frozen_low          diff=-0.8044 CI=[-1.7604,+0.0678] p=0.0929
+  [HOLM main] clean: frozen_low vs pbit             p_holm=0.00345
+  [HOLM main] clean: signmag vs frozen_low          p_holm=0.00345
+  [HOLM main] clean: signmag vs pbit                p_holm=0.00030
+  [HOLM main] corruption shift: frozen_low vs pbit  p_holm=0.00030
+  [HOLM main] corruption shift: signmag vs frozen_low p_holm=0.00030
+  [HOLM main] sign shift: signmag vs frozen_low     p_holm=0.09290
+  [validity] validity: frozen_high vs signmag           diff=+0.0000 CI=[+0.0000,+0.0000] p=0.0000
+  [validity] validity: frozen_high vs signmag           diff=+0.0138 CI=[-0.0073,+0.0476] p=0.5319
+  [validity] validity: frozen_high vs signmag           diff=+0.0000 CI=[+0.0000,+0.0000] p=1.0000
+  [HOLM vali] validity: frozen_high vs signmag      p_holm=0.00015
+  [HOLM vali] validity: frozen_high vs signmag      p_holm=1.00000
+  [HOLM vali] validity: frozen_high vs signmag      p_holm=1.00000
+
+[validity] residual flip rate at beta0=8 is sigmoid(-8) = 0.000335
+  [validity] clean                    |diff|=7.77e-07 rel=4.62e-08 bound=0.000335 (within bound)
+  [validity] CorruptionNoise_p=0.2    |diff|=0.0138 rel=0.00082 bound=0.000335 (EXCEEDS bound)
+  [validity] SignNoise                |diff|=0 rel=0 bound=0.000335 (within bound)
+[validity] frozen_high reproduces signmag within the analytic bound: False
+[validity] WARNING: separation broken; main contrasts are not attributable.
+wrote results\ablation_seed1_v2.json

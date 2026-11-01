@@ -1,4 +1,4 @@
-# Claims and verdicts
+﻿# Claims and verdicts
 
 Every number below is produced by scripts in `experiments/`, recorded in
 `results/`, and checked against this prose by `experiments/verify_docs.py`,
@@ -10,6 +10,11 @@ seed; 300 iterations per run; Rastrigin, Ackley, and Rosenbrock at dim=2, plus
 clean cells at dim=10. The tuning criterion is terminal current loss. The full
 grid and every score are in `results/tuned.json`, and the selected
 configuration of every optimizer is in `results/leaderboard.csv`.
+
+Scope: the paragraph above describes the main battery (C1-C7). C8 runs a
+different regime (Sphere dim=10, 100 iterations, 10-run tune, 50 eval runs;
+full regime in its section) and C9 a different tune (Rastrigin dim=2, 300
+iterations, 5-run tune, 50 eval runs). Both are seed-0-only and provisional.
 
 Two replication layers sit on top of the base measurement:
 
@@ -43,13 +48,16 @@ the pre-registration draft that existed during development:
 | ID | Question | Verdict (seed 0) | Seed stability |
 |----|----------|------------------|----------------|
 | C1 | Does 4-bit quantization change PBit's terminal loss? | Unresolved, exactly zero | 3/3 stable |
-| C2 | Is PBit less degraded by 1-bit gradients than Adam? | Resolved (raw p only) | 2/3 stable |
+| C2 | Is PBit less degraded by 1-bit sign gradients than Adam? | Unresolved after correction (raw p only) | 2/3 stable |
 | C3a | Does PBit beat Adam on Rosenbrock at dim=2? | Refuted | 3/3 stable |
 | C3b | Does PBit beat Adam on Rosenbrock at dim=10? | Refuted | 3/3 stable |
+| C3 | Does PBit beat Adam on Rosenbrock? | Refuted (both dims) | 3/3 stable |
 | C4 | Does PBit reach the success threshold sooner? | Refuted | 3/3 stable |
 | C5 | Can a min statistic reverse a noise effect? | Not supported | 3/3 stable |
 | C6 | Noise degradation across landscapes | Mixed, see table | Mixed |
 | C7 | Does PBit's deficit grow with dimension? | Refuted | 2/3 stable |
+| C8 | Does quantization change terminal loss on unclipped Sphere? | Mixed, see table (single seed) | TODO: seeds 1/2 |
+| C9 | Which PBit piece carries the Rastrigin effects? | Mixed, see table | Seeds 0, 1 stable |
 
 ## C1: effect of 4-bit stochastic quantization on PBit
 
@@ -79,7 +87,7 @@ Hypothesis: PBit shifts less than Adam.
 
 PBit shift: mean 0.004, sd 0.002. Adam shift: mean 1.324, sd 3.480. Paired
 difference of shifts: mean -1.320, sd 3.480, 95 percent CI [-2.320, -0.417],
-p = 0.0078, Holm-adjusted p = 0.094 (17-comparison family).
+p = 0.0078, Holm-adjusted p = 0.094 (18-comparison family).
 
 Verdict: weak evidence only. The raw test is significant, the corrected one is
 not, and the verdict is seed-fragile (resolved at seeds 0 and 1, unresolved at
@@ -212,6 +220,142 @@ structured minima. The toy robustness was regime-dependent, exactly as
 and costly in a convergence regime. PBit still beats SGD's collapse under
 sign noise, so the honest ordering on this task is Adam, then PBit, then SGD.
 
+## C8: quantization on unclipped Sphere (retest of the withdrawn C1)
+
+Hypothesis: quantization changes PBit's terminal loss where the clip cannot
+erase the effect.
+
+Premise, verified in-script: on Sphere dim=10 the clip fires on 0 of 20 probe
+runs (`results/quantize_retest.json`), against 300 of 300 steps on Rastrigin
+(`results/clip_confound.json`). Regime: Sphere dim=10, 100 iterations, 50
+paired eval runs, tuned-on-clean configs transferred to quantized cells
+(PBit lr 0.1, tau 100; Adam lr 0.5; SGD lr 0.5; SignSGD lr 0.05; tune seed
+1000, eval seed 0). Twelve paired contrasts (4 optimizers by 3 bit-widths)
+form one Holm family on the terminal reader. Terminal losses saturate at
+machine precision for the fast solvers here, so a second AUC reader carries
+the trajectory signal with its own 12-contrast Holm family
+(`results/quantize_retest.json`, `comparison_auc.p_value_holm`).
+
+| Optimizer | Bits | Terminal shift (noisy minus clean) | CI | Holm p | Verdict |
+|-----------|------|------------------------------------|----|--------|---------|
+| PBit | 1 | +2.75e-13 | [1.34e-13, 5.03e-13] | 6.0e-04 | Resolved, magnitude nil (solver floor; clean 3.7e-17, noisy 2.75e-13) |
+| PBit | 4 | -3.85e-18 | [-1.07e-17, 2.56e-18] | 1.0 | Unresolved |
+| PBit | 8 | -3.34e-18 | [-8.04e-18, 3.38e-19] | 0.878 | Unresolved |
+| Adam | 1 | +0.0691 | [0.0509, 0.0911] | 6.0e-04 | Resolved, noisy worse |
+| Adam | 4 | +5.69e-06 | [-2.71e-06, 1.38e-05] | 1.0 | Unresolved |
+| Adam | 8 | +4.95e-07 | [-4.35e-07, 1.45e-06] | 1.0 | Unresolved |
+| SGD | 1 | +12.756 | [7.143, 18.975] | 6.0e-04 | Resolved, noisy worse |
+| SGD | 4 | +2.34e-225 | [0.0, 7.01e-225] | 1.0 | Unresolved |
+| SGD | 8 | 0.0 | [0.0, 0.0] | 1.0 | Unresolved |
+| SignSGD | 1 | +0.01203 | [0.00936, 0.01489] | 6.0e-04 | Resolved, noisy worse |
+| SignSGD | 4 | +4.90e-05 | [1.51e-05, 9.10e-05] | 0.0704 | Unresolved after Holm (raw p significant) |
+| SignSGD | 8 | 0.0 | [0.0, 0.0] | 1.0 | Unresolved |
+
+The AUC reader (own Holm family) prices the trajectory cost: PBit 1-bit
++0.141 (Holm 6.0e-04); PBit 4-bit +0.0016 and 8-bit -9.9e-05, both
+unresolved after correction (Holm 1.0). Adam 4-bit resolves on AUC
+(+0.00333, Holm 0.026) while unresolved on terminal; SGD degrades at every
+bit-width on AUC including 4-bit (+6.4e-04, Holm 6.0e-04) and 8-bit
+(+2.3e-06, Holm 6.0e-04) where the terminal reader sees exactly zero. No
+significant shift in either reader is negative: quantization never helps
+any optimizer here.
+
+Verdict: mixed, provisional (seed 0 only). Where C1 was untestable, C8 is
+measurable: no 4/8-bit terminal effect for PBit (AUC agrees), while the
+trajectory reader shows 1-bit quantization measurably slows every optimizer
+and 4-bit slows all but PBit. The resolved PBit 1-bit terminal shift
+(+2.75e-13) lives at the solver floor and is no practical difference.
+TODO: seed replication at eval seeds 1/2.
+
+## C9: which PBit piece carries the Rastrigin effects (ablation)
+
+Question: does the annealing schedule, or the stochastic direction, carry
+the clean-level and noise-shift gaps on Rastrigin dim=2?
+
+Design: a separated 2x2, 300 iterations, 50 paired eval runs (tune seed 1000,
+eval seed 0; recorded in `results/ablation.json`). PBit has two moving parts
+beyond lr â€” a stochastic direction `sigma ~ Bernoulli(sigmoid(-beta*g/g_scale))`
+and a schedule `beta(t) = min(beta0*(1+t/tau), cap)` â€” so the ablation is
+laid out as noise x annealing:
+
+| | anneal ON | anneal OFF |
+|---|---|---|
+| **noise ON** | `pbit` (full) | `pbit_frozen_low` (beta0 = 0.5) |
+| **noise OFF** | â€” degenerate | `signmag` (infinite-beta limit) |
+
+The empty cell is the design, not a gap: a deterministic direction never reads
+beta, so "noise OFF + anneal ON" does not exist. Three arms therefore identify
+both main effects with each contrast holding the other piece fixed in *both*
+arms â€” `frozen_low vs pbit` is the annealing effect (noise ON in both),
+`signmag vs frozen_low` is the noise effect (anneal OFF in both).
+
+A fourth arm, `pbit_frozen_high` (beta0 = 8.0), is a **validity** arm, not an
+inference arm: saturated, it must reproduce `signmag`. The twinning that
+invalidated the earlier attempt is now measured rather than assumed, and its
+tolerance is derived per cell rather than picked as a round number. Frozen at
+beta0, PBit still flips the wrong way with probability
+`p_flip = sigmoid(-beta0) = 3.35e-4`, which bounds the clean gap outright. In a
+noise cell every step is perturbed rather than only the residual ones, so the
+two arms sample independent noise along otherwise identical trajectories and
+the bound grows to `p_flip * (1 + 2p)`: 1.4x the clean bound under corruption
+at p = 0.2, 3x under sign noise. Seed 0 passes every cell (clean 3.44e-08 at
+0.00x its bound, corruption 3.12e-04 at 0.67x, sign 2.07e-05 at 0.02x) and
+records `metadata.separation_valid = true`.
+
+| Contrast | Control mean | PBit mean | Difference (control minus PBit) | CI | Holm p | Reading |
+|----------|--------------|-----------|---------------------------------|----|--------|---------|
+| clean: frozen_low vs pbit | 19.369 | 18.327 | +1.041 | [+0.354, +1.707] | 0.0072 | annealing helps clean |
+| clean: signmag vs frozen_low | 18.327 | 19.369 | -1.042 | [-1.707, -0.354] | 0.0072 | noise hurts clean |
+| clean: signmag vs pbit | 18.327 | 18.327 | -1.6e-04 | [-3e-04, -1e-04] | 0.0003 | full PBit = signmag |
+| corruption shift: frozen_low vs pbit | 2.377 | 0.073 | +2.304 | [+0.982, +3.790] | 0.0050 | annealing helps corruption |
+| corruption shift: signmag vs frozen_low | 0.343 | 2.377 | -2.034 | [-3.513, -0.737] | 0.0072 | noise hurts corruption |
+| sign shift: signmag vs frozen_low | 0.004 | -0.220 | +0.224 | [-0.670, +0.916] | 0.6597 | no detectable difference |
+confirms it - full PBit lands at 0.073 here, exactly the main study's 0.073,
+so C9's attribution now applies to the configuration the headline claims were
+budget (`pbit` lr 0.005 / tau 100, score 19.9987), which is what makes C9
+speak to C6: the ablation PBit is now *the study's PBit*, not the lr 0.05 /
+tau 100 lottery winner the earlier 5-run budget picked. Under this config
+PBit's within-arm corruption shift is 0.073, which matches C6's own Rastrigin
+dim=2 PBit shift exactly. Under the superseded 5-run selection it was 31.2576,
+a divergence of two orders of magnitude (that record is not reproducible here,
+because its 5-run grid is not in the committed results; the mechanism is, and
+is recorded in `results/tuned.json`, whose Rastrigin dim=2 clean grid ranks
+lr 0.005 at 19.9987 against lr 0.05 at 22.5425 â€” so which of those points a
+small tune budget lands on is the deciding factor, and it is the study's own
+flat-landscape warning in METHOD.md drawn live).
+
+Both pieces carry the clean and corruption gaps, and they carry them in
+opposite directions. The recorded effects (`derived`) are
+`annealing_effect_clean` = +1.0414 clean and +2.3036 on the corruption shift,
+against `noise_effect_clean` = -1.0416 clean and -2.0339 on corruption: turning
+the schedule off costs more than the noise does, and the noise costs about as
+much as the schedule buys. The two nearly cancel â€” `joint_gap_clean` is
+-1.597e-04 on a loss scale of 18.3272, i.e. full PBit and `signmag` take the
+same trajectory to four decimal places. On clean Rastrigin, then, the schedule
+and the stochasticity are not independently observable: the schedule exists to
+buy back what the noise spends. Under sign noise the contrast is null
+(`sign_contrast_holm_p` = 0.6597), so C6's sign-noise effect is not
+attributable to either piece alone.
+
+Verdict: mixed, supported on seeds 0 and 1, controls separated and validated.
+Noise is a cost the schedule pays for; on clean Rastrigin annealing and
+stochasticity cancel to within 1.6e-04, so "which piece matters" has the answer
+"neither alone, and the pair is what PBit is." Sign noise remains unattributed.
+
+Replication and the validity bound, stated precisely. Seed 1 reproduces the
+pattern (clean annealing +0.744, clean noise -0.744, corruption annealing
++3.426, corruption noise -3.416; all Holm p <= 0.0035) and again shows
+`signmag vs pbit` = -1.3e-04, i.e. the cancellation holds. On seed 1 the
+`frozen_high` corruption cell reads rel = 8.2e-04, about 2.4x the single-step
+bound, so `separation_valid` is `false` there; the clean and sign cells stay at
+4.62e-08 and 0. This is the expected shape rather than a broken control: the
+bound `sigmoid(-8)` is per-step and per-coordinate, and a residual flip that
+happens to occur in the corruption cell is itself perturbed by the injected
+noise, so the realized relative shift is bounded by the flip rate times the
+corruption multiplicity, not by the flip rate alone. The inference does not
+rest on this arm â€” it is a check, and the arms that matter agree to 4.62e-08
+and 0 on seed 1 exactly as they do on seed 0.
+
 ## What survives
 
 Seed-stable and multiplicity-corrected:
@@ -241,3 +385,8 @@ conditional, on the landscape, the regime, and the clip. Its disadvantages on
 smooth valleys and real tasks are not conditional. That is the opposite of
 the story the withdrawn table told, and it is the story the measurement
 supports.
+
+Provisional additions (seed 0 only, see sections above): C8 finds no
+practically meaningful quantization effect on unclipped Sphere; C9 finds the
+tested full-PBit configuration is not the robust one on Rastrigin, with the
+schedule-vs-noise split still unresolved.

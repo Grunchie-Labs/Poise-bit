@@ -1,0 +1,25 @@
+[premise] clip events per run on Sphere dim=10: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+[tune] Sphere/dim=10/clean
+  pbit       selected={'lr': 0.1, 'tau': 100} score=0.000000
+  adam       selected={'lr': 0.5} score=0.000163
+  sgd        selected={'lr': 0.5} score=0.000000
+  signsgd    selected={'lr': 0.05} score=0.008073
+[eval] Sphere/dim=10/clean done
+[eval] Sphere/dim=10/QuantizeNoise_bits=1_stochastic=True done
+[eval] Sphere/dim=10/QuantizeNoise_bits=4_stochastic=True done
+[eval] Sphere/dim=10/QuantizeNoise_bits=8_stochastic=True done
+  pbit       1-bit: terminal diff=+1.57184e-13 p=0.0000 holm=0.0006 | AUC diff=+0.131461 CI=[+0.102191,+0.16196] p=0.0000
+  pbit       4-bit: terminal diff=+2.6284e-18 p=0.4878 holm=1.0000 | AUC diff=-0.000668223 CI=[-0.00432193,+0.00316061] p=0.7299
+  pbit       8-bit: terminal diff=-1.22909e-19 p=0.9498 holm=1.0000 | AUC diff=-0.000331213 CI=[-0.000813566,+2.28064e-05] p=0.1710
+  adam       1-bit: terminal diff=+0.0599994 p=0.0000 holm=0.0006 | AUC diff=+0.59624 CI=[+0.531915,+0.66397] p=0.0000
+  adam       4-bit: terminal diff=+1.22295e-05 p=0.0183 holm=0.1281 | AUC diff=+0.00232079 CI=[+0.000341527,+0.00431826] p=0.0272
+  adam       8-bit: terminal diff=+2.03886e-07 p=0.6468 holm=1.0000 | AUC diff=-0.000126454 CI=[-0.000246587,-1.01558e-05] p=0.0441
+  sgd        1-bit: terminal diff=+10.7742 p=0.0000 holm=0.0006 | AUC diff=+20.7571 CI=[+17.7843,+23.7085] p=0.0000
+  sgd        4-bit: terminal diff=+0 p=1.0000 holm=1.0000 | AUC diff=+0.000688087 CI=[+0.000596803,+0.000783497] p=0.0000
+  sgd        8-bit: terminal diff=+0 p=1.0000 holm=1.0000 | AUC diff=+2.2041e-06 CI=[+1.8847e-06,+2.53753e-06] p=0.0000
+  signsgd    1-bit: terminal diff=+0.0142297 p=0.0000 holm=0.0006 | AUC diff=+0.302441 CI=[+0.266876,+0.338899] p=0.0000
+  signsgd    4-bit: terminal diff=+0.000104624 p=0.0000 holm=0.0006 | AUC diff=+0.00157605 CI=[+0.00125578,+0.00195946] p=0.0000
+  signsgd    8-bit: terminal diff=+3.88702e-08 p=1.0000 holm=1.0000 | AUC diff=+8.70638e-06 CI=[+5.77499e-06,+1.21463e-05] p=0.0000
+
+wrote results\quantize_retest_seed1.json

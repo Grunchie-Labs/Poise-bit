@@ -1,0 +1,46 @@
+--- C1: Does 4-bit stochastic quantization change PBit's terminal loss (tuned)?
+--- C2: Is tuned PBit less degraded by 1-bit sign-only gradients than tuned Adam?
+--- C3a: Does tuned PBit reach lower terminal loss than tuned Adam on Rosenbrock dim=2?
+--- C3b: Does tuned PBit reach lower terminal loss than tuned Adam on Rosenbrock dim=10?
+--- C4: Does tuned PBit reach the success threshold sooner than tuned Adam on Rosenbrock?
+--- C5: Can a min-over-trajectory statistic reverse the sign of a noise effect?
+    NOT SUPPORTED: both readers agree
+--- C6: per-noise degradation across landscapes
+    Rastrigin   gaussian    pending
+    Rastrigin   corruption  pending
+    Rastrigin   quant4      pending
+    Rastrigin   sign        pending
+    Ackley      gaussian    pending
+    Ackley      corruption  pending
+    Ackley      quant4      pending
+    Ackley      sign        pending
+    Rosenbrock  gaussian    pending
+    Rosenbrock  corruption  pending
+    Rosenbrock  quant4      pending
+    Rosenbrock  sign        pending
+--- C7: Does PBit's deficit against Adam grow from dim=2 to dim=10 (Rastrigin, clean)?
+
+family: 18 comparisons, one Holm correction
+  C1                         raw=1 holm=1 -> INCONCLUSIVE: no detectable effect after family correction
+  C2                         raw=0.0078 holm=0.0936 -> INCONCLUSIVE: no detectable effect after family correction
+  C3a                         raw=5e-05 holm=0.0009 -> REFUTED: not lower
+  C3b                         raw=5e-05 holm=0.0009 -> REFUTED: not lower
+  C4                         raw=5e-05 holm=0.0009 -> REFUTED: not lower
+  C5: NOT SUPPORTED: both readers agree
+  C6: see per-noise entries
+  C6  Rastrigin/gaussian     raw=0.8831 holm=1 -> INCONCLUSIVE: no detectable effect after family correction
+  C6  Rastrigin/corruption   raw=5e-05 holm=0.0009 -> CONFIRMED
+  C6  Rastrigin/quant4       raw=0.9131 holm=1 -> INCONCLUSIVE: no detectable effect after family correction
+  C6  Rastrigin/sign         raw=0.0078 holm=0.0936 -> INCONCLUSIVE: no detectable effect after family correction
+  C6  Ackley/gaussian        raw=0.5657 holm=1 -> INCONCLUSIVE: no detectable effect after family correction
+  C6  Ackley/corruption      raw=0.9456 holm=1 -> INCONCLUSIVE: no detectable effect after family correction
+  C6  Ackley/quant4          raw=0.8392 holm=1 -> INCONCLUSIVE: no detectable effect after family correction
+  C6  Ackley/sign            raw=0.00245 holm=0.03185 -> CONFIRMED
+  C6  Rosenbrock/gaussian    raw=0.06795 holm=0.5436 -> INCONCLUSIVE: no detectable effect after family correction
+  C6  Rosenbrock/corruption  raw=0.01025 holm=0.1025 -> INCONCLUSIVE: no detectable effect after family correction
+  C6  Rosenbrock/quant4      raw=0.6087 holm=1 -> INCONCLUSIVE: no detectable effect after family correction
+  C6  Rosenbrock/sign        raw=0.014 holm=0.126 -> INCONCLUSIVE: no detectable effect after family correction
+  C7                         raw=0.00035 holm=0.0049 -> REFUTED: not lower
+
+wrote results\claims_v2.json
+wrote results\leaderboard.csv

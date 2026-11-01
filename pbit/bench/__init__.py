@@ -3,7 +3,7 @@
 from pbit.bench.compare import ReportDiff, compare_reports
 from pbit.bench.experiment import Experiment
 from pbit.bench.fitness import make_fitness
-from pbit.bench.functions import Ackley, Rastrigin, Rosenbrock, get_function
+from pbit.bench.functions import Ackley, Rastrigin, Rosenbrock, Sphere, get_function
 from pbit.bench.metrics import (
     auc_loss,
     escape_count_current,
@@ -58,6 +58,7 @@ __all__ = [
     "ReportDiff",
     "Rosenbrock",
     "SignNoise",
+    "Sphere",
     "TuningResult",
     "assert_seeds_disjoint",
     "auc_loss",

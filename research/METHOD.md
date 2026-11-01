@@ -178,6 +178,34 @@ The MNIST study is deliberately small: one architecture, one dataset, 10
 epochs. It is a transfer check on the headline claims, not a bid for
 state-of-the-art accuracy.
 
+## Sphere retest regime (C8)
+
+`experiments/quantize_retest.py` re-runs the withdrawn quantization comparison
+where it can be measured: Sphere at dim=10, 100 iterations per run, gradients
+that never reach the clip (0 clip events in all 20 probe runs,
+`results/quantize_retest.json`, against 300 of 300 steps on Rastrigin).
+Tuning mirrors the main study (declared grids, 10 clean runs from seed 1000,
+terminal-loss criterion, transfer to quantized cells, 50 held-out eval runs
+from seed 0). Twelve paired contrasts (4 optimizers by 3 bit-widths) form one
+Holm family on the terminal reader. Terminal losses saturate at machine
+precision for the fast solvers on this landscape, so a second AUC reader
+carries the trajectory signal; its p-values are currently raw (no Holm) and
+seed replication is missing (seed 0 only) — both recorded as TODOs in C8.
+
+## Ablation controls (C9)
+
+`experiments/ablation.py` separates PBit's two coupled pieces with one-piece
+controls on Rastrigin dim=2 (300 iterations, 5-run clean tune from seed 1000,
+50 paired eval runs from seed 0): `pbit_constbeta` freezes beta at its initial
+value (no annealing); `signmag` is deterministic sign direction with PBit's
+proportional magnitude (no noise, no schedule — the infinite-beta limit).
+Six paired contrasts (clean levels plus corruption/sign shifts) use the same
+paired machinery with raw p-values only (no Holm yet) and no seed replication
+yet — both recorded as TODOs in C9. Known design flaw, stated in C9 rather
+than hidden: the selected frozen beta0 is 8.0, deep in saturation, so the
+no-anneal control twins the no-noise control and the two pieces are not
+cleanly separated. A frozen low-beta control is the fix.
+
 ## Known limitations
 
 **The quantization cell is confounded by clipping.** Rastrigin gradients at

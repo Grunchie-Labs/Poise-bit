@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "pbit"
-version = "0.4.0"
+version = "0.5.0"
 description = "Probabilistic p-bit optimization, low-precision gradient robustness, and reproducible optimizer benchmarking."
 readme = "README.md"
 license = { text = "Apache-2.0" }

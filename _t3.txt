@@ -1,0 +1,42 @@
+..........F                                                              [100%]
+================================== FAILURES ===================================
+____________ test_claim_document_numbers_trace_to_recorded_results ____________
+
+    def test_claim_document_numbers_trace_to_recorded_results():
+        """Every number in CLAIMS.md must come from a results file.
+    
+        This caught two hand-computed Holm-adjusted p-values in the prose that did
+        not match the values the script recorded.
+        """
+        from verify_docs import main as verify
+    
+>       assert verify() == 0
+E       assert 1 == 0
+E        +  where 1 = <function main at 0x00000267743A3270>()
+
+tests\test_stats.py:140: AssertionError
+---------------------------- Captured stdout call -----------------------------
+numbers in CLAIMS.md with no match in results/*.json:
+  -6.712
+  -8.572
+  -4.905
+  -6.712
+  -8.572
+  -4.905
+  31.258
+  -30.909
+  -38.875
+  -23.281
+  31.258
+  -30.915
+  -38.891
+  -23.282
+  -6.233
+  6.237
+  8.134
+  -6.233
+  6.237
+  8.134
+  31.258
+=========================== short test summary info ===========================
+FAILED tests/test_stats.py::test_claim_document_numbers_trace_to_recorded_results

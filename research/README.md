@@ -48,6 +48,7 @@ research/
 ├── README.md                  this file
 ├── METHOD.md                  measurement rules and why they exist
 ├── CLAIMS.md                  every claim, its verdict, and the numbers
+├── PAPER.md                   standalone paper draft (all numbers trace to results/)
 ├── THEORY.md                  why PBit is robust to some noise, and when not
 ├── RELATED.md                 literature positioning and verified citations
 └── experiments/
@@ -57,7 +58,12 @@ research/
     ├── robustness.py          verdict and direction stability across master seeds
     ├── mnist.py               real-task replication with an MLP on MNIST
     ├── clip_confound.py       measures the quantization-cell clipping confound
+    ├── quantize_retest.py     C8: quantization retest on unclipped Sphere
+    ├── ablation.py            C9: frozen-beta and deterministic-sign controls
+    ├── figures.py             five reproducible panels from recorded artifacts
     └── verify_docs.py         checks CLAIMS.md against the recorded results
+
+assets/figs/                    fig1-fig5 as PDF (paper) + PNG (preview)
 
 results/
 ├── tuned.json                 tuning grids, selected configs, eval series
@@ -70,6 +76,8 @@ results/
 ├── mnist.json                 MNIST real-task results
 ├── power.json                 subsample power analysis
 ├── clip_confound.json         clip-confound measurements
+├── quantize_retest.json       C8: Sphere quantization shifts, terminal + AUC readers
+├── ablation.json              C9: ablation contrasts with Holm family
 ├── leaderboard.csv            per-cell mean terminal loss with sd, all optimizers
 └── withdrawn.json             figures quoted from the withdrawn prior report
 ```
@@ -89,6 +97,9 @@ python research/experiments/tune_and_evaluate.py
 python research/experiments/claims.py
 python research/experiments/power.py
 python research/experiments/clip_confound.py
+python research/experiments/quantize_retest.py
+python research/experiments/ablation.py
+python research/experiments/figures.py
 python research/experiments/mnist.py
 python research/experiments/verify_docs.py
 ```
